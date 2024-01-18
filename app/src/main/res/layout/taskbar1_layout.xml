@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+        <!-- Barcode Icon -->
+        <ImageView
+            android:id="@+id/barcodeIcon"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_launcher_background"
+            android:layout_gravity="end"
+            android:layout_margin="13dp"/>
+
+        <!-- Text View -->
+        <TextView
+            android:id="@+id/tvSec"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="מחלקה"
+            android:textSize="25dp"
+            android:layout_gravity="end"
+            android:layout_marginLeft="5dp"/>
+
+        <!-- Spinner -->
+        <Spinner
+            android:id="@+id/spI"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginLeft="15dp"/>
+
+        <!-- Button -->
+        <Button
+            android:id="@+id/btnSw"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="הצג פגי תוקף"
+            android:textSize="13dp"
+            android:layout_gravity="start"
+            android:layout_marginRight="10dp"
+            />
+    </androidx.appcompat.widget.Toolbar>
+

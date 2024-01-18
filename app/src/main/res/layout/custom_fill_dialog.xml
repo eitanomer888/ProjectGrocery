@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layoutDirection="rtl"
+    >
+
+    <Button
+        android:id="@+id/btnD_cancel"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_gravity="right"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="5dp"
+        android:background="@mipmap/ic_launcher"
+        />
+
+    <LinearLayout
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center">
+
+        <TextView
+            android:id="@+id/tvD_ProductName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_weight="1"
+            android:text="שם פריט" />
+
+        <EditText
+            android:id="@+id/etD_ProductName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="8"
+            android:inputType="text"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center">
+
+        <TextView
+            android:id="@+id/tvD_ProductAmount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_weight="1"
+            android:text="כמות" />
+
+        <EditText
+            android:id="@+id/etD_ProductAmount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="4"
+            android:inputType="number"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center">
+
+        <TextView
+            android:id="@+id/tvD_ProductLastDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="תוקף אחרון" />
+
+        <Button
+            android:id="@+id/btnD_ProductLastDate"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:background="@mipmap/ic_launcher"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            />
+
+        <EditText
+            android:id="@+id/etD_ProductLastDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="10"
+            android:inputType="date"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center">
+
+        <TextView
+            android:id="@+id/tvD_ProductFirstDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="תוקף למילוי" />
+
+        <Button
+            android:id="@+id/btnD_ProductFirstDate"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:background="@mipmap/ic_launcher"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            />
+
+        <EditText
+            android:id="@+id/etD_ProductFirstDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="10"
+            android:inputType="date"
+            />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnD_update"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="עדכן"
+        android:layout_gravity="center"
+        android:layout_marginTop="40dp"
+        />
+
+
+</LinearLayout>
