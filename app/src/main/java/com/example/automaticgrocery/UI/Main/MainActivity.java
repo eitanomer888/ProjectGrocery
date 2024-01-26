@@ -1,4 +1,4 @@
-package com.example.automaticgrocery;
+package com.example.automaticgrocery.UI.Main;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,23 +6,26 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.automaticgrocery.data.DB.MyDatabaseHelper;
+import com.example.automaticgrocery.R;
+import com.example.automaticgrocery.UI.Login.LoginPage;
 
 public class MainActivity extends AppCompatActivity {
 
-    private MyDatabaseHelper myDatabaseHelper;
+    private MainModel mainModel;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        mainModel = new MainModel(this);
+
         Intent i = new Intent(MainActivity.this, LoginPage.class);
+        startActivity(i);
 
 
     }

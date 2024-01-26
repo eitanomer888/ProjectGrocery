@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">AutomaticGrocery</string>
+    <string name="preference_file_key">sharedMain</string>
+    <string name="user_name_key">nameKey</string>
+    <string name="user_password_key">passKey</string>
+    <string name="user_remember_key">rememberKey</string>
 </resources>

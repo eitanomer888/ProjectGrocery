@@ -13,13 +13,13 @@
         android:theme="@style/Theme.AutomaticGrocery"
         tools:targetApi="31">
         <activity
-            android:name=".SignUpPage"
+            android:name=".UI.SignUp.SignUpPage"
             android:exported="false" />
         <activity
-            android:name=".LoginPage"
+            android:name=".UI.Login.LoginPage"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".UI.Main.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

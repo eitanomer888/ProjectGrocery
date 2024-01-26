@@ -1,4 +1,4 @@
-package com.example.automaticgrocery;
+package com.example.automaticgrocery.UI.SignUp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,11 +8,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.automaticgrocery.UI.Login.LoginModel;
+import com.example.automaticgrocery.data.DB.MyDatabaseHelper;
+import com.example.automaticgrocery.R;
+
 public class SignUpPage extends AppCompatActivity implements View.OnClickListener {
 
     private Button btnSignUp;
     private EditText SUuserName,SUuserPass;
-    private MyDatabaseHelper myDatabaseHelper;
+    private SignUpModel signUpModel;
 
 
 
@@ -21,7 +25,7 @@ public class SignUpPage extends AppCompatActivity implements View.OnClickListene
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up_page);
 
-        myDatabaseHelper = new MyDatabaseHelper(this);
+        signUpModel = new SignUpModel(this);
 
         btnSignUp = findViewById(R.id.btnSignUp);
         SUuserName = findViewById(R.id.SUuserName);
@@ -39,16 +43,20 @@ public class SignUpPage extends AppCompatActivity implements View.OnClickListene
             String name , pass;
             name = SUuserName.getText().toString();
             pass = SUuserPass.getText().toString();
-            if(!(pass.equals("") || name.equals("")))
+            if(signUpModel.sighUpValidation(name,pass))
             {
-                //need to add check of ensuring that there is not identical user exist
-
-                myDatabaseHelper.addUser(name,pass);
+                if(signUpModel.checkForDuplicate(name))
+                {
+                    signUpModel.addUser(name,pass);
+                    finish();
+                }
+                else{
+                    Toast.makeText(this, "user is already exist", Toast.LENGTH_SHORT).show();
+                }
             }
             else{
                 Toast.makeText(this, "pls fill all fields", Toast.LENGTH_SHORT).show();
             }
-            finish();
         }
     }
 }
