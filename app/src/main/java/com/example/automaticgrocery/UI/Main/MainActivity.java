@@ -1,6 +1,9 @@
 package com.example.automaticgrocery.UI.Main;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.app.Dialog;
 import android.content.Intent;
@@ -10,13 +13,18 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.automaticgrocery.UI.ExpiredFragment.ExpiredFragment;
+import com.example.automaticgrocery.UI.FillFragment.FillFragment;
 import com.example.automaticgrocery.data.DB.MyDatabaseHelper;
 import com.example.automaticgrocery.R;
 import com.example.automaticgrocery.UI.Login.LoginPage;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private MainModel mainModel;
+    private FragmentManager fm;
+
+    private Button btnSw;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,9 +32,19 @@ public class MainActivity extends AppCompatActivity {
 
         mainModel = new MainModel(this);
 
+        btnSw = findViewById(R.id.btnSw);
+        btnSw.setOnClickListener(this);
+
+
+
+        fm = getSupportFragmentManager();
+        fm.beginTransaction().replace(R.id.contentFragment,FillFragment.class,null).commit();
+
+
+
+
         Intent i = new Intent(MainActivity.this, LoginPage.class);
         startActivity(i);
-
 
     }
 
@@ -58,5 +76,24 @@ public class MainActivity extends AppCompatActivity {
         });
 
         dialog.show();
+    }
+
+    @Override
+    public void onClick(View view) {
+        if(btnSw == view){
+            if (MainModel.isFill){
+                fm.beginTransaction().replace(R.id.contentFragment,ExpiredFragment.class,null).commit();
+                btnSw.setText(R.string.exSW);
+                MainModel.isFill = false;
+            }
+            else{
+                fm.beginTransaction().replace(R.id.contentFragment,FillFragment.class,null).commit();
+                btnSw.setText(R.string.fillSW);
+                MainModel.isFill = true;
+            }
+        }
+
+
+
     }
 }
