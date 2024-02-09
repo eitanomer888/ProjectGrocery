@@ -12,7 +12,7 @@
             android:id="@+id/barcodeIcon"
             android:layout_width="40dp"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_launcher_background"
+            android:src="@drawable/barcode_icon"
             android:layout_gravity="end"
             android:layout_margin="13dp"/>
 
@@ -22,12 +22,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="מחלקה"
-            android:textSize="25dp"
-            android:layout_gravity="end"
-            android:layout_marginLeft="5dp"/>
+            android:textSize="18dp"
+            android:layout_gravity="end" />
 
         <!-- Spinner -->
         <Spinner
+            android:textDirection="rtl"
+            android:gravity="right"
             android:id="@+id/spI"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

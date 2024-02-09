@@ -9,8 +9,10 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.automaticgrocery.UI.ExpiredFragment.ExpiredFragment;
@@ -19,23 +21,36 @@ import com.example.automaticgrocery.data.DB.MyDatabaseHelper;
 import com.example.automaticgrocery.R;
 import com.example.automaticgrocery.UI.Login.LoginPage;
 
+import java.util.LinkedList;
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private MainModel mainModel;
     private FragmentManager fm;
 
+    private Spinner spI;
     private Button btnSw;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         mainModel = new MainModel(this);
+
 
         btnSw = findViewById(R.id.btnSw);
         btnSw.setOnClickListener(this);
 
-
+        spI = findViewById(R.id.spI);
+        List<String> lst = new LinkedList<>();
+        lst.add("one");
+        lst.add("two");
+        lst.add("three");
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,android.R.layout.simple_spinner_item,lst);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spI.setAdapter(adapter);
 
         fm = getSupportFragmentManager();
         fm.beginTransaction().replace(R.id.contentFragment,FillFragment.class,null).commit();
