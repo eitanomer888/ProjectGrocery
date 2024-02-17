@@ -1,11 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.appcompat.widget.Toolbar
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize"
+    android:background="?attr/colorPrimary"
+    android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+    android:textAlignment="gravity">
 
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+        <!-- User Icon -->
+        <ImageView
+            android:id="@+id/userIcon"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/user_icon"
+            android:layout_gravity="end"
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp" />
 
         <!-- Barcode Icon -->
         <ImageView
@@ -14,7 +26,9 @@
             android:layout_height="wrap_content"
             android:src="@drawable/barcode_icon"
             android:layout_gravity="end"
-            android:layout_margin="13dp"/>
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp" />
 
         <!-- Text View -->
         <TextView
@@ -22,18 +36,23 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="מחלקה"
-            android:textSize="18dp"
-            android:layout_gravity="end" />
+            android:textSize="18sp"
+            android:layout_gravity="end"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="3dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp" />
 
         <!-- Spinner -->
         <Spinner
-            android:textDirection="rtl"
-            android:gravity="right"
             android:id="@+id/spI"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
-            android:layout_marginLeft="15dp"/>
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:gravity="right"
+            android:textDirection="rtl" />
 
         <!-- Button -->
         <Button
@@ -41,9 +60,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="הצג פגי תוקף"
-            android:textSize="13dp"
+            android:textSize="13sp"
             android:layout_gravity="start"
-            android:layout_marginRight="10dp"
-            />
-    </androidx.appcompat.widget.Toolbar>
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp" />
 
+</androidx.appcompat.widget.Toolbar>
