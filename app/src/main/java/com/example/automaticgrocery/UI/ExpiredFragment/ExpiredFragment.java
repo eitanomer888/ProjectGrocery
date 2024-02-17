@@ -3,12 +3,19 @@ package com.example.automaticgrocery.UI.ExpiredFragment;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.automaticgrocery.R;
+import com.example.automaticgrocery.UI.MyRecycleView.MyAdapter;
+import com.example.automaticgrocery.data.Items.ExpiredItem;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -25,6 +32,9 @@ public class ExpiredFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    private RecyclerView recyclerView;
+    private View view;
 
     public ExpiredFragment() {
         // Required empty public constructor
@@ -61,6 +71,69 @@ public class ExpiredFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_expired, container, false);
+        view = inflater.inflate(R.layout.fragment_expired, container, false);
+
+        recyclerView = view.findViewById(R.id.recycleView);
+
+        List<ExpiredItem> items = new ArrayList<ExpiredItem>();
+        items.add(new ExpiredItem("milk","24/8/26",50));
+        items.add(new ExpiredItem("beef","1/2/80",800));
+        items.add(new ExpiredItem("apple","18/7/06",12));
+        items.add(new ExpiredItem("milk","24/8/26",50));
+        items.add(new ExpiredItem("beef","1/2/80",800));
+        items.add(new ExpiredItem("apple","18/7/06",12));
+        items.add(new ExpiredItem("milk","24/8/26",50));
+        items.add(new ExpiredItem("beef","1/2/80",800));
+        items.add(new ExpiredItem("apple","18/7/06",12));
+        items.add(new ExpiredItem("milk","24/8/26",50));
+        items.add(new ExpiredItem("beef","1/2/80",800));
+        items.add(new ExpiredItem("apple","18/7/06",12));
+        items.add(new ExpiredItem("milk","24/8/26",50));
+        items.add(new ExpiredItem("beef","1/2/80",800));
+        items.add(new ExpiredItem("apple","18/7/06",12));
+        items.add(new ExpiredItem("milk","24/8/26",50));
+        items.add(new ExpiredItem("beef","1/2/80",800));
+        items.add(new ExpiredItem("apple","18/7/06",12));
+        items.add(new ExpiredItem("milk","24/8/26",50));
+        items.add(new ExpiredItem("beef","1/2/80",800));
+        items.add(new ExpiredItem("apple","18/7/06",12));
+        items.add(new ExpiredItem("milk","24/8/26",50));
+        items.add(new ExpiredItem("beef","1/2/80",800));
+        items.add(new ExpiredItem("apple","18/7/06",12));
+        items.add(new ExpiredItem("milk","24/8/26",50));
+        items.add(new ExpiredItem("beef","1/2/80",800));
+        items.add(new ExpiredItem("apple","18/7/06",12));
+        items.add(new ExpiredItem("milk","24/8/26",50));
+        items.add(new ExpiredItem("beef","1/2/80",800));
+        items.add(new ExpiredItem("apple","18/7/06",12));
+        items.add(new ExpiredItem("milk","24/8/26",50));
+        items.add(new ExpiredItem("beef","1/2/80",800));
+        items.add(new ExpiredItem("apple","18/7/06",12));
+        items.add(new ExpiredItem("milk","24/8/26",50));
+        items.add(new ExpiredItem("beef","1/2/80",800));
+        items.add(new ExpiredItem("apple","18/7/06",12));
+        items.add(new ExpiredItem("milk","24/8/26",50));
+        items.add(new ExpiredItem("beef","1/2/80",800));
+        items.add(new ExpiredItem("apple","18/7/06",12));
+        items.add(new ExpiredItem("milk","24/8/26",50));
+        items.add(new ExpiredItem("beef","1/2/80",800));
+        items.add(new ExpiredItem("apple","18/7/06",12));
+        items.add(new ExpiredItem("milk","24/8/26",50));
+        items.add(new ExpiredItem("beef","1/2/80",800));
+        items.add(new ExpiredItem("apple","18/7/06",12));
+        items.add(new ExpiredItem("milk","24/8/26",50));
+        items.add(new ExpiredItem("beef","1/2/80",800));
+        items.add(new ExpiredItem("apple","18/7/06",12));
+
+
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        recyclerView.setAdapter(new MyAdapter(getActivity().getApplicationContext(),items));
+
+
+
+
+
+        return view;
     }
 }
