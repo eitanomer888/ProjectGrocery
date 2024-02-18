@@ -12,11 +12,13 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.automaticgrocery.UI.ExpiredFragment.ExpiredFragment;
 import com.example.automaticgrocery.UI.FillFragment.FillFragment;
+import com.example.automaticgrocery.UI.UserCenter.UserCenter;
 import com.example.automaticgrocery.data.DB.MyDatabaseHelper;
 import com.example.automaticgrocery.R;
 import com.example.automaticgrocery.UI.Login.LoginPage;
@@ -29,6 +31,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private MainModel mainModel;
     private FragmentManager fm;
 
+    private ImageView userIcon;
+
     private Spinner spI;
     private Button btnSw;
     @Override
@@ -38,6 +42,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
         mainModel = new MainModel(this);
+
+        userIcon = findViewById(R.id.userIcon);
+        userIcon.setOnClickListener(this);
 
 
         btnSw = findViewById(R.id.btnSw);
@@ -106,6 +113,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 btnSw.setText(R.string.fillSW);
                 MainModel.isFill = true;
             }
+        }
+        else if(userIcon == view)
+        {
+            //move to userHub
+            Intent i = new Intent(MainActivity.this, UserCenter.class);
+            startActivity(i);
         }
 
 

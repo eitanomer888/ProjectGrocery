@@ -12,10 +12,18 @@ public class Repository {
 
     private MyDatabaseHelper myDatabaseHelper;
     private SharedPreferences sharedPreferences;
+
+    private Context context;
     public Repository(Context context){
         myDatabaseHelper = new MyDatabaseHelper(context);
         sharedPreferences = context.getSharedPreferences(String.valueOf(R.string.preference_file_key),Context.MODE_PRIVATE);
+        this.context = context;
     }
+
+    public Context getContext() {
+        return context;
+    }
+
     public Cursor readData(){
         return myDatabaseHelper.readAllData();
     }
