@@ -7,16 +7,16 @@
     tools:context=".UI.UserCenter.UserCenter">
 
     <!-- Back Button -->
-    <ImageButton
+    <ImageView
         android:id="@+id/backButton"
-        android:layout_width="29dp"
-        android:layout_height="24dp"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:background="@android:color/transparent"
-        android:src="@drawable/barcode_icon" />
+        android:src="@drawable/return_icon" />
 
     <!-- User Icon -->
     <ImageView

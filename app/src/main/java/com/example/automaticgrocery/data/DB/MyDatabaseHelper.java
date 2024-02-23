@@ -14,7 +14,6 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
     private Context context;
     private static final String DATABASE_NAME = "Users.db";
     private static final int DATABASE_VERSION = 1;
-
     private static final String TABLE_NAME = "my_users";
     private static final String COLUMN_ID = "_id";
     private static final String COLUMN_NAME = "user_name";

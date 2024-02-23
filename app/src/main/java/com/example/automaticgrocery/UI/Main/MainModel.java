@@ -16,4 +16,24 @@ public class MainModel {
     public void deleteUsersHelper(){
         repository.deleteAllUsers();
     }
+
+    public void WriteStringToSharedPreferences(String key,String value)
+    {
+        repository.WriteStringToSharedPreferences(key,value);
+    }
+
+    public String ReadStringFromSharedPreferences(String key,String defaultValue)
+    {
+        return repository.ReadStringFromSharedPreferences(key, defaultValue);
+    }
+
+    public void WriteBooleanToSharedPreferences(String key,boolean value)
+    {
+        repository.WriteBooleanToSharedPreferences(key, value);
+    }
+
+    public boolean ReadBooleanFromSharedPreferences(String key,boolean defaultValue)
+    {
+        return repository.ReadBooleanFromSharedPreferences(key, defaultValue);
+    }
 }

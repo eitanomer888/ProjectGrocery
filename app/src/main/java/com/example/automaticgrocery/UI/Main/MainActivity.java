@@ -41,11 +41,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
 
 
+
         mainModel = new MainModel(this);
 
         userIcon = findViewById(R.id.userIcon);
         userIcon.setOnClickListener(this);
-
+        
 
         btnSw = findViewById(R.id.btnSw);
         btnSw.setOnClickListener(this);
@@ -64,10 +65,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
 
+        if(!mainModel.ReadBooleanFromSharedPreferences(String.valueOf(R.string.user_remember_key),false))
+        {
+            Intent i = new Intent(MainActivity.this, LoginPage.class);
+            startActivity(i);
+        }
 
-        Intent i = new Intent(MainActivity.this, LoginPage.class);
-        startActivity(i);
 
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        if(!mainModel.ReadBooleanFromSharedPreferences(String.valueOf(R.string.user_remember_key),false))
+        {
+            Intent i = new Intent(MainActivity.this, LoginPage.class);
+            startActivity(i);
+        }
     }
 
     private void showCustomDialog() {
