@@ -36,4 +36,8 @@ public class MainModel {
     {
         return repository.ReadBooleanFromSharedPreferences(key, defaultValue);
     }
+
+    public void addProduct(String internal_reference, String name, String barcode, String amount, String fill_date,String last_date){
+        repository.addProduct(internal_reference,name,barcode,amount,fill_date,last_date);
+    }
 }

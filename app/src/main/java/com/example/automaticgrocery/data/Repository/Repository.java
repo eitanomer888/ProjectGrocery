@@ -19,11 +19,12 @@ public class Repository {
         sharedPreferences = context.getSharedPreferences(String.valueOf(R.string.preference_file_key),Context.MODE_PRIVATE);
         this.context = context;
     }
-
     public Context getContext() {
         return context;
     }
 
+
+    //user actions mydatabasehelper//
     public Cursor readData(){
         return myDatabaseHelper.readAllData();
     }
@@ -39,7 +40,9 @@ public class Repository {
         WriteStringToSharedPreferences(String.valueOf(R.string.user_password_key),"");
         WriteBooleanToSharedPreferences(String.valueOf(R.string.user_remember_key),false);
     }
+    //###############//
 
+    //Shared preference//
     public void WriteStringToSharedPreferences(String key,String value)
     {
         SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -63,6 +66,10 @@ public class Repository {
     {
         return sharedPreferences.getBoolean(key, defaultValue);
     }
+    //###############//
 
-
+    //product actions mydatabasehelper//
+    public void addProduct(String internal_reference, String name, String barcode, String amount, String fill_date,String last_date){
+        myDatabaseHelper.addProduct(internal_reference,name,barcode,amount,fill_date,last_date);
+    }
 }

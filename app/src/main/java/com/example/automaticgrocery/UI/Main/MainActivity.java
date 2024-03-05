@@ -22,6 +22,7 @@ import com.example.automaticgrocery.UI.UserCenter.UserCenter;
 import com.example.automaticgrocery.data.DB.MyDatabaseHelper;
 import com.example.automaticgrocery.R;
 import com.example.automaticgrocery.UI.Login.LoginPage;
+import com.example.automaticgrocery.data.Repository.Repository;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -31,10 +32,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private MainModel mainModel;
     private FragmentManager fm;
 
-    private ImageView userIcon;
+    private ImageView userIcon,barcodeIcon;
 
     private Spinner spI;
     private Button btnSw;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,7 +48,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         userIcon = findViewById(R.id.userIcon);
         userIcon.setOnClickListener(this);
-        
+
+        barcodeIcon = findViewById(R.id.barcodeIcon);
+        barcodeIcon.setOnClickListener(this);
 
         btnSw = findViewById(R.id.btnSw);
         btnSw.setOnClickListener(this);
@@ -84,35 +88,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    private void showCustomDialog() {
-        Dialog dialog = new Dialog(MainActivity.this);
-
-        dialog.setContentView(R.layout.custom_fill_dialog);
-
-        Button btnD_cancel = dialog.findViewById(R.id.btnD_cancel);
-        Button btnD_update = dialog.findViewById(R.id.btnD_update);
-        EditText et = dialog.findViewById(R.id.etD_ProductName);
-
-
-
-        btnD_update.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(MainActivity.this,et.getText().toString() , Toast.LENGTH_SHORT).show();
-                dialog.dismiss();
-            }
-        });
-
-        btnD_cancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(MainActivity.this, "לא עודכן", Toast.LENGTH_SHORT).show();
-                dialog.dismiss();
-            }
-        });
-
-        dialog.show();
-    }
 
     @Override
     public void onClick(View view) {
@@ -133,6 +108,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             //move to userHub
             Intent i = new Intent(MainActivity.this, UserCenter.class);
             startActivity(i);
+        }
+        else if(barcodeIcon == view)
+        {
+
         }
 
 
