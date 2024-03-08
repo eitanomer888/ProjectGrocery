@@ -27,6 +27,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
     private static final String COLUMN_AMOUNT = "amount";
     private static final String COLUMN_FILL_DATE = "fill_date";
     private static final String COLUMN_LAST_DATE = "last_date";
+    private static final String COLUMN_CATEGORY = "category";
 
 
     public MyDatabaseHelper(@Nullable Context context)
@@ -46,9 +47,10 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
                 " (" + COLUMN_INTERNAL_REFERENCE + " TEXT PRIMARY KEY, " +
                 COLUMN_PRODUCT_NAME + " TEXT, " +
                 COLUMN_BARCODE + " TEXT, " +
-                COLUMN_AMOUNT + " TEXT, " +
+                COLUMN_AMOUNT + " INTEGER, " +
                 COLUMN_FILL_DATE + " TEXT, " +
-                COLUMN_LAST_DATE + " TEXT);";
+                COLUMN_LAST_DATE + " TEXT, " +
+                COLUMN_CATEGORY + " TEXT);";
         db.execSQL(query);
         db.execSQL(query2);
     }
@@ -137,7 +139,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
 
 
     //products actions//
-    public void addProduct(String internal_reference, String name, String barcode, String amount, String fill_date,String last_date){
+    public void addProduct(String internal_reference, String name, String barcode, int amount, String fill_date,String last_date, String category){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
@@ -147,6 +149,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         cv.put(COLUMN_AMOUNT,amount);
         cv.put(COLUMN_FILL_DATE,fill_date);
         cv.put(COLUMN_LAST_DATE,last_date);
+        cv.put(COLUMN_CATEGORY,category);
 
 
         long result = db.insert(TABLE_NAME2,null, cv);
@@ -159,7 +162,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
-    public void updateProductFullData(String internal_reference, String name, String barcode, String amount, String fill_date,String last_date){
+    public void updateProductFullData(String internal_reference, String name, String barcode, int amount, String fill_date,String last_date,String category){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
         cv.put(COLUMN_PRODUCT_NAME, name);
@@ -167,6 +170,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         cv.put(COLUMN_AMOUNT,amount);
         cv.put(COLUMN_FILL_DATE,fill_date);
         cv.put(COLUMN_LAST_DATE,last_date);
+        cv.put(COLUMN_CATEGORY,category);
 
         long result = db.update(TABLE_NAME2, cv, "internal_reference=?", new String[]{internal_reference});
         if(result == -1)
@@ -191,6 +195,36 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         {
             Toast.makeText(context, "Successfully Deleted.", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    public void deleteAllProducts()
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("DELETE FROM " + TABLE_NAME2);
+    }
+
+    public Cursor getAllProducts()
+    {
+        String query = "SELECT * FROM " + TABLE_NAME2;
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = null;
+        if(db != null){
+            cursor = db.rawQuery(query, null);
+        }
+        return cursor;
+    }
+
+    public Cursor getProductsByCategory(String category)
+    {
+        String query = "SELECT * FROM " + TABLE_NAME2 + " WHERE " + COLUMN_CATEGORY + " LIKE '%" + category + "%'";
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = null;
+        if(db != null){
+            cursor = db.rawQuery(query, null);
+        }
+        return cursor;
     }
 
 }

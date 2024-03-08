@@ -6,9 +6,9 @@
     tools:context=".UI.FillFragment.FillFragment">
 
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="178dp"
-        android:layout_height="201dp"
-        android:text="fill" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycleView2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        />
 </FrameLayout>

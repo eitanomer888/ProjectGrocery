@@ -3,6 +3,8 @@ package com.example.automaticgrocery.UI.FillFragment;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,6 +27,9 @@ public class FillFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    private RecyclerView recycleView2;
+    private View view;
 
     public FillFragment() {
         // Required empty public constructor
@@ -61,6 +66,14 @@ public class FillFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_fill, container, false);
+        view = inflater.inflate(R.layout.fragment_fill, container, false);
+
+        recycleView2 = view.findViewById(R.id.recycleView2);
+        recycleView2.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+
+
+
+        return view;
     }
 }

@@ -69,7 +69,14 @@ public class Repository {
     //###############//
 
     //product actions mydatabasehelper//
-    public void addProduct(String internal_reference, String name, String barcode, String amount, String fill_date,String last_date){
-        myDatabaseHelper.addProduct(internal_reference,name,barcode,amount,fill_date,last_date);
+    public void addProduct(String internal_reference, String name, String barcode, int amount, String fill_date,String last_date, String category){
+        myDatabaseHelper.addProduct(internal_reference,name,barcode,amount,fill_date,last_date,category);
     }
+
+    public void DeleteAllProducts(){myDatabaseHelper.deleteAllProducts();}
+
+    public Cursor getAllProducts(){return myDatabaseHelper.getAllProducts();}
+
+    public Cursor getProductsByCategory(String category){return myDatabaseHelper.getProductsByCategory(category);}
+
 }

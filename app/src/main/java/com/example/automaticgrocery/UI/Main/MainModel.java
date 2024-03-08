@@ -1,6 +1,7 @@
 package com.example.automaticgrocery.UI.Main;
 
 import android.content.Context;
+import android.database.Cursor;
 
 import com.example.automaticgrocery.data.Repository.Repository;
 
@@ -37,7 +38,13 @@ public class MainModel {
         return repository.ReadBooleanFromSharedPreferences(key, defaultValue);
     }
 
-    public void addProduct(String internal_reference, String name, String barcode, String amount, String fill_date,String last_date){
-        repository.addProduct(internal_reference,name,barcode,amount,fill_date,last_date);
+    public void addProduct(String internal_reference, String name, String barcode, int amount, String fill_date,String last_date, String category){
+        repository.addProduct(internal_reference,name,barcode,amount,fill_date,last_date,category);
     }
+
+    public void DeleteAllProducts(){repository.DeleteAllProducts();}
+
+    public Cursor getAllProducts(){return repository.getAllProducts();}
+
+    public Cursor getProductsByCategory(String category){return repository.getProductsByCategory(category);}
 }

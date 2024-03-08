@@ -1,5 +1,6 @@
 package com.example.automaticgrocery.UI.ExpiredFragment;
 
+import android.database.Cursor;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -35,6 +36,8 @@ public class ExpiredFragment extends Fragment {
 
     private RecyclerView recyclerView;
     private View view;
+
+    private ExpiredModel expiredModel;
 
     public ExpiredFragment() {
         // Required empty public constructor
@@ -74,8 +77,26 @@ public class ExpiredFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_expired, container, false);
 
         recyclerView = view.findViewById(R.id.recycleView);
+        expiredModel = new ExpiredModel(getActivity());
 
         List<ExpiredItem> items = new ArrayList<ExpiredItem>();
+
+
+        Cursor cursor = expiredModel.getAllProducts();
+        cursor.moveToFirst();
+        int l = cursor.getCount();
+        for (int i = 0; i < l; i++)
+        {
+            //להוסיף בדיקה שהמוצר אכן לא בתוקף
+            items.add(new ExpiredItem(cursor.getString(1),cursor.getString(5),cursor.getInt(3)));
+            cursor.moveToNext();
+        }
+
+
+
+
+
+
         items.add(new ExpiredItem("milk","24/8/26",50));
         items.add(new ExpiredItem("beef","1/2/80",800));
         items.add(new ExpiredItem("apple","18/7/06",12));
@@ -124,6 +145,10 @@ public class ExpiredFragment extends Fragment {
         items.add(new ExpiredItem("milk","24/8/26",50));
         items.add(new ExpiredItem("beef","1/2/80",800));
         items.add(new ExpiredItem("apple","18/7/06",12));
+
+
+
+
 
 
 
