@@ -73,4 +73,6 @@ public class UserCenterModel
     {
         return repository.ReadBooleanFromSharedPreferences(key, defaultValue);
     }
+
+    public void deleteOneRowUser(String username){repository.deleteOneRowUser(username);}
 }

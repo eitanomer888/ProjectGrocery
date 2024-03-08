@@ -41,7 +41,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
     {
         String query = "CREATE TABLE " + TABLE_NAME +
                         " (" + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                        COLUMN_NAME + " TEXT, " +
+                        COLUMN_NAME + " TEXT PRIMARY KEY, " +
                         COLUMN_PASS + " TEXT);";
         String query2 = "CREATE TABLE " + TABLE_NAME2 +
                 " (" + COLUMN_INTERNAL_REFERENCE + " TEXT PRIMARY KEY, " +
@@ -109,10 +109,10 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
 
     }
 
-    public void deleteOneRowUser(String row_id)
+    public void deleteOneRowUser(String username)
     {
         SQLiteDatabase db = this.getWritableDatabase();
-        long result = db.delete(TABLE_NAME, "_id=?", new String[]{row_id});
+        long result = db.delete(TABLE_NAME, "user_name=?", new String[]{username});
         if(result == -1)
         {
             Toast.makeText(context, "Failed to Delete.", Toast.LENGTH_SHORT).show();

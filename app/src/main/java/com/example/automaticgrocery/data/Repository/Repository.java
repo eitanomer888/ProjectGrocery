@@ -40,6 +40,8 @@ public class Repository {
         WriteStringToSharedPreferences(String.valueOf(R.string.user_password_key),"");
         WriteBooleanToSharedPreferences(String.valueOf(R.string.user_remember_key),false);
     }
+
+    public void deleteOneRowUser(String username){myDatabaseHelper.deleteOneRowUser(username);}
     //###############//
 
     //Shared preference//
@@ -78,5 +80,6 @@ public class Repository {
     public Cursor getAllProducts(){return myDatabaseHelper.getAllProducts();}
 
     public Cursor getProductsByCategory(String category){return myDatabaseHelper.getProductsByCategory(category);}
+
 
 }

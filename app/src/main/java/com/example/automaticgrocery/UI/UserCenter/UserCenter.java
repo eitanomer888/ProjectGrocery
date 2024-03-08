@@ -44,6 +44,13 @@ public class UserCenter extends AppCompatActivity implements View.OnClickListene
         }
         else if(btnDeleteUser == v){
             //delete user
+            userCenterModel.deleteOneRowUser(userCenterModel.ReadStringFromSharedPreferences(String.valueOf(R.string.user_name_key),""));
+
+            userCenterModel.WriteStringToSharedPreferences(String.valueOf(R.string.user_name_key),"");
+            userCenterModel.WriteStringToSharedPreferences(String.valueOf(R.string.user_password_key),"");
+            userCenterModel.WriteBooleanToSharedPreferences(String.valueOf(R.string.user_remember_key),false);
+
+            finish();
         }
         else if(btnLogoutUser == v)
         {
