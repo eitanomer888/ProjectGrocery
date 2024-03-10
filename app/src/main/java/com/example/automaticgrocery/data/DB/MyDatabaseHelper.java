@@ -12,7 +12,7 @@ import androidx.annotation.Nullable;
 public class MyDatabaseHelper extends SQLiteOpenHelper {
 
     private Context context;
-    private static final String DATABASE_NAME = "Users.db";
+    private static final String DATABASE_NAME = "MyDataBase.db";
     private static final int DATABASE_VERSION = 1;
 
     private static final String TABLE_NAME = "my_users";
@@ -40,8 +40,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db)
     {
         String query = "CREATE TABLE " + TABLE_NAME +
-                        " (" + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                        COLUMN_NAME + " TEXT PRIMARY KEY, " +
+                        " (" + COLUMN_NAME + " TEXT PRIMARY KEY, " +
                         COLUMN_PASS + " TEXT);";
         String query2 = "CREATE TABLE " + TABLE_NAME2 +
                 " (" + COLUMN_INTERNAL_REFERENCE + " TEXT PRIMARY KEY, " +
@@ -92,13 +91,13 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         return cursor;
     }
 
-    public void updateUserData(String row_id, String name, String pass){
+    public void updateUserData(String current_name, String name, String pass){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
         cv.put(COLUMN_NAME, name);
         cv.put(COLUMN_PASS, pass);
 
-        long result = db.update(TABLE_NAME, cv, "_id=?", new String[]{row_id});
+        long result = db.update(TABLE_NAME, cv, "user_name=?", new String[]{current_name});
         if(result == -1)
         {
             Toast.makeText(context, "Failed", Toast.LENGTH_SHORT).show();

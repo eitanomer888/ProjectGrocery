@@ -29,7 +29,7 @@ public class SignUpModel {
         cursor.moveToFirst();
         for (int i = 0; i < n; i++)
         {
-            if(name.equals(cursor.getString(1)))
+            if(name.equals(cursor.getString(0)))
                 return false;
         }
 
