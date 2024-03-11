@@ -41,17 +41,17 @@ public class SignUpPage extends AppCompatActivity implements View.OnClickListene
         if(v == btnSignUp)
         {
             String name , pass;
-            name = SUuserName.getText().toString();
-            pass = SUuserPass.getText().toString();
+            name = SUuserName.getText().toString().trim();
+            pass = SUuserPass.getText().toString().trim();
             if(signUpModel.sighUpValidation(name,pass))
             {
-                if(signUpModel.checkForDuplicate(name))
+                if(signUpModel.NoDuplicate(name))
                 {
                     signUpModel.addUser(name,pass);
                     finish();
                 }
                 else{
-                    Toast.makeText(this, "user is already exist", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "user name is already taken", Toast.LENGTH_SHORT).show();
                 }
             }
             else{

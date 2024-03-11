@@ -42,6 +42,8 @@ public class Repository {
     }
 
     public void deleteOneRowUser(String username){myDatabaseHelper.deleteOneRowUser(username);}
+
+    public boolean updateUserData(String current_name, String name, String pass){return myDatabaseHelper.updateUserData(current_name,name,pass);}
     //###############//
 
     //Shared preference//

@@ -52,8 +52,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-
+        //initialize objects
         mainModel = new MainModel(this);
 
         userIcon = findViewById(R.id.userIcon);
@@ -66,7 +65,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnSw.setOnClickListener(this);
 
         tvSelectedClass = findViewById(R.id.tvSelectedClass);
-
 
         spI = findViewById(R.id.spI);
         List<String> lst = new LinkedList<>();
@@ -88,7 +86,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //////        {
 //////            lst.add(arrayItem[i].toString());
 //////        }
-
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this,android.R.layout.simple_spinner_item,lst);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -120,7 +117,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         fm.beginTransaction().replace(R.id.contentFragment,FillFragment.class,null).commit();
 
 
-
+        //check if user is logged in
         if(!mainModel.ReadBooleanFromSharedPreferences(String.valueOf(R.string.user_remember_key),false))
         {
             Intent i = new Intent(MainActivity.this, LoginPage.class);
@@ -133,6 +130,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onRestart() {
         super.onRestart();
+        //check if user is logged in
         if(!mainModel.ReadBooleanFromSharedPreferences(String.valueOf(R.string.user_remember_key),false))
         {
             Intent i = new Intent(MainActivity.this, LoginPage.class);
@@ -142,9 +140,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
     @Override
-    public void onClick(View view) {
+    public void onClick(View view)
+    {
         if(btnSw == view){
-            if (MainModel.isFill){
+            //move between fragments and set the right taskbar
+            if (MainModel.isFill)
+            {
                 fm.beginTransaction().replace(R.id.contentFragment,ExpiredFragment.class,null).commit();
                 btnSw.setText(R.string.exSW);
                 MainModel.isFill = false;

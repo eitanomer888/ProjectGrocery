@@ -20,7 +20,7 @@ import com.example.automaticgrocery.UI.SignUp.SignUpPage;
 public class LoginPage extends AppCompatActivity implements View.OnClickListener {
 
     private Button btnLogin;
-    private TextView tvUsername, tvPass, forgotPass, signUp;
+    private TextView forgotPass, signUp;
     private EditText userPass, userName;
     private CheckBox cbRemeber;
 
@@ -31,28 +31,23 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_page);
 
-        btnLogin = findViewById(R.id.btnLogin);
-        tvUsername = findViewById(R.id.tvUsername);
-        tvPass = findViewById(R.id.tvPass);
-        userPass = findViewById(R.id.userPass);
-        userName = findViewById(R.id.userName);
-        forgotPass = findViewById(R.id.forgotPass);
-        signUp = findViewById(R.id.signUp);
-        cbRemeber = findViewById(R.id.cbRemeber);
-
-
         loginModel = new LoginModel(this);
 
-        signUp.setOnClickListener(this);
-        forgotPass.setOnClickListener(this);
+        btnLogin = findViewById(R.id.btnLogin);
         btnLogin.setOnClickListener(this);
 
-        if(loginModel.ReadBooleanFromSharedPreferences(String.valueOf(R.string.user_remember_key),false)){
-            //userName.setText(loginModel.ReadStringFromSharedPreferences(String.valueOf(R.string.user_name_key),""));
-            //userPass.setText(loginModel.ReadStringFromSharedPreferences(String.valueOf(R.string.user_password_key),""));
-            //cbRemeber.setChecked(true);
-            finish();
-        }
+        userPass = findViewById(R.id.userPass);
+
+        userName = findViewById(R.id.userName);
+
+        forgotPass = findViewById(R.id.forgotPass);
+        forgotPass.setOnClickListener(this);
+
+        signUp = findViewById(R.id.signUp);
+        signUp.setOnClickListener(this);
+
+        cbRemeber = findViewById(R.id.cbRemeber);
+
     }
 
     @Override
@@ -60,9 +55,12 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
         if(v == btnLogin)
         {
             //send to the main page with the planogram
+
+            //get user name + password
             String name , pass;
-            name = userName.getText().toString();
-            pass = userPass.getText().toString();
+            name = userName.getText().toString().trim();
+            pass = userPass.getText().toString().trim();
+
             if(loginModel.loginValidation(name,pass))
             {
                 if(loginModel.searchUser(name,pass))
@@ -86,9 +84,6 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
                     Toast.makeText(this, "user is not found", Toast.LENGTH_SHORT).show();
                 }
 
-            }
-            else{
-                Toast.makeText(this, "pls fill all fields", Toast.LENGTH_SHORT).show();
             }
         }
         else if(v == forgotPass)

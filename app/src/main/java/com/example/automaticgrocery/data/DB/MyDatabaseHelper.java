@@ -13,10 +13,9 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
 
     private Context context;
     private static final String DATABASE_NAME = "MyDataBase.db";
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
 
     private static final String TABLE_NAME = "my_users";
-    private static final String COLUMN_ID = "_id";
     private static final String COLUMN_NAME = "user_name";
     private static final String COLUMN_PASS = "user_pass";
 
@@ -91,7 +90,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         return cursor;
     }
 
-    public void updateUserData(String current_name, String name, String pass){
+    public boolean updateUserData(String current_name, String name, String pass){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
         cv.put(COLUMN_NAME, name);
@@ -101,9 +100,11 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         if(result == -1)
         {
             Toast.makeText(context, "Failed", Toast.LENGTH_SHORT).show();
+            return false;
         }else
         {
             Toast.makeText(context, "Updated Successfully!", Toast.LENGTH_SHORT).show();
+            return true;
         }
 
     }

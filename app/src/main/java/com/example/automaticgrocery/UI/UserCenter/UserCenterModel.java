@@ -2,6 +2,7 @@ package com.example.automaticgrocery.UI.UserCenter;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.database.Cursor;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -29,7 +30,8 @@ public class UserCenterModel
         EditText etUpDiUserName = dialog.findViewById(R.id.etUpDiUserName);
         EditText etUpDiUserPass = dialog.findViewById(R.id.etUpDiUserPass);
 
-
+        etUpDiUserName.setText(ReadStringFromSharedPreferences(String.valueOf(R.string.user_name_key),""));
+        etUpDiUserPass.setText(ReadStringFromSharedPreferences(String.valueOf(R.string.user_password_key),""));
 
         btnUpDiCancle.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -42,12 +44,48 @@ public class UserCenterModel
             @Override
             public void onClick(View view)
             {
+                String currnet_name = ReadStringFromSharedPreferences(String.valueOf(R.string.user_name_key),"");
+                String name = etUpDiUserName.getText().toString().trim();
+                String pass = etUpDiUserPass.getText().toString().trim();
+                if(currnet_name.equals("") || name.equals("") || pass.equals(""))
+                    Toast.makeText(repository.getContext(), "pls fill all fields/saved data failed", Toast.LENGTH_SHORT).show();
 
+                else if(currnet_name.equals(name))
+                {
+                    //if user didn't change name
+                    boolean up = repository.updateUserData(currnet_name,name,pass);
+                    if(up){
+                        WriteStringToSharedPreferences(String.valueOf(R.string.user_name_key),name);
+                        WriteStringToSharedPreferences(String.valueOf(R.string.user_password_key),pass);
+                    }
 
+                    dialog.dismiss();
+                }
+                else
+                {
+                    //if user change name
+                    boolean degel = false;
 
+                    Cursor cursor = repository.readData();
+                    cursor.moveToNext();
+                    int l = cursor.getCount();
+                    for (int i = 0; i < l; i++)
+                    {
+                        if( name.equals(cursor.getString(0)) && !name.equals(currnet_name))
+                            degel = true;
+                    }
 
-                Toast.makeText(repository.getContext(), "updated successfully", Toast.LENGTH_SHORT).show();
-                dialog.dismiss();
+                    if(degel)
+                        Toast.makeText(repository.getContext(), "user name already exists", Toast.LENGTH_SHORT).show();
+                    else{
+                        boolean up =repository.updateUserData(currnet_name,name,pass);
+                        if(up){
+                            WriteStringToSharedPreferences(String.valueOf(R.string.user_name_key),name);
+                            WriteStringToSharedPreferences(String.valueOf(R.string.user_password_key),pass);
+                        }
+                        dialog.dismiss();
+                    }
+                }
             }
         });
 

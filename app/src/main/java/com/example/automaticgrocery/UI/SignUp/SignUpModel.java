@@ -22,7 +22,7 @@ public class SignUpModel {
         return true;
     }
 
-    public boolean checkForDuplicate(String name)
+    public boolean NoDuplicate(String name)
     {
         Cursor cursor = repository.readData();
         int n = cursor.getCount();
@@ -31,6 +31,8 @@ public class SignUpModel {
         {
             if(name.equals(cursor.getString(0)))
                 return false;
+
+            cursor.moveToNext();
         }
 
         return true;
