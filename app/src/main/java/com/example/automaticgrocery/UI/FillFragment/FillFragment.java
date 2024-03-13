@@ -1,16 +1,23 @@
 package com.example.automaticgrocery.UI.FillFragment;
 
+import android.database.Cursor;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.automaticgrocery.R;
+import com.example.automaticgrocery.UI.MyRecycleView.MyFillAdapter;
+import com.example.automaticgrocery.data.Items.FillItem;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -30,6 +37,7 @@ public class FillFragment extends Fragment {
 
     private RecyclerView recycleView2;
     private View view;
+    private FillModel fillModel;
 
     public FillFragment() {
         // Required empty public constructor
@@ -69,9 +77,51 @@ public class FillFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_fill, container, false);
 
         recycleView2 = view.findViewById(R.id.recycleView2);
-        recycleView2.setLayoutManager(new LinearLayoutManager(getActivity()));
+        fillModel = new FillModel(getActivity());
+
+        List<FillItem> items = new ArrayList<>();
+
+        Cursor cursor = fillModel.getAllProducts();
+
+        if(cursor != null)
+        {
+            int l = cursor.getCount();
+            cursor.moveToFirst();
+            for (int i = 0; i < l; i++)
+            {
+                items.add(new FillItem(cursor.getString(1),cursor.getString(0),cursor.getInt(3)));
+                cursor.moveToNext();
+            }
+        }
+
+        items.add(new FillItem("milk","11111111",50));
+        items.add(new FillItem("beef","22222222",100));
+        items.add(new FillItem("apple","33333333",200));
+        items.add(new FillItem("bamba","44444444",400));
+        items.add(new FillItem("milk","11111111",50));
+        items.add(new FillItem("beef","22222222",100));
+        items.add(new FillItem("apple","33333333",200));
+        items.add(new FillItem("bamba","44444444",400));
+        items.add(new FillItem("milk","11111111",50));
+        items.add(new FillItem("beef","22222222",100));
+        items.add(new FillItem("apple","33333333",200));
+        items.add(new FillItem("bamba","44444444",400));
+        items.add(new FillItem("milk","11111111",50));
+        items.add(new FillItem("beef","22222222",100));
+        items.add(new FillItem("apple","33333333",200));
+        items.add(new FillItem("bamba","44444444",400));
+        items.add(new FillItem("milk","11111111",50));
+        items.add(new FillItem("beef","22222222",100));
+        items.add(new FillItem("apple","33333333",200));
+        items.add(new FillItem("bamba","44444444",400));
+        items.add(new FillItem("milk","11111111",50));
+        items.add(new FillItem("beef","22222222",100));
+        items.add(new FillItem("apple","33333333",200));
+        //items.add(new FillItem("bamba","44444444",400));
 
 
+        recycleView2.setLayoutManager(new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL));
+        recycleView2.setAdapter(new MyFillAdapter(getActivity().getApplicationContext(),items));
 
 
         return view;
