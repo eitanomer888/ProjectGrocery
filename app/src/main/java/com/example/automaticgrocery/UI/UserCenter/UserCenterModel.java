@@ -47,15 +47,15 @@ public class UserCenterModel
                 String currnet_name = ReadStringFromSharedPreferences(String.valueOf(R.string.user_name_key),"");
                 String name = etUpDiUserName.getText().toString().trim();
                 String pass = etUpDiUserPass.getText().toString().trim();
+
                 if(currnet_name.equals("") || name.equals("") || pass.equals(""))
                     Toast.makeText(repository.getContext(), "pls fill all fields/saved data failed", Toast.LENGTH_SHORT).show();
-
                 else if(currnet_name.equals(name))
                 {
                     //if user didn't change name
                     boolean up = repository.updateUserData(currnet_name,name,pass);
-                    if(up){
-                        WriteStringToSharedPreferences(String.valueOf(R.string.user_name_key),name);
+                    if(up)
+                    {
                         WriteStringToSharedPreferences(String.valueOf(R.string.user_password_key),pass);
                     }
 
@@ -63,28 +63,21 @@ public class UserCenterModel
                 }
                 else
                 {
-                    //if user change name
-                    boolean degel = false;
-
-                    Cursor cursor = repository.readData();
-                    cursor.moveToNext();
-                    int l = cursor.getCount();
-                    for (int i = 0; i < l; i++)
+                    //if user changed name
+                    if(isNameTaken(name,currnet_name))
+                        Toast.makeText(repository.getContext(), "username is already taken", Toast.LENGTH_SHORT).show();
+                    else
                     {
-                        if( name.equals(cursor.getString(0)) && !name.equals(currnet_name))
-                            degel = true;
-                    }
-
-                    if(degel)
-                        Toast.makeText(repository.getContext(), "user name already exists", Toast.LENGTH_SHORT).show();
-                    else{
-                        boolean up =repository.updateUserData(currnet_name,name,pass);
-                        if(up){
+                        boolean up = repository.updateUserData(currnet_name,name,pass);
+                        if(up)
+                        {
                             WriteStringToSharedPreferences(String.valueOf(R.string.user_name_key),name);
                             WriteStringToSharedPreferences(String.valueOf(R.string.user_password_key),pass);
                         }
+
                         dialog.dismiss();
                     }
+
                 }
             }
         });
@@ -113,4 +106,23 @@ public class UserCenterModel
     }
 
     public void deleteOneRowUser(String username){repository.deleteOneRowUser(username);}
+
+    public boolean isNameTaken(String name,String currnet_name)
+    {
+        Cursor cursor = repository.readData();
+        if(cursor == null)
+            return false;
+
+        cursor.moveToFirst();
+        int l = cursor.getCount();
+        for (int i = 0; i < l; i++)
+        {
+            if(cursor.getString(0).equals(name) && !currnet_name.equals(name))
+                return true;
+
+            cursor.moveToNext();
+        }
+
+        return false;
+    }
 }
