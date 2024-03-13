@@ -13,4 +13,8 @@ public class ExpiredModel
     }
 
     public Cursor getAllProducts(){return repository.getAllProducts();}
+
+    public Cursor getProductsByCategory(){return repository.getProductsByCategory(getCurrent_category());}
+
+    public String getCurrent_category(){return repository.getCurrent_category();}
 }

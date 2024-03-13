@@ -82,7 +82,7 @@ public class ExpiredFragment extends Fragment {
         List<ExpiredItem> items = new ArrayList<ExpiredItem>();
 
 
-        Cursor cursor = expiredModel.getAllProducts();
+        Cursor cursor = expiredModel.getProductsByCategory();
         cursor.moveToFirst();
         int l = cursor.getCount();
         for (int i = 0; i < l; i++)

@@ -3,9 +3,9 @@ package com.example.automaticgrocery.UI.Main;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
 import android.app.Dialog;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Color;
@@ -73,20 +73,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         lst.add("מזון מקורר, קפוא ונקניקים");
         lst.add("מוצרי חלב וביצים");
 
-//        Set<String> set = new HashSet<>();
-//        Cursor cursor = mainModel.getAllProducts();
-//        cursor.moveToFirst();
-//        int l = cursor.getCount();
-//        for (int i = 0; i < l; i++) {
-//            set.add(cursor.getString(7));
-//            cursor.moveToNext();
-//        }
-//////        Object[] arrayItem = set.toArray();
-//////        for (int i = 0; i < arrayItem.length; i++)
-//////        {
-//////            lst.add(arrayItem[i].toString());
-//////        }
-
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this,android.R.layout.simple_spinner_item,lst);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spI.setAdapter(adapter);
@@ -94,17 +80,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String category = spI.getItemAtPosition(position).toString();
+
                 tvSelectedClass.setText(category);
+                mainModel.setCurrent_category(category);
 
-                Cursor cursor = mainModel.getProductsByCategory(category);
-                cursor.moveToFirst();
-                int l = cursor.getCount();
-                for (int i = 0; i < l; i++)
-                {
-                    Toast.makeText(MainActivity.this, cursor.getString(1), Toast.LENGTH_SHORT).show();
-                    cursor.moveToNext();
+                //communicte with fragments
+                if(MainModel.isFill){
+                    FillFragment fillFragment = new FillFragment();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.contentFragment,fillFragment).commit();
                 }
-
+                else{
+                    ExpiredFragment expiredFragment = new ExpiredFragment();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.contentFragment,expiredFragment).commit();
+                }
             }
 
             @Override
@@ -155,6 +143,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 fm.beginTransaction().replace(R.id.contentFragment,FillFragment.class,null).commit();
                 btnSw.setText(R.string.fillSW);
                 MainModel.isFill = true;
+                spI.setSelection(0);
             }
         }
         else if(userIcon == view)

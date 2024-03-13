@@ -11,10 +11,12 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.automaticgrocery.R;
 import com.example.automaticgrocery.UI.MyRecycleView.MyFillAdapter;
 import com.example.automaticgrocery.data.Items.FillItem;
+import com.example.automaticgrocery.data.Repository.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -81,7 +83,7 @@ public class FillFragment extends Fragment {
 
         List<FillItem> items = new ArrayList<>();
 
-        Cursor cursor = fillModel.getAllProducts();
+        Cursor cursor = fillModel.getProductsByCategory();
 
         if(cursor != null)
         {

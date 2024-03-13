@@ -13,14 +13,27 @@ public class Repository {
     private MyDatabaseHelper myDatabaseHelper;
     private SharedPreferences sharedPreferences;
 
+    private static String current_category;
+
     private Context context;
     public Repository(Context context){
         myDatabaseHelper = new MyDatabaseHelper(context);
         sharedPreferences = context.getSharedPreferences(String.valueOf(R.string.preference_file_key),Context.MODE_PRIVATE);
         this.context = context;
+        if (current_category == null){
+            current_category = "הכל";
+        }
     }
     public Context getContext() {
         return context;
+    }
+
+    public String getCurrent_category() {
+        return current_category;
+    }
+
+    public void setCurrent_category(String current_category) {
+        this.current_category = current_category;
     }
 
 

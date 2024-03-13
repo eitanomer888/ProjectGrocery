@@ -47,4 +47,14 @@ public class MainModel {
     public Cursor getAllProducts(){return repository.getAllProducts();}
 
     public Cursor getProductsByCategory(String category){return repository.getProductsByCategory(category);}
+
+
+
+    public void setCurrent_category(String category)
+    {
+        repository.setCurrent_category(category);
+    }
+
+
+
 }
