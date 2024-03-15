@@ -62,7 +62,7 @@
         <TextView
             android:id="@+id/tvDUPEXPProductLastDate"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="30dp"
             android:layout_weight="1"
             android:text="תוקף אחרון" />
 
@@ -77,12 +77,13 @@
             android:layout_marginRight="10dp"
             />
 
-        <EditText
+        <TextView
             android:id="@+id/etDExpProductLastDate"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="30dp"
             android:layout_weight="10"
-            android:inputType="date"
+            android:text="אנא סרוק תאריך"
+            android:gravity="center"
             />
 
     </LinearLayout>
@@ -110,5 +111,7 @@
             />
 
     </LinearLayout>
+
+
 
 </LinearLayout>

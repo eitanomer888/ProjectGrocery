@@ -55,17 +55,77 @@ public class MyViewHolder extends RecyclerView.ViewHolder {
 
         TextView tvDExpAmount =dialog.findViewById(R.id.tvDExpAmount);
         TextView tvDExpProductAmount = dialog.findViewById(R.id.tvDExpProductAmount);
+        tvDExpProductAmount.setText(tvExpAmount.getText().toString());
 
 
         TextView tvDExpLastDate = dialog.findViewById(R.id.tvDExpLastDate);
         TextView tvDExpProductLastDate = dialog.findViewById(R.id.tvDExpProductLastDate);
+        tvDExpProductLastDate.setText(tvExpDate.getText().toString());
 
         Button btnDExpConfirm =dialog.findViewById(R.id.btnDExpConfirm);
         Button btnDExpUpdate = dialog.findViewById(R.id.btnDExpUpdate);
 
+        btnDExpConfirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+            }
+        });
+
+        btnDExpUpdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openUpDialog();
+            }
+        });
 
 
         dialog.show();
     }
+
+
+    public void openUpDialog()
+    {
+        Dialog dialog = new Dialog(repository.getContext());
+
+        dialog.setContentView(R.layout.custom_exp_update_date_dialog);
+
+        TextView tvDUPEXPProductName = dialog.findViewById(R.id.tvDUPEXPProductName);
+        tvDUPEXPProductName.setText(tvExpName.getText().toString());
+
+        EditText etDUPEXPProductAmount = dialog.findViewById(R.id.etDUPEXPProductAmount);
+
+        Button btnDUPEXPProductLastDate = dialog.findViewById(R.id.btnDUPEXPProductLastDate);
+        TextView etDExpProductLastDate = dialog.findViewById(R.id.etDExpProductLastDate);
+
+
+        Button btnDUPEXPCancle = dialog.findViewById(R.id.btnDUPEXPCancle);
+        Button btnDUPEXPConfirm = dialog.findViewById(R.id.btnDUPEXPConfirm);
+
+        btnDUPEXPProductLastDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(repository.getContext(), "scanning...", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        btnDUPEXPCancle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+        btnDUPEXPConfirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(repository.getContext(), "comfirm", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+        dialog.show();
+    }
+
+
 }
