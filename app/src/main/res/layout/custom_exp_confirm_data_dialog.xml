@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layoutDirection="rtl">
+
+    <TextView
+        android:id="@+id/tvConfirmRemove"
+        android:layout_marginTop="50dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="אנא הסר x מוצרים פגי תוקף"
+        android:textSize="40dp"
+        android:gravity="center"
+        />
+
+    <LinearLayout
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="50dp"
+        android:layout_gravity="center">
+
+        <Button
+            android:id="@+id/btnConfirmCancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="בטל"
+
+            />
+
+        <Button
+            android:id="@+id/btnConfirmOK"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="אשר"
+            android:layout_marginRight="100dp"
+            />
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -46,29 +46,6 @@
         android:layout_gravity="center">
 
         <TextView
-            android:id="@+id/tvDExpAmount"
-            android:layout_width="wrap_content"
-            android:layout_height="30dp"
-            android:layout_marginLeft="20dp"
-            android:layout_weight="1"
-            android:text="כמות" />
-
-        <TextView
-            android:id="@+id/tvDExpProductAmount"
-            android:layout_width="wrap_content"
-            android:layout_height="30dp"
-            android:layout_weight="8"
-            />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="280dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_gravity="center">
-
-        <TextView
             android:id="@+id/tvDExpLastDate"
             android:layout_width="wrap_content"
             android:layout_height="30dp"
@@ -84,6 +61,32 @@
             />
 
     </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center">
+
+        <TextView
+            android:id="@+id/tvDExpAmount"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_marginLeft="20dp"
+            android:layout_weight="1"
+            android:text="כמות" />
+
+        <EditText
+            android:id="@+id/etDExpProductAmount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="4"
+            android:inputType="number"
+            />
+
+    </LinearLayout>
+
+
 
     <LinearLayout
         android:layout_width="280dp"

@@ -53,14 +53,14 @@ public class MyViewHolder extends RecyclerView.ViewHolder {
        TextView tvDExpProductName =dialog.findViewById(R.id.tvDExpProductName);
        tvDExpProductName.setText(tvExpName.getText().toString());
 
-        TextView tvDExpAmount =dialog.findViewById(R.id.tvDExpAmount);
-        TextView tvDExpProductAmount = dialog.findViewById(R.id.tvDExpProductAmount);
-        tvDExpProductAmount.setText(tvExpAmount.getText().toString());
-
 
         TextView tvDExpLastDate = dialog.findViewById(R.id.tvDExpLastDate);
         TextView tvDExpProductLastDate = dialog.findViewById(R.id.tvDExpProductLastDate);
         tvDExpProductLastDate.setText(tvExpDate.getText().toString());
+
+        TextView tvDExpAmount =dialog.findViewById(R.id.tvDExpAmount);
+        EditText etDExpProductAmount = dialog.findViewById(R.id.etDExpProductAmount);
+        etDExpProductAmount.setText(tvExpAmount.getText().toString());
 
         Button btnDExpConfirm =dialog.findViewById(R.id.btnDExpConfirm);
         Button btnDExpUpdate = dialog.findViewById(R.id.btnDExpUpdate);
@@ -68,7 +68,7 @@ public class MyViewHolder extends RecyclerView.ViewHolder {
         btnDExpConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                openConDialog();
             }
         });
 
@@ -128,4 +128,31 @@ public class MyViewHolder extends RecyclerView.ViewHolder {
     }
 
 
+    public void openConDialog(){
+        Dialog dialog = new Dialog(repository.getContext());
+
+        dialog.setContentView(R.layout.custom_exp_confirm_data_dialog);
+
+        TextView tvConfirmRemove = dialog.findViewById(R.id.tvConfirmRemove);
+
+        Button btnConfirmCancel = dialog.findViewById(R.id.btnConfirmCancel);
+        Button btnConfirmOK = dialog.findViewById(R.id.btnConfirmOK);
+
+        btnConfirmCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+        btnConfirmOK.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+
+        dialog.show();
+    }
 }
