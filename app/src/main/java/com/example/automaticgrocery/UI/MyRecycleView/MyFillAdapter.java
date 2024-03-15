@@ -26,7 +26,7 @@ public class MyFillAdapter extends RecyclerView.Adapter<MyFillViewHolder> {
     @NonNull
     @Override
     public MyFillViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new MyFillViewHolder(LayoutInflater.from(context).inflate(R.layout.single_fill_item,parent,false));
+        return new MyFillViewHolder(LayoutInflater.from(context).inflate(R.layout.single_fill_item,parent,false), parent.getContext());
     }
 
     @Override

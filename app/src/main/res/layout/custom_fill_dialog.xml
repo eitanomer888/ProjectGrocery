@@ -15,7 +15,7 @@
         android:layout_gravity="right"
         android:layout_marginRight="5dp"
         android:layout_marginTop="5dp"
-        android:background="@mipmap/ic_launcher"
+        android:background="@drawable/return_icon"
         />
 
     <LinearLayout
@@ -25,19 +25,18 @@
         android:layout_gravity="center">
 
         <TextView
-            android:id="@+id/tvD_ProductName"
+            android:id="@+id/tvD_Name"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="30dp"
             android:layout_marginLeft="20dp"
             android:layout_weight="1"
             android:text="שם פריט" />
 
-        <EditText
-            android:id="@+id/etD_ProductName"
+        <TextView
+            android:id="@+id/tvD_ProductName"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="30dp"
             android:layout_weight="8"
-            android:inputType="text"
             />
 
     </LinearLayout>
@@ -54,7 +53,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_weight="1"
-            android:text="כמות" />
+            android:text="כמות נוכחית" />
 
         <EditText
             android:id="@+id/etD_ProductAmount"
@@ -75,7 +74,7 @@
         <TextView
             android:id="@+id/tvD_ProductLastDate"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="30dp"
             android:layout_weight="1"
             android:text="תוקף אחרון" />
 
@@ -90,12 +89,13 @@
             android:layout_marginRight="10dp"
             />
 
-        <EditText
+        <TextView
             android:id="@+id/etD_ProductLastDate"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="30dp"
             android:layout_weight="10"
-            android:inputType="date"
+            android:text="אנא סרוק תאריך"
+            android:gravity="center"
             />
 
     </LinearLayout>
@@ -109,7 +109,7 @@
         <TextView
             android:id="@+id/tvD_ProductFirstDate"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="30dp"
             android:layout_weight="1"
             android:text="תוקף למילוי" />
 
@@ -124,12 +124,39 @@
             android:layout_marginRight="10dp"
             />
 
-        <EditText
+        <TextView
             android:id="@+id/etD_ProductFirstDate"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="30dp"
             android:layout_weight="10"
-            android:inputType="date"
+            android:text="אנא סרוק תאריך"
+            android:gravity="center"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center">
+
+        <TextView
+            android:id="@+id/tvD_ProductAmountToFill"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_weight="1"
+            android:text="כמות למילוי" />
+
+        <EditText
+            android:id="@+id/etD_ProductAmountToFill"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="11sp"
+            android:layout_weight="3"
+            android:inputType="number"
+            android:hint="מתעדכן ברגע שכל שאר השדות ימולאו"
             />
 
     </LinearLayout>
