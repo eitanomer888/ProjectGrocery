@@ -18,6 +18,8 @@ public class MyViewHolder extends RecyclerView.ViewHolder {
     TextView tvExpName,tvExpAmount,tvExpDate;
 
     private Repository repository;
+
+    private Dialog dialog1,dialog2,dialog3;
     public MyViewHolder(@NonNull View itemView, Context context) {
         super(itemView);
         repository = new Repository(context);
@@ -37,38 +39,51 @@ public class MyViewHolder extends RecyclerView.ViewHolder {
 
     public void openDialog()
     {
-        Dialog dialog = new Dialog(repository.getContext());
+        dialog1 = new Dialog(repository.getContext());
 
-        dialog.setContentView(R.layout.custom_exp_dialog);
+        dialog1.setContentView(R.layout.custom_exp_dialog);
 
-        Button btnDExpCancel = dialog.findViewById(R.id.btnDExpCancel);
+        Button btnDExpCancel = dialog1.findViewById(R.id.btnDExpCancel);
         btnDExpCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dialog.dismiss();
+                dialog1.dismiss();
             }
         });
 
-       TextView tvDExpName =dialog.findViewById(R.id.tvDExpName);
-       TextView tvDExpProductName =dialog.findViewById(R.id.tvDExpProductName);
+       TextView tvDExpName =dialog1.findViewById(R.id.tvDExpName);
+       TextView tvDExpProductName =dialog1.findViewById(R.id.tvDExpProductName);
        tvDExpProductName.setText(tvExpName.getText().toString());
 
 
-        TextView tvDExpLastDate = dialog.findViewById(R.id.tvDExpLastDate);
-        TextView tvDExpProductLastDate = dialog.findViewById(R.id.tvDExpProductLastDate);
+        TextView tvDExpLastDate = dialog1.findViewById(R.id.tvDExpLastDate);
+        TextView tvDExpProductLastDate = dialog1.findViewById(R.id.tvDExpProductLastDate);
         tvDExpProductLastDate.setText(tvExpDate.getText().toString());
 
-        TextView tvDExpAmount =dialog.findViewById(R.id.tvDExpAmount);
-        EditText etDExpProductAmount = dialog.findViewById(R.id.etDExpProductAmount);
+        TextView tvDExpAmount =dialog1.findViewById(R.id.tvDExpAmount);
+        EditText etDExpProductAmount = dialog1.findViewById(R.id.etDExpProductAmount);
         etDExpProductAmount.setText(tvExpAmount.getText().toString());
 
-        Button btnDExpConfirm =dialog.findViewById(R.id.btnDExpConfirm);
-        Button btnDExpUpdate = dialog.findViewById(R.id.btnDExpUpdate);
+        Button btnDExpConfirm =dialog1.findViewById(R.id.btnDExpConfirm);
+        Button btnDExpUpdate = dialog1.findViewById(R.id.btnDExpUpdate);
 
         btnDExpConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openConDialog();
+                if(etDExpProductAmount.getText().toString().trim().equals("")){
+                    Toast.makeText(repository.getContext(), "אנא מלא את שדה הכמות", Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+                    int amount = Integer.parseInt(etDExpProductAmount.getText().toString().trim());
+                    if(amount > 0){
+                        openConDialog(amount);
+                    }
+                    else{
+                        Toast.makeText(repository.getContext(), "כמות צריכה להיות גדולה מ-0", Toast.LENGTH_SHORT).show();
+                    }
+                }
+
             }
         });
 
@@ -80,27 +95,27 @@ public class MyViewHolder extends RecyclerView.ViewHolder {
         });
 
 
-        dialog.show();
+        dialog1.show();
     }
 
 
     public void openUpDialog()
     {
-        Dialog dialog = new Dialog(repository.getContext());
+        dialog2 = new Dialog(repository.getContext());
 
-        dialog.setContentView(R.layout.custom_exp_update_date_dialog);
+        dialog2.setContentView(R.layout.custom_exp_update_date_dialog);
 
-        TextView tvDUPEXPProductName = dialog.findViewById(R.id.tvDUPEXPProductName);
+        TextView tvDUPEXPProductName = dialog2.findViewById(R.id.tvDUPEXPProductName);
         tvDUPEXPProductName.setText(tvExpName.getText().toString());
 
-        EditText etDUPEXPProductAmount = dialog.findViewById(R.id.etDUPEXPProductAmount);
+        EditText etDUPEXPProductAmount = dialog2.findViewById(R.id.etDUPEXPProductAmount);
 
-        Button btnDUPEXPProductLastDate = dialog.findViewById(R.id.btnDUPEXPProductLastDate);
-        TextView etDExpProductLastDate = dialog.findViewById(R.id.etDExpProductLastDate);
+        Button btnDUPEXPProductLastDate = dialog2.findViewById(R.id.btnDUPEXPProductLastDate);
+        TextView etDExpProductLastDate = dialog2.findViewById(R.id.etDExpProductLastDate);
 
 
-        Button btnDUPEXPCancle = dialog.findViewById(R.id.btnDUPEXPCancle);
-        Button btnDUPEXPConfirm = dialog.findViewById(R.id.btnDUPEXPConfirm);
+        Button btnDUPEXPCancle = dialog2.findViewById(R.id.btnDUPEXPCancle);
+        Button btnDUPEXPConfirm = dialog2.findViewById(R.id.btnDUPEXPConfirm);
 
         btnDUPEXPProductLastDate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -112,7 +127,7 @@ public class MyViewHolder extends RecyclerView.ViewHolder {
         btnDUPEXPCancle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dialog.dismiss();
+                dialog2.dismiss();
             }
         });
 
@@ -124,35 +139,36 @@ public class MyViewHolder extends RecyclerView.ViewHolder {
         });
 
 
-        dialog.show();
+        dialog2.show();
     }
 
 
-    public void openConDialog(){
-        Dialog dialog = new Dialog(repository.getContext());
+    public void openConDialog(int amount){
+        dialog3 = new Dialog(repository.getContext());
 
-        dialog.setContentView(R.layout.custom_exp_confirm_data_dialog);
+        dialog3.setContentView(R.layout.custom_exp_confirm_data_dialog);
 
-        TextView tvConfirmRemove = dialog.findViewById(R.id.tvConfirmRemove);
+        TextView tvConfirmRemove = dialog3.findViewById(R.id.tvConfirmRemove);
+        tvConfirmRemove.setText("אנא הסר " + amount + " מוצרים פגי תוקף");
 
-        Button btnConfirmCancel = dialog.findViewById(R.id.btnConfirmCancel);
-        Button btnConfirmOK = dialog.findViewById(R.id.btnConfirmOK);
+        Button btnConfirmCancel = dialog3.findViewById(R.id.btnConfirmCancel);
+        Button btnConfirmOK = dialog3.findViewById(R.id.btnConfirmOK);
 
         btnConfirmCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dialog.dismiss();
+                dialog3.dismiss();
             }
         });
 
         btnConfirmOK.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Toast.makeText(repository.getContext(), "update all data and views", Toast.LENGTH_SHORT).show();
             }
         });
 
 
-        dialog.show();
+        dialog3.show();
     }
 }
