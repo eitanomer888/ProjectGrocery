@@ -13,7 +13,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
 
     private Context context;
     private static final String DATABASE_NAME = "MyDataBase.db";
-    private static final int DATABASE_VERSION = 2;
+    private static final int DATABASE_VERSION = 3;
 
     private static final String TABLE_NAME = "my_users";
     private static final String COLUMN_NAME = "user_name";
@@ -27,6 +27,8 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
     private static final String COLUMN_FILL_DATE = "fill_date";
     private static final String COLUMN_LAST_DATE = "last_date";
     private static final String COLUMN_CATEGORY = "category";
+    private static final String COLUMN_TARGET_AMOUNT = "target_amount";
+    private static final String COLUMN_LAST_DATE_AMOUNT = "last_date_amount";
 
 
     public MyDatabaseHelper(@Nullable Context context)
@@ -48,7 +50,9 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
                 COLUMN_AMOUNT + " INTEGER, " +
                 COLUMN_FILL_DATE + " TEXT, " +
                 COLUMN_LAST_DATE + " TEXT, " +
-                COLUMN_CATEGORY + " TEXT);";
+                COLUMN_CATEGORY + " TEXT, " +
+                COLUMN_TARGET_AMOUNT + " INTEGER, " +
+                COLUMN_LAST_DATE_AMOUNT + " INTEGER);";
         db.execSQL(query);
         db.execSQL(query2);
     }
@@ -139,7 +143,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
 
 
     //products actions//
-    public void addProduct(String internal_reference, String name, String barcode, int amount, String fill_date,String last_date, String category){
+    public void addProduct(String internal_reference, String name, String barcode, int amount, String fill_date,String last_date, String category,int target_amount,int last_date_amount){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
@@ -150,6 +154,8 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         cv.put(COLUMN_FILL_DATE,fill_date);
         cv.put(COLUMN_LAST_DATE,last_date);
         cv.put(COLUMN_CATEGORY,category);
+        cv.put(COLUMN_TARGET_AMOUNT,target_amount);
+        cv.put(COLUMN_LAST_DATE_AMOUNT,last_date_amount);
 
 
         long result = db.insert(TABLE_NAME2,null, cv);
@@ -162,7 +168,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
-    public void updateProductFullData(String internal_reference, String name, String barcode, int amount, String fill_date,String last_date,String category){
+    public void updateProductFullData(String internal_reference, String name, String barcode, int amount, String fill_date,String last_date,String category,int target_amount,int last_date_amount){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
         cv.put(COLUMN_PRODUCT_NAME, name);
@@ -171,6 +177,8 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         cv.put(COLUMN_FILL_DATE,fill_date);
         cv.put(COLUMN_LAST_DATE,last_date);
         cv.put(COLUMN_CATEGORY,category);
+        cv.put(COLUMN_TARGET_AMOUNT,target_amount);
+        cv.put(COLUMN_LAST_DATE_AMOUNT,last_date_amount);
 
         long result = db.update(TABLE_NAME2, cv, "internal_reference=?", new String[]{internal_reference});
         if(result == -1)
