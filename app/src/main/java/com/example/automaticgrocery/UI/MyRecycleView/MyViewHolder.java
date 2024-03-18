@@ -165,10 +165,84 @@ public class MyViewHolder extends RecyclerView.ViewHolder {
             @Override
             public void onClick(View v) {
                 Toast.makeText(repository.getContext(), "update all data and views", Toast.LENGTH_SHORT).show();
+
+
+
+                openFinDialog();
             }
         });
 
 
         dialog3.show();
+    }
+
+    public void openFinDialog()
+    {
+        Dialog dialog = new Dialog(repository.getContext());
+        dialog.setCancelable(false);
+
+        dialog.setContentView(R.layout.custom_exp_final_data_dialog);
+
+        TextView tvFINEXPProductName = dialog.findViewById(R.id.tvFINEXPProductName);
+        tvFINEXPProductName.setText(tvExpName.getText().toString().trim());
+
+        EditText etFINEXPProductAmount = dialog.findViewById(R.id.etFINEXPProductAmount);
+
+        Button btnFINEXPProductLastDate = dialog.findViewById(R.id.btnFINEXPProductLastDate);
+        TextView etDFINProductLastDate = dialog.findViewById(R.id.etDFINProductLastDate);
+        btnFINEXPProductLastDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(repository.getContext(), "scanning...", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        EditText etFINEXPRemoveAmount = dialog.findViewById(R.id.etFINEXPRemoveAmount);
+
+
+        Button btnFINEXPOk =dialog.findViewById(R.id.btnFINEXPOk);
+        btnFINEXPOk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (etFINEXPProductAmount.getText().toString().trim().equals(""))
+                    Toast.makeText(repository.getContext(), "מלא כמות של תוקף אחרון", Toast.LENGTH_SHORT).show();
+                else if(etDFINProductLastDate.getText().toString().trim().equals("אנא סרוק תאריך"))
+                    Toast.makeText(repository.getContext(), "סרוק תאריך אחרון", Toast.LENGTH_SHORT).show();
+                else if (etFINEXPRemoveAmount.getText().toString().trim().equals(""))
+                    Toast.makeText(repository.getContext(), "מלא כמות של פגי תוקף", Toast.LENGTH_SHORT).show();
+                else{
+                    int amount = Integer.parseInt(etFINEXPProductAmount.getText().toString().trim());
+                    String lastdate = etDFINProductLastDate.getText().toString().trim();
+                    int removeAmount = Integer.parseInt(etFINEXPRemoveAmount.getText().toString().trim());
+                    if(amount > 0 && removeAmount > 0)
+                    {
+
+
+
+
+
+
+
+                    }
+                    else{
+                        Toast.makeText(repository.getContext(), "כמות חייבת להיות גדולה מ-0", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+        });
+
+
+
+
+
+
+
+
+
+
+
+
+
+        dialog.show();
     }
 }
