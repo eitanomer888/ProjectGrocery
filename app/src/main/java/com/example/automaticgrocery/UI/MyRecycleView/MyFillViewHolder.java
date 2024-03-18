@@ -36,7 +36,6 @@ public class MyFillViewHolder extends RecyclerView.ViewHolder {
             @Override
             public void onClick(View v) {
                 openDialog();
-                Toast.makeText(repository.getContext(), repository.getContext() + "", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -111,14 +110,23 @@ public class MyFillViewHolder extends RecyclerView.ViewHolder {
                     return;
                 }
                 if(etD_ProductAmountToFill.getText().toString().equals("")){
-                    Toast.makeText(repository.getContext(), "scan new date", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(repository.getContext(), "fill amount cant be blank", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
-                int currentAmount = Integer.parseInt(etD_ProductAmount.getText().toString());
-                String lastDate = etD_ProductLastDate.getText().toString();
-                String firstDate = etD_ProductFirstDate.getText().toString();
-                int fillAmount = Integer.parseInt(etD_ProductAmountToFill.getText().toString());
+                int currentAmount = Integer.parseInt(etD_ProductAmount.getText().toString().trim());
+                String lastDate = etD_ProductLastDate.getText().toString().trim();
+                String firstDate = etD_ProductFirstDate.getText().toString().trim();
+                int fillAmount = Integer.parseInt(etD_ProductAmountToFill.getText().toString().trim());
+
+                if(currentAmount <= 0){
+                    Toast.makeText(repository.getContext(), "current amount must be higher than 0", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if(fillAmount <= 0){
+                    Toast.makeText(repository.getContext(), "fill amount = 0, no need to fill", Toast.LENGTH_SHORT).show();
+                    return;
+                }
 
                 //update DB + Holder Objects
                 Toast.makeText(repository.getContext(), currentAmount + " " + lastDate + "\n" + firstDate + " " + fillAmount, Toast.LENGTH_SHORT).show();

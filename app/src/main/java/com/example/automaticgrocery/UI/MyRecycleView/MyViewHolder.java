@@ -2,6 +2,7 @@ package com.example.automaticgrocery.UI.MyRecycleView;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -12,6 +13,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.automaticgrocery.R;
+import com.example.automaticgrocery.UI.Main.MainActivity;
+import com.example.automaticgrocery.UI.UserCenter.UserCenter;
 import com.example.automaticgrocery.data.Repository.Repository;
 
 public class MyViewHolder extends RecyclerView.ViewHolder {
@@ -53,16 +56,16 @@ public class MyViewHolder extends RecyclerView.ViewHolder {
 
        TextView tvDExpName =dialog1.findViewById(R.id.tvDExpName);
        TextView tvDExpProductName =dialog1.findViewById(R.id.tvDExpProductName);
-       tvDExpProductName.setText(tvExpName.getText().toString());
+       tvDExpProductName.setText(tvExpName.getText().toString().trim());
 
 
         TextView tvDExpLastDate = dialog1.findViewById(R.id.tvDExpLastDate);
         TextView tvDExpProductLastDate = dialog1.findViewById(R.id.tvDExpProductLastDate);
-        tvDExpProductLastDate.setText(tvExpDate.getText().toString());
+        tvDExpProductLastDate.setText(tvExpDate.getText().toString().trim());
 
         TextView tvDExpAmount =dialog1.findViewById(R.id.tvDExpAmount);
         EditText etDExpProductAmount = dialog1.findViewById(R.id.etDExpProductAmount);
-        etDExpProductAmount.setText(tvExpAmount.getText().toString());
+        etDExpProductAmount.setText(tvExpAmount.getText().toString().trim());
 
         Button btnDExpConfirm =dialog1.findViewById(R.id.btnDExpConfirm);
         Button btnDExpUpdate = dialog1.findViewById(R.id.btnDExpUpdate);
@@ -70,14 +73,16 @@ public class MyViewHolder extends RecyclerView.ViewHolder {
         btnDExpConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(etDExpProductAmount.getText().toString().trim().equals("")){
+                if(etDExpProductAmount.getText().toString().trim().equals(""))
+                {
                     Toast.makeText(repository.getContext(), "אנא מלא את שדה הכמות", Toast.LENGTH_SHORT).show();
                 }
                 else
                 {
                     int amount = Integer.parseInt(etDExpProductAmount.getText().toString().trim());
+                    String date = tvDExpProductLastDate.getText().toString().trim();
                     if(amount > 0){
-                        openConDialog(amount);
+                        openConDialog(amount,date);
                     }
                     else{
                         Toast.makeText(repository.getContext(), "כמות צריכה להיות גדולה מ-0", Toast.LENGTH_SHORT).show();
@@ -134,6 +139,25 @@ public class MyViewHolder extends RecyclerView.ViewHolder {
         btnDUPEXPConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(etDUPEXPProductAmount.getText().toString().trim().equals("")){
+                    Toast.makeText(repository.getContext(), "אנא מלא את שדה הכמות", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if(etDExpProductLastDate.getText().toString().trim().equals("אנא סרוק תאריך")){
+                    Toast.makeText(repository.getContext(), "אנא סרוק תוקף אחרון", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                String last_date = etDExpProductLastDate.getText().toString().trim();
+                int amount = Integer.parseInt(etDUPEXPProductAmount.getText().toString().trim());
+                if(amount <= 0){
+                    Toast.makeText(repository.getContext(), "כמות חייבת להיות גדולה מ-0", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                //check if date is not pag tokef
+
+                openConDialog(amount,last_date);
+
                 Toast.makeText(repository.getContext(), "comfirm", Toast.LENGTH_SHORT).show();
             }
         });
@@ -143,7 +167,7 @@ public class MyViewHolder extends RecyclerView.ViewHolder {
     }
 
 
-    public void openConDialog(int amount){
+    public void openConDialog(int amount,String date){
         dialog3 = new Dialog(repository.getContext());
 
         dialog3.setContentView(R.layout.custom_exp_confirm_data_dialog);
