@@ -1,10 +1,12 @@
 package com.example.automaticgrocery.UI.MyRecycleView;
 
+import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -17,15 +19,25 @@ import com.example.automaticgrocery.UI.Main.MainActivity;
 import com.example.automaticgrocery.UI.UserCenter.UserCenter;
 import com.example.automaticgrocery.data.Repository.Repository;
 
+import java.util.Calendar;
+
 public class MyViewHolder extends RecyclerView.ViewHolder {
     TextView tvExpName,tvExpAmount,tvExpDate;
 
     private Repository repository;
+    private Calendar calendar1,calendar2;
+    private int y1,m1,d1,y2,m2,d2;
 
     private Dialog dialog1,dialog2,dialog3;
     public MyViewHolder(@NonNull View itemView, Context context) {
         super(itemView);
         repository = new Repository(context);
+
+        y1=0;m1=0;d1=0;y2=0;m2=0;d2=0;
+        calendar1 = Calendar.getInstance();
+        calendar1.set(calendar1.get(Calendar.YEAR) + 5,calendar1.get(Calendar.MONTH),calendar1.get(Calendar.DAY_OF_MONTH));
+        calendar2 = Calendar.getInstance();
+        calendar2.set(calendar2.get(Calendar.YEAR),calendar2.get(Calendar.MONTH),calendar2.get(Calendar.DAY_OF_MONTH));
 
         tvExpName = itemView.findViewById(R.id.tvExpName);
         tvExpAmount = itemView.findViewById(R.id.tvExpAmount);
@@ -125,7 +137,27 @@ public class MyViewHolder extends RecyclerView.ViewHolder {
         btnDUPEXPProductLastDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(repository.getContext(), "scanning...", Toast.LENGTH_SHORT).show();
+                DatePickerDialog datePicker = new DatePickerDialog(repository.getContext());
+                datePicker.setCancelable(false);
+
+                datePicker.getDatePicker().setMaxDate(calendar1.getTimeInMillis());
+                datePicker.getDatePicker().setMinDate(calendar2.getTimeInMillis());
+
+                if(y1 != 0){
+                    datePicker.updateDate(y1,m1,d1);
+                }
+
+                datePicker.show();
+
+                datePicker.setOnDateSetListener(new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker datePicker2, int i, int i1, int i2) {
+                        etDExpProductLastDate.setText(i2 + "/" + (i1+1) + "/" + i);
+                        y1 = i;
+                        m1 = i1;
+                        d1 = i2;
+                    }
+                });
             }
         });
 
@@ -217,7 +249,27 @@ public class MyViewHolder extends RecyclerView.ViewHolder {
         btnFINEXPProductLastDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(repository.getContext(), "scanning...", Toast.LENGTH_SHORT).show();
+                DatePickerDialog datePicker = new DatePickerDialog(repository.getContext());
+                datePicker.setCancelable(false);
+
+                datePicker.getDatePicker().setMaxDate(calendar1.getTimeInMillis());
+                datePicker.getDatePicker().setMinDate(calendar2.getTimeInMillis());
+
+                if(y2 != 0){
+                    datePicker.updateDate(y2,m2,d2);
+                }
+
+                datePicker.show();
+
+                datePicker.setOnDateSetListener(new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker datePicker2, int i, int i1, int i2) {
+                        etDFINProductLastDate.setText(i2 + "/" + (i1+1) + "/" + i);
+                        y2 = i;
+                        m2 = i1;
+                        d2 = i2;
+                    }
+                });
             }
         });
 
