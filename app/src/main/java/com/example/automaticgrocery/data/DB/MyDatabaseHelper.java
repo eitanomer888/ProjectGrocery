@@ -192,6 +192,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
 
     }
 
+
     public void deleteOneProduct(String internal_reference)
     {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -234,5 +235,59 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         }
         return cursor;
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    public void updateProductExpPart1(String internal_reference, int new_amount){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put(COLUMN_AMOUNT,new_amount);
+
+        long result = db.update(TABLE_NAME2, cv, "internal_reference=?", new String[]{internal_reference});
+        if(result == -1)
+        {
+            Toast.makeText(context, "Failed", Toast.LENGTH_SHORT).show();
+        }
+        else
+        {
+            Toast.makeText(context, "Updated Successfully!", Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
+    public void updateProductExpPart2(String internal_reference, int last_date_amount, String last_date, int other_expired_removed_items_amount , int amount){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put(COLUMN_AMOUNT,amount - other_expired_removed_items_amount);
+        cv.put(COLUMN_LAST_DATE,last_date);
+        cv.put(COLUMN_LAST_DATE_AMOUNT,last_date_amount);
+
+        long result = db.update(TABLE_NAME2, cv, "internal_reference=?", new String[]{internal_reference});
+        if(result == -1)
+        {
+            Toast.makeText(context, "Failed", Toast.LENGTH_SHORT).show();
+        }
+        else
+        {
+            Toast.makeText(context, "Updated Successfully!", Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
 
 }

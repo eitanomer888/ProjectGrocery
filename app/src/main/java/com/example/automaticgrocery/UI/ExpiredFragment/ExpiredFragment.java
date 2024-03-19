@@ -88,7 +88,7 @@ public class ExpiredFragment extends Fragment {
         for (int i = 0; i < l; i++)
         {
             //להוסיף בדיקה שהמוצר אכן לא בתוקף
-            items.add(new ExpiredItem(cursor.getString(1),cursor.getString(5),cursor.getInt(3)));
+            items.add(new ExpiredItem(cursor.getString(1),cursor.getString(5),cursor.getInt(3),cursor.getString(0),cursor.getInt(8)));
             cursor.moveToNext();
         }
 
@@ -97,54 +97,47 @@ public class ExpiredFragment extends Fragment {
 
 
 
-        items.add(new ExpiredItem("milk","24/8/26",50));
-        items.add(new ExpiredItem("beef","1/2/80",800));
-        items.add(new ExpiredItem("apple","18/7/06",12));
-        items.add(new ExpiredItem("milk","24/8/26",50));
-        items.add(new ExpiredItem("beef","1/2/80",800));
-        items.add(new ExpiredItem("apple","18/7/06",12));
-        items.add(new ExpiredItem("milk","24/8/26",50));
-        items.add(new ExpiredItem("beef","1/2/80",800));
-        items.add(new ExpiredItem("apple","18/7/06",12));
-        items.add(new ExpiredItem("milk","24/8/26",50));
-        items.add(new ExpiredItem("beef","1/2/80",800));
-        items.add(new ExpiredItem("apple","18/7/06",12));
-        items.add(new ExpiredItem("milk","24/8/26",50));
-        items.add(new ExpiredItem("beef","1/2/80",800));
-        items.add(new ExpiredItem("apple","18/7/06",12));
-        items.add(new ExpiredItem("milk","24/8/26",50));
-        items.add(new ExpiredItem("beef","1/2/80",800));
-        items.add(new ExpiredItem("apple","18/7/06",12));
-        items.add(new ExpiredItem("milk","24/8/26",50));
-        items.add(new ExpiredItem("beef","1/2/80",800));
-        items.add(new ExpiredItem("apple","18/7/06",12));
-        items.add(new ExpiredItem("milk","24/8/26",50));
-        items.add(new ExpiredItem("beef","1/2/80",800));
-        items.add(new ExpiredItem("apple","18/7/06",12));
-        items.add(new ExpiredItem("milk","24/8/26",50));
-        items.add(new ExpiredItem("beef","1/2/80",800));
-        items.add(new ExpiredItem("apple","18/7/06",12));
-        items.add(new ExpiredItem("milk","24/8/26",50));
-        items.add(new ExpiredItem("beef","1/2/80",800));
-        items.add(new ExpiredItem("apple","18/7/06",12));
-        items.add(new ExpiredItem("milk","24/8/26",50));
-        items.add(new ExpiredItem("beef","1/2/80",800));
-        items.add(new ExpiredItem("apple","18/7/06",12));
-        items.add(new ExpiredItem("milk","24/8/26",50));
-        items.add(new ExpiredItem("beef","1/2/80",800));
-        items.add(new ExpiredItem("apple","18/7/06",12));
-        items.add(new ExpiredItem("milk","24/8/26",50));
-        items.add(new ExpiredItem("beef","1/2/80",800));
-        items.add(new ExpiredItem("apple","18/7/06",12));
-        items.add(new ExpiredItem("milk","24/8/26",50));
-        items.add(new ExpiredItem("beef","1/2/80",800));
-        items.add(new ExpiredItem("apple","18/7/06",12));
-        items.add(new ExpiredItem("milk","24/8/26",50));
-        items.add(new ExpiredItem("beef","1/2/80",800));
-        items.add(new ExpiredItem("apple","18/7/06",12));
-        items.add(new ExpiredItem("milk","24/8/26",50));
-        items.add(new ExpiredItem("beef","1/2/80",800));
-        items.add(new ExpiredItem("apple","18/7/06",12));
+        items.add(new ExpiredItem("milk","24/8/26",50,"111111111",20));
+        items.add(new ExpiredItem("beef","1/2/80",800,"222222222222",300));
+        items.add(new ExpiredItem("apple","18/7/06",12,"33333333333",1));
+        items.add(new ExpiredItem("milk","24/8/26",50,"111111111",20));
+        items.add(new ExpiredItem("beef","1/2/80",800,"222222222222",300));
+        items.add(new ExpiredItem("apple","18/7/06",12,"33333333333",1));
+        items.add(new ExpiredItem("milk","24/8/26",50,"111111111",20));
+        items.add(new ExpiredItem("beef","1/2/80",800,"222222222222",300));
+        items.add(new ExpiredItem("apple","18/7/06",12,"33333333333",1));
+        items.add(new ExpiredItem("milk","24/8/26",50,"111111111",20));
+        items.add(new ExpiredItem("beef","1/2/80",800,"222222222222",300));
+        items.add(new ExpiredItem("apple","18/7/06",12,"33333333333",1));
+        items.add(new ExpiredItem("milk","24/8/26",50,"111111111",20));
+        items.add(new ExpiredItem("beef","1/2/80",800,"222222222222",300));
+        items.add(new ExpiredItem("apple","18/7/06",12,"33333333333",1));
+        items.add(new ExpiredItem("milk","24/8/26",50,"111111111",20));
+        items.add(new ExpiredItem("beef","1/2/80",800,"222222222222",300));
+        items.add(new ExpiredItem("apple","18/7/06",12,"33333333333",1));
+        items.add(new ExpiredItem("milk","24/8/26",50,"111111111",20));
+        items.add(new ExpiredItem("beef","1/2/80",800,"222222222222",300));
+        items.add(new ExpiredItem("apple","18/7/06",12,"33333333333",1));
+        items.add(new ExpiredItem("milk","24/8/26",50,"111111111",20));
+        items.add(new ExpiredItem("beef","1/2/80",800,"222222222222",300));
+        items.add(new ExpiredItem("apple","18/7/06",12,"33333333333",1));
+        items.add(new ExpiredItem("milk","24/8/26",50,"111111111",20));
+        items.add(new ExpiredItem("beef","1/2/80",800,"222222222222",300));
+        items.add(new ExpiredItem("apple","18/7/06",12,"33333333333",1));
+        items.add(new ExpiredItem("milk","24/8/26",50,"111111111",20));
+        items.add(new ExpiredItem("beef","1/2/80",800,"222222222222",300));
+        items.add(new ExpiredItem("apple","18/7/06",12,"33333333333",1));
+        items.add(new ExpiredItem("milk","24/8/26",50,"111111111",20));
+        items.add(new ExpiredItem("beef","1/2/80",800,"222222222222",300));
+        items.add(new ExpiredItem("apple","18/7/06",12,"33333333333",1));
+        items.add(new ExpiredItem("milk","24/8/26",50,"111111111",20));
+        items.add(new ExpiredItem("beef","1/2/80",800,"222222222222",300));
+        items.add(new ExpiredItem("apple","18/7/06",12,"33333333333",1));
+        items.add(new ExpiredItem("milk","24/8/26",50,"111111111",20));
+        items.add(new ExpiredItem("beef","1/2/80",800,"222222222222",300));
+        items.add(new ExpiredItem("apple","18/7/06",12,"33333333333",1));
+
+
 
 
 

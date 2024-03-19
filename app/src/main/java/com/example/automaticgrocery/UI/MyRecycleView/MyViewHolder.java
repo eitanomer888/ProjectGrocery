@@ -23,6 +23,8 @@ import java.util.Calendar;
 
 public class MyViewHolder extends RecyclerView.ViewHolder {
     TextView tvExpName,tvExpAmount,tvExpDate;
+    public String internal_reference;
+    public int amount;
 
     private Repository repository;
     private Calendar calendar1,calendar2;
@@ -32,6 +34,8 @@ public class MyViewHolder extends RecyclerView.ViewHolder {
     public MyViewHolder(@NonNull View itemView, Context context) {
         super(itemView);
         repository = new Repository(context);
+        internal_reference = "";
+        amount = -1;
 
         y1=0;m1=0;d1=0;y2=0;m2=0;d2=0;
         calendar1 = Calendar.getInstance();
@@ -190,7 +194,6 @@ public class MyViewHolder extends RecyclerView.ViewHolder {
 
                 openConDialog(amount,last_date);
 
-                Toast.makeText(repository.getContext(), "comfirm", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -199,13 +202,18 @@ public class MyViewHolder extends RecyclerView.ViewHolder {
     }
 
 
-    public void openConDialog(int amount,String date){
+    public void openConDialog(int last_date_amount,String date){
+        if(last_date_amount > amount){
+            Toast.makeText(repository.getContext(), "too big", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         dialog3 = new Dialog(repository.getContext());
 
         dialog3.setContentView(R.layout.custom_exp_confirm_data_dialog);
 
         TextView tvConfirmRemove = dialog3.findViewById(R.id.tvConfirmRemove);
-        tvConfirmRemove.setText("אנא הסר " + amount + " מוצרים פגי תוקף");
+        tvConfirmRemove.setText("אנא הסר " + last_date_amount + " מוצרים פגי תוקף");
 
         Button btnConfirmCancel = dialog3.findViewById(R.id.btnConfirmCancel);
         Button btnConfirmOK = dialog3.findViewById(R.id.btnConfirmOK);
@@ -221,8 +229,18 @@ public class MyViewHolder extends RecyclerView.ViewHolder {
             @Override
             public void onClick(View v) {
                 Toast.makeText(repository.getContext(), "update all data and views", Toast.LENGTH_SHORT).show();
+                if(internal_reference.equals("")){
+                    Toast.makeText(repository.getContext(), "internal_reference is blank", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if(amount == -1)
+                {
+                    Toast.makeText(repository.getContext(), "amount is invalid", Toast.LENGTH_SHORT).show();
+                    return;
+                }
 
-
+                repository.updateProductExpPart1(internal_reference,amount-last_date_amount);
+                amount -= last_date_amount;
 
                 openFinDialog();
             }
@@ -287,16 +305,21 @@ public class MyViewHolder extends RecyclerView.ViewHolder {
                 else if (etFINEXPRemoveAmount.getText().toString().trim().equals(""))
                     Toast.makeText(repository.getContext(), "מלא כמות של פגי תוקף", Toast.LENGTH_SHORT).show();
                 else{
-                    int amount = Integer.parseInt(etFINEXPProductAmount.getText().toString().trim());
+                    int last_date_amount = Integer.parseInt(etFINEXPProductAmount.getText().toString().trim());
                     String lastdate = etDFINProductLastDate.getText().toString().trim();
                     int removeAmount = Integer.parseInt(etFINEXPRemoveAmount.getText().toString().trim());
-                    if(amount > 0 && removeAmount > 0)
+                    if(last_date_amount > 0 && removeAmount >= 0)
                     {
 
-
-
-
-
+                        if(last_date_amount + removeAmount > amount){
+                            Toast.makeText(repository.getContext(), "מידע שגוי, אנא תקן מידע / עדכן מידע", Toast.LENGTH_SHORT).show();
+                        }
+                        else
+                        {
+                            repository.updateProductExpPart2(internal_reference,last_date_amount,lastdate,removeAmount,amount);
+                            amount -= removeAmount;
+                            dialog.dismiss();
+                        }
 
 
                     }

@@ -31,8 +31,10 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         holder.tvExpName.setText(items.get(position).getName());
-        holder.tvExpAmount.setText(items.get(position).getAmount() + " ");
-        holder.tvExpDate.setText(items.get(position).getDate());
+        holder.tvExpAmount.setText(items.get(position).getLast_date_amount() + " ");
+        holder.tvExpDate.setText(items.get(position).getLast_date());
+        holder.internal_reference = items.get(position).getInternal_reference();
+        holder.amount = items.get(position).getAmount();
     }
 
     @Override
