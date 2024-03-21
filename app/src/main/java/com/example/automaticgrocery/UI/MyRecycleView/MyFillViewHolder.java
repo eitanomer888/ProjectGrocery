@@ -18,7 +18,9 @@ import com.example.automaticgrocery.R;
 import com.example.automaticgrocery.UI.Main.MainActivity;
 import com.example.automaticgrocery.data.Repository.Repository;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 public class MyFillViewHolder extends RecyclerView.ViewHolder {
 
@@ -28,6 +30,8 @@ public class MyFillViewHolder extends RecyclerView.ViewHolder {
 
     TextView tvFillName,tvFillAmount,tvFillint;
     ImageView ivFillWarn;
+
+    public int targetAmount;
     public MyFillViewHolder(@NonNull View itemView, Context context) {
         super(itemView);
 
@@ -37,6 +41,10 @@ public class MyFillViewHolder extends RecyclerView.ViewHolder {
         calendar1.set(calendar1.get(Calendar.YEAR) + 5,calendar1.get(Calendar.MONTH),calendar1.get(Calendar.DAY_OF_MONTH));
         calendar2 = Calendar.getInstance();
         calendar2.set(calendar2.get(Calendar.YEAR),calendar2.get(Calendar.MONTH),calendar2.get(Calendar.DAY_OF_MONTH));
+
+
+        targetAmount = -1;
+
 
         tvFillName = itemView.findViewById(R.id.tvFillName);
         tvFillAmount = itemView.findViewById(R.id.tvFillAmount);
@@ -81,9 +89,6 @@ public class MyFillViewHolder extends RecyclerView.ViewHolder {
         TextView tvD_ProductFirstDate = dialog.findViewById(R.id.tvD_ProductFirstDate);
         Button btnD_ProductFirstDate = dialog.findViewById(R.id.btnD_ProductFirstDate);
         TextView etD_ProductFirstDate = dialog.findViewById(R.id.etD_ProductFirstDate);
-
-        TextView tvD_ProductAmountToFill = dialog.findViewById(R.id.tvD_ProductAmountToFill);
-        EditText etD_ProductAmountToFill = dialog.findViewById(R.id.etD_ProductAmountToFill);
 
         Button btnD_update = dialog.findViewById(R.id.btnD_update);
 
@@ -161,27 +166,23 @@ public class MyFillViewHolder extends RecyclerView.ViewHolder {
                     Toast.makeText(repository.getContext(), "scan new date", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if(etD_ProductAmountToFill.getText().toString().equals("")){
-                    Toast.makeText(repository.getContext(), "fill amount cant be blank", Toast.LENGTH_SHORT).show();
-                    return;
-                }
 
                 int currentAmount = Integer.parseInt(etD_ProductAmount.getText().toString().trim());
                 String lastDate = etD_ProductLastDate.getText().toString().trim();
                 String firstDate = etD_ProductFirstDate.getText().toString().trim();
-                int fillAmount = Integer.parseInt(etD_ProductAmountToFill.getText().toString().trim());
 
                 if(currentAmount <= 0){
                     Toast.makeText(repository.getContext(), "current amount must be higher than 0", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if(fillAmount <= 0){
-                    Toast.makeText(repository.getContext(), "fill amount = 0, no need to fill", Toast.LENGTH_SHORT).show();
+                if(targetAmount == -1){
+                    Toast.makeText(repository.getContext(), "target amount fail", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
                 //update DB + Holder Objects
-                Toast.makeText(repository.getContext(), currentAmount + " " + lastDate + "\n" + firstDate + " " + fillAmount, Toast.LENGTH_SHORT).show();
+                Toast.makeText(repository.getContext(), currentAmount + " " + lastDate + "\n" + firstDate, Toast.LENGTH_SHORT).show();
+                openFinalDialog(currentAmount,lastDate,firstDate);
             }
         });
 
@@ -190,9 +191,62 @@ public class MyFillViewHolder extends RecyclerView.ViewHolder {
     }
 
 
+    public void openFinalDialog(int currentAmount,String last_date, String fill_date)
+    {
+        Dialog dialog = new Dialog(repository.getContext());
+
+        dialog.setContentView(R.layout.custom_fill_pt2_dialog);
+
+        EditText etD_ProductAmountToFill = dialog.findViewById(R.id.etD_ProductAmountToFill);
+
+        etD_ProductAmountToFill.setText(secretFormula(currentAmount,last_date,fill_date) + "");
 
 
 
+        Button btnFillBack =dialog.findViewById(R.id.btnFillBack);
+        Button btnFillOk =dialog.findViewById(R.id.btnFillOk);
+
+        btnFillBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+
+
+
+
+
+        dialog.show();
+    }
+
+
+
+    public static int getDifferenceInDays(String dateString1, String dateString2) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        try {
+            Date date1 = dateFormat.parse(dateString1);
+            Date date2 = dateFormat.parse(dateString2);
+
+            long differenceInMillis = date2.getTime() - date1.getTime();
+            int differenceInDays = (int) (differenceInMillis / (1000 * 60 * 60 * 24));
+            return differenceInDays;
+        } catch (Exception e) {
+            return -1;
+        }
+    }
+
+
+    public int secretFormula(int currentAmount,String last_date, String fill_date)
+    {
+        int top = getDifferenceInDays(calendar1.get(Calendar.DAY_OF_MONTH) + "/" + (calendar1.get(Calendar.MONTH) + 1) + "/" + calendar1.get(Calendar.YEAR) , last_date);
+        int buttom = getDifferenceInDays(fill_date,last_date);
+        int F = top / buttom;
+        F /= 100;
+        int answer = (targetAmount - currentAmount) + F * (targetAmount - currentAmount);
+        return answer;
+    }
 
 
 

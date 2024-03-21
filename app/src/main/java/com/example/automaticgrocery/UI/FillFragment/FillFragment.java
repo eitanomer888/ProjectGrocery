@@ -91,34 +91,33 @@ public class FillFragment extends Fragment {
             cursor.moveToFirst();
             for (int i = 0; i < l; i++)
             {
-                items.add(new FillItem(cursor.getString(1),cursor.getString(0),cursor.getInt(3)));
+                items.add(new FillItem(cursor.getString(1),cursor.getString(0),cursor.getInt(3),cursor.getInt(7)));
                 cursor.moveToNext();
             }
         }
 
-        items.add(new FillItem("milk","11111111",50));
-        items.add(new FillItem("beef","22222222",100));
-        items.add(new FillItem("apple","33333333",200));
-        items.add(new FillItem("bamba","44444444",400));
-        items.add(new FillItem("milk","11111111",50));
-        items.add(new FillItem("beef","22222222",100));
-        items.add(new FillItem("apple","33333333",200));
-        items.add(new FillItem("bamba","44444444",400));
-        items.add(new FillItem("milk","11111111",50));
-        items.add(new FillItem("beef","22222222",100));
-        items.add(new FillItem("apple","33333333",200));
-        items.add(new FillItem("bamba","44444444",400));
-        items.add(new FillItem("milk","11111111",50));
-        items.add(new FillItem("beef","22222222",100));
-        items.add(new FillItem("apple","33333333",200));
-        items.add(new FillItem("bamba","44444444",400));
-        items.add(new FillItem("milk","11111111",50));
-        items.add(new FillItem("beef","22222222",100));
-        items.add(new FillItem("apple","33333333",200));
-        items.add(new FillItem("bamba","44444444",400));
-        items.add(new FillItem("milk","11111111",50));
-        items.add(new FillItem("beef","22222222",100));
-        items.add(new FillItem("apple","33333333",200));
+        items.add(new FillItem("milk","11111111",50,200));
+        items.add(new FillItem("beef","22222222",100,300));
+        items.add(new FillItem("apple","33333333",200,400));
+        items.add(new FillItem("bamba","44444444",400,500));
+        items.add(new FillItem("milk","11111111",50,200));
+        items.add(new FillItem("beef","22222222",100,300));
+        items.add(new FillItem("apple","33333333",200,400));
+        items.add(new FillItem("bamba","44444444",400,500));
+        items.add(new FillItem("milk","11111111",50,200));
+        items.add(new FillItem("beef","22222222",100,300));
+        items.add(new FillItem("apple","33333333",200,400));
+        items.add(new FillItem("bamba","44444444",400,500));
+        items.add(new FillItem("milk","11111111",50,200));
+        items.add(new FillItem("beef","22222222",100,300));
+        items.add(new FillItem("apple","33333333",200,400));
+        items.add(new FillItem("bamba","44444444",400,500));
+        items.add(new FillItem("apple","33333333",200,400));
+        items.add(new FillItem("bamba","44444444",400,500));
+        items.add(new FillItem("milk","11111111",50,200));
+        items.add(new FillItem("beef","22222222",100,300));
+        items.add(new FillItem("apple","33333333",200,400));
+        items.add(new FillItem("bamba","44444444",400,500));
         //items.add(new FillItem("bamba","44444444",400));
 
 

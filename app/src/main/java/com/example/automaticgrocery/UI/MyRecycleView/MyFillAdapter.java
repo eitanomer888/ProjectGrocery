@@ -34,6 +34,7 @@ public class MyFillAdapter extends RecyclerView.Adapter<MyFillViewHolder> {
         holder.tvFillName.setText(items.get(position).getName());
         holder.tvFillAmount.setText(items.get(position).getAmount() + "");
         holder.tvFillint.setText(items.get(position).getInternal_reference());
+        holder.targetAmount = items.get(position).getTargetAmount();
 
         //add color options on the ivFillWarn
 

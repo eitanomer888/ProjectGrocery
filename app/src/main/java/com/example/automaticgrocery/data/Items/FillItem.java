@@ -5,10 +5,13 @@ public class FillItem {
     private String internal_reference;
     private int amount;
 
-    public FillItem(String name, String internal_reference, int amount) {
+    private int targetAmount;
+
+    public FillItem(String name, String internal_reference, int amount, int targetAmount) {
         this.name = name;
         this.internal_reference = internal_reference;
         this.amount = amount;
+        this.targetAmount = targetAmount;
     }
 
     public String getName() {
@@ -33,5 +36,13 @@ public class FillItem {
 
     public void setAmount(int amount) {
         this.amount = amount;
+    }
+
+    public int getTargetAmount() {
+        return targetAmount;
+    }
+
+    public void setTargetAmount(int targetAmount) {
+        this.targetAmount = targetAmount;
     }
 }
