@@ -2,6 +2,7 @@ package com.example.automaticgrocery.UI.MyRecycleView;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
 import android.view.View;
@@ -12,14 +13,19 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.automaticgrocery.R;
+import com.example.automaticgrocery.UI.ExpiredFragment.ExpiredFragment;
+import com.example.automaticgrocery.UI.FillFragment.FillFragment;
 import com.example.automaticgrocery.UI.Main.MainActivity;
 import com.example.automaticgrocery.UI.UserCenter.UserCenter;
 import com.example.automaticgrocery.data.Repository.Repository;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 public class MyViewHolder extends RecyclerView.ViewHolder {
     TextView tvExpName,tvExpAmount,tvExpDate;
@@ -41,7 +47,7 @@ public class MyViewHolder extends RecyclerView.ViewHolder {
         calendar1 = Calendar.getInstance();
         calendar1.set(calendar1.get(Calendar.YEAR) + 5,calendar1.get(Calendar.MONTH),calendar1.get(Calendar.DAY_OF_MONTH));
         calendar2 = Calendar.getInstance();
-        calendar2.set(calendar2.get(Calendar.YEAR),calendar2.get(Calendar.MONTH),calendar2.get(Calendar.DAY_OF_MONTH));
+        calendar2.set(calendar2.get(Calendar.YEAR) - 5,calendar2.get(Calendar.MONTH),calendar2.get(Calendar.DAY_OF_MONTH));
 
         tvExpName = itemView.findViewById(R.id.tvExpName);
         tvExpAmount = itemView.findViewById(R.id.tvExpAmount);
@@ -69,17 +75,14 @@ public class MyViewHolder extends RecyclerView.ViewHolder {
                 dialog1.dismiss();
             }
         });
-
-       TextView tvDExpName =dialog1.findViewById(R.id.tvDExpName);
+        
        TextView tvDExpProductName =dialog1.findViewById(R.id.tvDExpProductName);
        tvDExpProductName.setText(tvExpName.getText().toString().trim());
 
-
-        TextView tvDExpLastDate = dialog1.findViewById(R.id.tvDExpLastDate);
+       
         TextView tvDExpProductLastDate = dialog1.findViewById(R.id.tvDExpProductLastDate);
         tvDExpProductLastDate.setText(tvExpDate.getText().toString().trim());
-
-        TextView tvDExpAmount =dialog1.findViewById(R.id.tvDExpAmount);
+        
         EditText etDExpProductAmount = dialog1.findViewById(R.id.etDExpProductAmount);
         etDExpProductAmount.setText(tvExpAmount.getText().toString().trim());
 
@@ -95,10 +98,14 @@ public class MyViewHolder extends RecyclerView.ViewHolder {
                 }
                 else
                 {
-                    int amount = Integer.parseInt(etDExpProductAmount.getText().toString().trim());
+                    int amountD = Integer.parseInt(etDExpProductAmount.getText().toString().trim());
                     String date = tvDExpProductLastDate.getText().toString().trim();
-                    if(amount > 0){
-                        openConDialog(amount,date);
+                    if(amountD >= amount){
+                        Toast.makeText(repository.getContext(), "למלא מוצרים חדשים או לעדכן כמות", Toast.LENGTH_SHORT).show();
+                    }
+                    else if(amountD > 0 && amountD < amount)
+                    {
+                        openConDialog(amountD,date);
                     }
                     else{
                         Toast.makeText(repository.getContext(), "כמות צריכה להיות גדולה מ-0", Toast.LENGTH_SHORT).show();
@@ -107,6 +114,7 @@ public class MyViewHolder extends RecyclerView.ViewHolder {
 
             }
         });
+        
 
         btnDExpUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -175,6 +183,7 @@ public class MyViewHolder extends RecyclerView.ViewHolder {
         btnDUPEXPConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //checks
                 if(etDUPEXPProductAmount.getText().toString().trim().equals("")){
                     Toast.makeText(repository.getContext(), "אנא מלא את שדה הכמות", Toast.LENGTH_SHORT).show();
                     return;
@@ -184,15 +193,23 @@ public class MyViewHolder extends RecyclerView.ViewHolder {
                     return;
                 }
                 String last_date = etDExpProductLastDate.getText().toString().trim();
-                int amount = Integer.parseInt(etDUPEXPProductAmount.getText().toString().trim());
-                if(amount <= 0){
+                int amountD = Integer.parseInt(etDUPEXPProductAmount.getText().toString().trim());
+                if(amountD <= 0){
                     Toast.makeText(repository.getContext(), "כמות חייבת להיות גדולה מ-0", Toast.LENGTH_SHORT).show();
                     return;
                 }
+                if(amountD >= amount){
+                    Toast.makeText(repository.getContext(), "למלא מוצרים חדשים או לעדכן כמות", Toast.LENGTH_SHORT).show();
+                    return;
+                }
 
-                //check if date is not pag tokef
-
-                openConDialog(amount,last_date);
+                
+                //check if date conditions
+                if (isBeforeToday(last_date))
+                    openConDialog(amount,last_date);
+                else
+                    Toast.makeText(repository.getContext(), "מעדכן דאטה בייס, אין צורך להסיר", Toast.LENGTH_SHORT).show();
+                
 
             }
         });
@@ -304,21 +321,41 @@ public class MyViewHolder extends RecyclerView.ViewHolder {
                     Toast.makeText(repository.getContext(), "סרוק תאריך אחרון", Toast.LENGTH_SHORT).show();
                 else if (etFINEXPRemoveAmount.getText().toString().trim().equals(""))
                     Toast.makeText(repository.getContext(), "מלא כמות של פגי תוקף", Toast.LENGTH_SHORT).show();
-                else{
-                    int last_date_amount = Integer.parseInt(etFINEXPProductAmount.getText().toString().trim());
+                else
+                {
                     String lastdate = etDFINProductLastDate.getText().toString().trim();
+                    if(isBeforeToday(lastdate)){
+                        Toast.makeText(repository.getContext(), "תאריך חייב להיות גדול מתאריך נוכחי", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    int last_date_amount = Integer.parseInt(etFINEXPProductAmount.getText().toString().trim());
                     int removeAmount = Integer.parseInt(etFINEXPRemoveAmount.getText().toString().trim());
                     if(last_date_amount > 0 && removeAmount >= 0)
                     {
-
-                        if(last_date_amount + removeAmount > amount){
+                        if(last_date_amount + removeAmount > amount)
+                        {
                             Toast.makeText(repository.getContext(), "מידע שגוי, אנא תקן מידע / עדכן מידע", Toast.LENGTH_SHORT).show();
                         }
                         else
                         {
                             repository.updateProductExpPart2(internal_reference,last_date_amount,lastdate,removeAmount,amount);
                             amount -= removeAmount;
+
+
+                            if(dialog1 != null)
+                                if(dialog1.isShowing())
+                                    dialog1.dismiss();
+                            if(dialog2 != null)
+                                if(dialog2.isShowing())
+                                    dialog2.dismiss();
+                            if(dialog3 != null)
+                                if(dialog3.isShowing())
+                                    dialog3.dismiss();
+
                             dialog.dismiss();
+
+                            ExpiredFragment expiredFragment = new ExpiredFragment();
+                            ((AppCompatActivity)repository.getContext()).getSupportFragmentManager().beginTransaction().replace(R.id.contentFragment,expiredFragment).commit();
                         }
 
 
@@ -344,4 +381,35 @@ public class MyViewHolder extends RecyclerView.ViewHolder {
 
         dialog.show();
     }
+
+
+
+
+
+
+
+
+    public boolean isBeforeToday(String date)
+    {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        Calendar calendar = Calendar.getInstance();
+        String todayDate = calendar.get(Calendar.DAY_OF_MONTH) + "/" + (calendar.get(Calendar.MONTH) + 1) + "/" + calendar.get(Calendar.YEAR);
+        try {
+            Date date1 = dateFormat.parse(date);
+            Date today = dateFormat.parse(todayDate);
+            long differenceInMillis = today.getTime() - date1.getTime();
+            int differenceInDays = (int) (differenceInMillis / (1000 * 60 * 60 * 24));
+             if (differenceInDays > 0)
+                 return  true;
+             
+             return  false;
+        }
+        catch (Exception e){
+            Toast.makeText(repository.getContext(), e + " ", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+    }
+
+
+
 }
