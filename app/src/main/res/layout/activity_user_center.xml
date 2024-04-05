@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UI.UserCenter.UserCenter">
+    tools:context=".UI.UserCenter.UserCenter"
+    android:layoutDirection="ltr">
 
     <!-- Back Button -->
     <ImageView
@@ -28,12 +29,23 @@
         android:layout_marginTop="32dp" />
 
     <!-- Update User Button -->
+    <TextView
+        android:id="@+id/tvName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ivUserIcon"
+        android:text="username/admin"
+        android:textSize="30dp"
+        android:layout_centerHorizontal="true"
+ />
+
+    <!-- Update User Button -->
     <Button
         android:id="@+id/btnUpdateUser"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Update User"
-        android:layout_below="@id/ivUserIcon"
+        android:layout_below="@id/tvName"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="32dp" />
 

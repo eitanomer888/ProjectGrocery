@@ -3,10 +3,11 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/toolbar"
     android:layout_width="match_parent"
-    android:layout_height="?attr/actionBarSize"
+    android:layout_height="80dp"
     android:background="?attr/colorPrimary"
     android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-    android:textAlignment="gravity">
+    android:textAlignment="gravity"
+    android:layoutDirection="ltr">
 
         <!-- User Icon -->
         <ImageView
@@ -46,7 +47,7 @@
         <!-- Spinner -->
         <Spinner
             android:id="@+id/spI"
-            android:layout_width="120sp"
+            android:layout_width="100sp"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
             android:layout_marginTop="8dp"
@@ -60,8 +61,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="הצג פגי תוקף"
-            android:textSize="13sp"
-            android:layout_gravity="start"
+            android:textSize="12sp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp" />
 

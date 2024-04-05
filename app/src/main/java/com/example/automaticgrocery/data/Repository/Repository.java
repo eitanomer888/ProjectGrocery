@@ -51,7 +51,7 @@ public class Repository {
         myDatabaseHelper.deleteAllData();
         WriteStringToSharedPreferences(String.valueOf(R.string.user_name_key),"");
         WriteStringToSharedPreferences(String.valueOf(R.string.user_password_key),"");
-        WriteBooleanToSharedPreferences(String.valueOf(R.string.user_remember_key),false);
+        WriteBooleanToSharedPreferences(String.valueOf(R.string.user_loggedIn_key),false);
     }
 
     public void deleteOneRowUser(String username){myDatabaseHelper.deleteOneRowUser(username);}

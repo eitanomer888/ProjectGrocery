@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.automaticgrocery.R;
 
@@ -13,7 +14,7 @@ public class UserCenter extends AppCompatActivity implements View.OnClickListene
 
     private UserCenterModel userCenterModel;
     private Button btnUpdateUser,btnDeleteUser,btnLogoutUser;
-
+    private TextView tvName;
     private ImageView backButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +26,15 @@ public class UserCenter extends AppCompatActivity implements View.OnClickListene
 
         backButton = findViewById(R.id.backButton);
         backButton.setOnClickListener(this);
+
+        tvName = findViewById(R.id.tvName);
+        String Uname = userCenterModel.ReadStringFromSharedPreferences(String.valueOf(R.string.user_name_key),"");
+        tvName.setText(Uname);
+        if(Uname.equals("eitan"))
+            tvName.setText("Admin");
+
+
+
 
         btnUpdateUser = findViewById(R.id.btnUpdateUser);
         btnDeleteUser = findViewById(R.id.btnDeleteUser);
@@ -41,7 +51,7 @@ public class UserCenter extends AppCompatActivity implements View.OnClickListene
     {
         if(btnUpdateUser == v)
         {
-            userCenterModel.showUpdateDialog();
+            userCenterModel.showUpdateDialog(tvName);
         }
         else if(btnDeleteUser == v){
             //delete user
@@ -49,7 +59,7 @@ public class UserCenter extends AppCompatActivity implements View.OnClickListene
 
             userCenterModel.WriteStringToSharedPreferences(String.valueOf(R.string.user_name_key),"");
             userCenterModel.WriteStringToSharedPreferences(String.valueOf(R.string.user_password_key),"");
-            userCenterModel.WriteBooleanToSharedPreferences(String.valueOf(R.string.user_remember_key),false);
+            userCenterModel.WriteBooleanToSharedPreferences(String.valueOf(R.string.user_loggedIn_key),false);
 
             finish();
         }
@@ -60,7 +70,7 @@ public class UserCenter extends AppCompatActivity implements View.OnClickListene
            //clear sheareprefernce
             userCenterModel.WriteStringToSharedPreferences(String.valueOf(R.string.user_name_key),"");
             userCenterModel.WriteStringToSharedPreferences(String.valueOf(R.string.user_password_key),"");
-            userCenterModel.WriteBooleanToSharedPreferences(String.valueOf(R.string.user_remember_key),false);
+            userCenterModel.WriteBooleanToSharedPreferences(String.valueOf(R.string.user_loggedIn_key),false);
            //move to main
             finish();
         }

@@ -20,9 +20,8 @@ import com.example.automaticgrocery.UI.SignUp.SignUpPage;
 public class LoginPage extends AppCompatActivity implements View.OnClickListener {
 
     private Button btnLogin;
-    private TextView forgotPass, signUp;
+    private TextView signUp;
     private EditText userPass, userName;
-    private CheckBox cbRemeber;
 
     private LoginModel loginModel;
 
@@ -40,13 +39,8 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
 
         userName = findViewById(R.id.userName);
 
-        forgotPass = findViewById(R.id.forgotPass);
-        forgotPass.setOnClickListener(this);
-
         signUp = findViewById(R.id.signUp);
         signUp.setOnClickListener(this);
-
-        cbRemeber = findViewById(R.id.cbRemeber);
 
     }
 
@@ -65,32 +59,17 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
             {
                 if(loginModel.searchUser(name,pass))
                 {
-                    if(cbRemeber.isChecked())
-                    {
-                        loginModel.WriteStringToSharedPreferences(String.valueOf(R.string.user_name_key),name);
-                        loginModel.WriteStringToSharedPreferences(String.valueOf(R.string.user_password_key),pass);
-                        loginModel.WriteBooleanToSharedPreferences(String.valueOf(R.string.user_remember_key),true);
-                    }
-                    else{
-                        loginModel.WriteStringToSharedPreferences(String.valueOf(R.string.user_name_key),"");
-                        loginModel.WriteStringToSharedPreferences(String.valueOf(R.string.user_password_key),"");
-                        loginModel.WriteBooleanToSharedPreferences(String.valueOf(R.string.user_remember_key),false);
-                    }
+                    loginModel.WriteStringToSharedPreferences(String.valueOf(R.string.user_name_key),name);
+                    loginModel.WriteStringToSharedPreferences(String.valueOf(R.string.user_password_key),pass);
+                    loginModel.WriteBooleanToSharedPreferences(String.valueOf(R.string.user_loggedIn_key),true);
                     Toast.makeText(this, "logged in successfully", Toast.LENGTH_SHORT).show();
-                    Intent i = new Intent(LoginPage.this, MainActivity.class);
-                    startActivity(i);
+                    finish();
                 }
                 else{
                     Toast.makeText(this, "user is not found", Toast.LENGTH_SHORT).show();
                 }
 
             }
-        }
-        else if(v == forgotPass)
-        {
-            //send ForgotPassword page
-            Toast.makeText(this, "send ForgotPassword page", Toast.LENGTH_SHORT).show();
-
         }
         else if(v == signUp)
         {

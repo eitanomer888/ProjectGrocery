@@ -206,7 +206,7 @@ public class MyViewHolder extends RecyclerView.ViewHolder {
                 
                 //check if date conditions
                 if (isBeforeToday(last_date))
-                    openConDialog(amount,last_date);
+                    openConDialog(amountD,last_date);
                 else
                     Toast.makeText(repository.getContext(), "מעדכן דאטה בייס, אין צורך להסיר", Toast.LENGTH_SHORT).show();
                 

@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".UI.SignUp.SignUpPage">
+    tools:context=".UI.SignUp.SignUpPage"
+    android:layoutDirection="ltr">
 
     <TextView
         android:id="@+id/SUhead"

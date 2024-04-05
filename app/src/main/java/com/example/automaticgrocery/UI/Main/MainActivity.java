@@ -106,7 +106,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
         //check if user is logged in
-        if(!mainModel.ReadBooleanFromSharedPreferences(String.valueOf(R.string.user_remember_key),false))
+        if(!mainModel.ReadBooleanFromSharedPreferences(String.valueOf(R.string.user_loggedIn_key),false))
         {
             Intent i = new Intent(MainActivity.this, LoginPage.class);
             startActivity(i);
@@ -119,7 +119,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onRestart() {
         super.onRestart();
         //check if user is logged in
-        if(!mainModel.ReadBooleanFromSharedPreferences(String.valueOf(R.string.user_remember_key),false))
+        if(!mainModel.ReadBooleanFromSharedPreferences(String.valueOf(R.string.user_loggedIn_key),false))
         {
             Intent i = new Intent(MainActivity.this, LoginPage.class);
             startActivity(i);

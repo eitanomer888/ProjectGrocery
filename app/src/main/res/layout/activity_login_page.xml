@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".UI.Login.LoginPage">
+    tools:context=".UI.Login.LoginPage"
+    android:layoutDirection="ltr">
 
     <TextView
         android:id="@+id/headL"
@@ -63,15 +64,6 @@
 
     </LinearLayout>
 
-    <CheckBox
-        android:id="@+id/cbRemeber"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="remember me"
-        android:layout_gravity="left"
-        android:layout_marginLeft="50dp"
-        />
-
     <TextView
         android:id="@+id/signUp"
         android:layout_width="wrap_content"
@@ -79,16 +71,6 @@
         android:gravity="center"
         android:layout_marginTop="80dp"
         android:text="dont have an account? sign up!"
-        android:layout_gravity="center"
-        android:textColor="#2196F3"
-        />
-    <TextView
-        android:id="@+id/forgotPass"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:layout_marginTop="10dp"
-        android:text="forgot password?"
         android:layout_gravity="center"
         android:textColor="#2196F3"
         />

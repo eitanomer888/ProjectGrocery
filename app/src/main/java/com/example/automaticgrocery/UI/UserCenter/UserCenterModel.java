@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.automaticgrocery.R;
@@ -19,7 +20,7 @@ public class UserCenterModel
         repository = new Repository(context);
     }
 
-    public void showUpdateDialog() {
+    public void showUpdateDialog(TextView tvName) {
         Dialog dialog = new Dialog(repository.getContext());
 
         dialog.setContentView(R.layout.user_update_dialog);
@@ -73,6 +74,7 @@ public class UserCenterModel
                         {
                             WriteStringToSharedPreferences(String.valueOf(R.string.user_name_key),name);
                             WriteStringToSharedPreferences(String.valueOf(R.string.user_password_key),pass);
+                            tvName.setText(name);
                         }
 
                         dialog.dismiss();
