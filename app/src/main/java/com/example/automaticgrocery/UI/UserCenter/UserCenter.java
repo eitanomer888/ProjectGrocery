@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.automaticgrocery.R;
 
@@ -30,7 +31,7 @@ public class UserCenter extends AppCompatActivity implements View.OnClickListene
         tvName = findViewById(R.id.tvName);
         String Uname = userCenterModel.ReadStringFromSharedPreferences(String.valueOf(R.string.user_name_key),"");
         tvName.setText(Uname);
-        if(Uname.equals("eitan"))
+        if(Uname.equals(getString(R.string.admin)))
             tvName.setText("Admin");
 
 
@@ -57,9 +58,7 @@ public class UserCenter extends AppCompatActivity implements View.OnClickListene
             //delete user
             userCenterModel.deleteOneRowUser(userCenterModel.ReadStringFromSharedPreferences(String.valueOf(R.string.user_name_key),""));
 
-            userCenterModel.WriteStringToSharedPreferences(String.valueOf(R.string.user_name_key),"");
-            userCenterModel.WriteStringToSharedPreferences(String.valueOf(R.string.user_password_key),"");
-            userCenterModel.WriteBooleanToSharedPreferences(String.valueOf(R.string.user_loggedIn_key),false);
+            userCenterModel.clear_sharedPreference();
 
             finish();
         }
@@ -67,10 +66,8 @@ public class UserCenter extends AppCompatActivity implements View.OnClickListene
         {
            //logout user
 
-           //clear sheareprefernce
-            userCenterModel.WriteStringToSharedPreferences(String.valueOf(R.string.user_name_key),"");
-            userCenterModel.WriteStringToSharedPreferences(String.valueOf(R.string.user_password_key),"");
-            userCenterModel.WriteBooleanToSharedPreferences(String.valueOf(R.string.user_loggedIn_key),false);
+           //clear sharedPreference
+            userCenterModel.clear_sharedPreference();
            //move to main
             finish();
         }

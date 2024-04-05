@@ -127,4 +127,10 @@ public class UserCenterModel
 
         return false;
     }
+
+    public void clear_sharedPreference(){
+       WriteStringToSharedPreferences(String.valueOf(R.string.user_name_key),"");
+       WriteStringToSharedPreferences(String.valueOf(R.string.user_password_key),"");
+       WriteBooleanToSharedPreferences(String.valueOf(R.string.user_loggedIn_key),false);
+    }
 }
