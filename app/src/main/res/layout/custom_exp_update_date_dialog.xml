@@ -15,7 +15,7 @@
         <TextView
             android:id="@+id/tvDUPEXPName"
             android:layout_width="wrap_content"
-            android:layout_height="30dp"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_weight="1"
             android:text="שם פריט" />
@@ -23,7 +23,7 @@
         <TextView
             android:id="@+id/tvDUPEXPProductName"
             android:layout_width="wrap_content"
-            android:layout_height="30dp"
+            android:layout_height="wrap_content"
             android:layout_weight="8"
             />
 
@@ -68,9 +68,9 @@
 
         <Button
             android:id="@+id/btnDUPEXPProductLastDate"
-            android:layout_width="15dp"
-            android:layout_height="15dp"
-            android:background="@drawable/search_img"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:background="@drawable/barcode_icon"
             android:layout_gravity="center"
             android:layout_weight="1"
             android:layout_marginLeft="10dp"

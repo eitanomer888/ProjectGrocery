@@ -27,7 +27,7 @@
         <TextView
             android:id="@+id/tvD_Name"
             android:layout_width="wrap_content"
-            android:layout_height="30dp"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_weight="1"
             android:text="שם פריט" />
@@ -35,7 +35,7 @@
         <TextView
             android:id="@+id/tvD_ProductName"
             android:layout_width="wrap_content"
-            android:layout_height="30dp"
+            android:layout_height="wrap_content"
             android:layout_weight="8"
             />
 
@@ -80,9 +80,9 @@
 
         <Button
             android:id="@+id/btnD_ProductLastDate"
-            android:layout_width="15dp"
-            android:layout_height="15dp"
-            android:background="@drawable/search_img"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:background="@drawable/barcode_icon"
             android:layout_gravity="center"
             android:layout_weight="1"
             android:layout_marginLeft="10dp"
@@ -115,9 +115,9 @@
 
         <Button
             android:id="@+id/btnD_ProductFirstDate"
-            android:layout_width="15dp"
-            android:layout_height="15dp"
-            android:background="@drawable/search_img"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:background="@drawable/barcode_icon"
             android:layout_gravity="center"
             android:layout_weight="1"
             android:layout_marginLeft="10dp"
