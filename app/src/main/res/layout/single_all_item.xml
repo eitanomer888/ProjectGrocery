@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:textDirection="rtl"
+    >
+
+    <TextView
+        android:id="@+id/tvAllName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="שם מוצר"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="4dp" />
+    <TextView
+        android:id="@+id/tvAllInternalReference"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="internal reference"
+        android:gravity="center"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="4dp" />
+
+
+
+    <LinearLayout
+        android:layout_marginTop="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:background="#673AB7"/>
+
+</LinearLayout>

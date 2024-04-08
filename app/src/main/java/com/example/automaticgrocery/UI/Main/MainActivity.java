@@ -20,6 +20,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.automaticgrocery.UI.AllProducts.AllProducts;
 import com.example.automaticgrocery.UI.ExpiredFragment.ExpiredFragment;
 import com.example.automaticgrocery.UI.FillFragment.FillFragment;
 import com.example.automaticgrocery.UI.UserCenter.UserCenter;
@@ -171,6 +172,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 ExpiredFragment expiredFragment = new ExpiredFragment();
                 getSupportFragmentManager().beginTransaction().replace(R.id.contentFragment,expiredFragment).commit();
             }
+
+            Intent intent = new Intent(MainActivity.this, AllProducts.class);
+            startActivity(intent);
         }
 
 
