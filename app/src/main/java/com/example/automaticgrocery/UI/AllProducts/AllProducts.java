@@ -3,8 +3,11 @@ package com.example.automaticgrocery.UI.AllProducts;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,18 +18,24 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.automaticgrocery.R;
+import com.example.automaticgrocery.UI.ExpiredFragment.ExpiredFragment;
+import com.example.automaticgrocery.UI.FillFragment.FillFragment;
+import com.example.automaticgrocery.UI.Main.MainModel;
 import com.example.automaticgrocery.UI.MyRecycleView.MyAdapter;
 import com.example.automaticgrocery.UI.MyRecycleView.MyAllAdapter;
 import com.example.automaticgrocery.data.Items.AllItem;
 import com.example.automaticgrocery.data.Items.ExpiredItem;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class AllProducts extends AppCompatActivity implements View.OnClickListener {
 
     private AllProductsModel allProductsModel;
     private ImageView btnReturn;
+
+    private Spinner spiAllProducts;
     private EditText etSearchProduct;
     private RecyclerView recycleViewAll;
 
@@ -44,26 +53,40 @@ public class AllProducts extends AppCompatActivity implements View.OnClickListen
 
             btnReturn = findViewById(R.id.btnReturn);
             btnReturn.setOnClickListener(this);
+            spiAllProducts = findViewById(R.id.spiAllProducts);
             etSearchProduct = findViewById(R.id.etSearchProduct);
             recycleViewAll = findViewById(R.id.recycleViewAll);
 
 
-            List<AllItem> items = new ArrayList<>();
+            List<String> lst = new LinkedList<>();
+            lst.add("הכל");
+            lst.add("חטיפים, מתוקים ודגני בוקר");
+            lst.add("מזון מקורר, קפוא ונקניקים");
+            lst.add("מוצרי חלב וביצים");
 
-            Cursor cursor = allProductsModel.getAllProducts();
-            cursor.moveToFirst();
-            int l = cursor.getCount();
-            for (int i = 0; i < l; i++)
-            {
-                //להוסיף בדיקה שהמוצר אכן לא בתוקף
-                items.add(new AllItem(cursor.getString(0),cursor.getString(1),cursor.getString(2),
-                        cursor.getInt(3),cursor.getString(4),cursor.getString(5),
-                        cursor.getString(6),cursor.getInt(7),cursor.getInt(8)));
-                cursor.moveToNext();
-            }
+            ArrayAdapter<String> adapter = new ArrayAdapter<>(this,android.R.layout.simple_spinner_item,lst);
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            spiAllProducts.setAdapter(adapter);
+            spiAllProducts.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    String category = spiAllProducts.getItemAtPosition(position).toString();
+                    allProductsModel.InitializeRecycleView(category,recycleViewAll);
+                }
 
-            recycleViewAll.setLayoutManager(new LinearLayoutManager(this));
-            recycleViewAll.setAdapter(new MyAllAdapter(this,items));
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+
+
+
+
+
+
+
+            allProductsModel.InitializeRecycleView("הכל",recycleViewAll);
 
 
             return insets;

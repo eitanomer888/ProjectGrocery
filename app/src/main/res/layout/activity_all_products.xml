@@ -9,16 +9,45 @@
     android:orientation="vertical"
     android:layoutDirection="rtl">
 
-    <ImageView
-        android:id="@+id/btnReturn"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:background="@android:color/transparent"
-        android:src="@drawable/return_icon" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layoutDirection="rtl">
+
+        <ImageView
+            android:id="@+id/btnReturn"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="16dp"
+            android:layout_marginRight="16dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/return_icon" />
+
+        <!-- Text View -->
+        <TextView
+            android:id="@+id/tvClass"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="מחלקה"
+            android:textSize="17dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginRight="80dp"/>
+
+        <!-- Spinner -->
+        <Spinner
+            android:id="@+id/spiAllProducts"
+            android:layout_width="150sp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginRight="8dp"
+            android:textDirection="rtl" />
+
+    </LinearLayout>
+
+
 
 
     <EditText
