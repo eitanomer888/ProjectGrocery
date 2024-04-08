@@ -75,6 +75,8 @@ public class UserCenterModel
                             WriteStringToSharedPreferences(String.valueOf(R.string.user_name_key),name);
                             WriteStringToSharedPreferences(String.valueOf(R.string.user_password_key),pass);
                             tvName.setText(name);
+                            if(name.equals(repository.getContext().getString(R.string.admin)))
+                                tvName.setText("Admin");
                         }
 
                         dialog.dismiss();
