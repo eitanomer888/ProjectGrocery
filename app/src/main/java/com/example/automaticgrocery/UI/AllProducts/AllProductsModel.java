@@ -26,11 +26,19 @@ public class AllProductsModel {
     public Cursor getProductsByCategory(String category){
         return repository.getProductsByCategory(category);
     }
-    public  void InitializeRecycleView(String category, RecyclerView recyclerView){
+
+    public Cursor getProductsByCategoryAndString(String category, String str){return repository.getProductsByCategoryAndString(category,str);}
+
+    public  void InitializeRecycleView(String category, String str ,RecyclerView recyclerView){
         List<AllItem> items = new ArrayList<>();
 
 
-        Cursor cursor = getProductsByCategory(category);
+        Cursor cursor;
+        if(str.equals(""))
+            cursor = getProductsByCategory(category);
+        else
+            cursor = getProductsByCategoryAndString(category, str);
+
         cursor.moveToFirst();
         int l = cursor.getCount();
         for (int i = 0; i < l; i++)

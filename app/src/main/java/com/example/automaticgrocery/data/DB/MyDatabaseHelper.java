@@ -237,7 +237,17 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
     }
 
 
+    public Cursor getProductsByCategoryAndString(String category, String str)
+    {
+        String query = "SELECT * FROM " + TABLE_NAME2 + " WHERE " + COLUMN_PRODUCT_NAME + " LIKE '%" + str + "%'" + " AND " + COLUMN_CATEGORY + " LIKE '%" + category + "%'";
+        SQLiteDatabase db = this.getReadableDatabase();
 
+        Cursor cursor = null;
+        if(db != null){
+            cursor = db.rawQuery(query, null);
+        }
+        return cursor;
+    }
 
 
 

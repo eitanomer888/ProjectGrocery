@@ -2,12 +2,14 @@ package com.example.automaticgrocery.UI.AllProducts;
 
 import android.database.Cursor;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -39,6 +41,8 @@ public class AllProducts extends AppCompatActivity implements View.OnClickListen
     private EditText etSearchProduct;
     private RecyclerView recycleViewAll;
 
+    private String category,strSearch;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,12 +54,43 @@ public class AllProducts extends AppCompatActivity implements View.OnClickListen
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
 
             allProductsModel = new AllProductsModel(this);
+            strSearch = "";
+            category = "הכל";
 
             btnReturn = findViewById(R.id.btnReturn);
             btnReturn.setOnClickListener(this);
             spiAllProducts = findViewById(R.id.spiAllProducts);
             etSearchProduct = findViewById(R.id.etSearchProduct);
             recycleViewAll = findViewById(R.id.recycleViewAll);
+            etSearchProduct.setOnKeyListener(new View.OnKeyListener() {
+                boolean isAdded = false;
+                @Override
+                public boolean onKey(View v, int keyCode, KeyEvent event) {
+                    if (!isAdded){
+                        char c = (char) event.getUnicodeChar();
+                        if(event.getUnicodeChar() == 0){
+                            if(!strSearch.equals("")){
+                                String str = "";
+                                for (int i = 0; i < strSearch.length() - 1; i++) {
+                                    str += strSearch.charAt(i);
+                                }
+                                strSearch = str;
+                            }
+                        }
+                        else{
+                            strSearch += c;
+                            isAdded = true;
+                        }
+                        allProductsModel.InitializeRecycleView(category,strSearch,recycleViewAll);
+                        Toast.makeText(AllProducts.this, category, Toast.LENGTH_SHORT).show();
+                    }
+                    else
+                        isAdded = false;
+
+                    return false;
+                }
+            });
+
 
 
             List<String> lst = new LinkedList<>();
@@ -70,8 +105,8 @@ public class AllProducts extends AppCompatActivity implements View.OnClickListen
             spiAllProducts.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    String category = spiAllProducts.getItemAtPosition(position).toString();
-                    allProductsModel.InitializeRecycleView(category,recycleViewAll);
+                    category = spiAllProducts.getItemAtPosition(position).toString();
+                    allProductsModel.InitializeRecycleView(category,strSearch,recycleViewAll);
                 }
 
                 @Override
@@ -86,7 +121,7 @@ public class AllProducts extends AppCompatActivity implements View.OnClickListen
 
 
 
-            allProductsModel.InitializeRecycleView("הכל",recycleViewAll);
+            allProductsModel.InitializeRecycleView(category,strSearch,recycleViewAll);
 
 
             return insets;

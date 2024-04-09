@@ -96,7 +96,7 @@ public class Repository {
 
     public Cursor getProductsByCategory(String category){return myDatabaseHelper.getProductsByCategory(category);}
 
-
+    public Cursor getProductsByCategoryAndString(String category, String str){return myDatabaseHelper.getProductsByCategoryAndString(category,str);}
 
 
 
