@@ -223,29 +223,34 @@ public class MyFillViewHolder extends RecyclerView.ViewHolder {
 
 
 
-    public static int getDifferenceInDays(String dateString1, String dateString2) {
+    public static double getDifferenceInDays(String dateString1, String dateString2) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         try {
             Date date1 = dateFormat.parse(dateString1);
             Date date2 = dateFormat.parse(dateString2);
 
             long differenceInMillis = date2.getTime() - date1.getTime();
-            int differenceInDays = (int) (differenceInMillis / (1000 * 60 * 60 * 24));
+            double differenceInDays = (double) (differenceInMillis / (1000 * 60 * 60 * 24));
             return differenceInDays;
         } catch (Exception e) {
-            return -1;
+            return -1.0;
         }
     }
 
 
     public int secretFormula(int currentAmount,String last_date, String fill_date)
     {
-        int top = getDifferenceInDays(calendar1.get(Calendar.DAY_OF_MONTH) + "/" + (calendar1.get(Calendar.MONTH) + 1) + "/" + calendar1.get(Calendar.YEAR) , last_date);
-        int buttom = getDifferenceInDays(fill_date,last_date);
-        int F = top / buttom;
-        F /= 100;
-        int answer = (targetAmount - currentAmount) + F * (targetAmount - currentAmount);
-        return answer;
+        String today = calendar2.get(Calendar.DAY_OF_MONTH) + "/" + (calendar2.get(Calendar.MONTH) + 1) + "/" + calendar2.get(Calendar.YEAR);
+        double top = getDifferenceInDays(today , last_date);
+        double buttom = Math.abs(getDifferenceInDays(fill_date,last_date));
+        double F = top / buttom;
+        if (F > 1)
+            F = 1;
+        else if (F < 0)
+            F = 0;
+        double answer =  F * (targetAmount - currentAmount);
+        answer = Math.round(answer);
+        return (int) answer;
     }
 
 

@@ -249,24 +249,28 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         return cursor;
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     public void updateProductExpPart1(String internal_reference, int new_amount){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
         cv.put(COLUMN_AMOUNT,new_amount);
+
+        long result = db.update(TABLE_NAME2, cv, "internal_reference=?", new String[]{internal_reference});
+        if(result == -1)
+        {
+            Toast.makeText(context, "Failed", Toast.LENGTH_SHORT).show();
+        }
+        else
+        {
+            Toast.makeText(context, "Updated Successfully!", Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
+    public void updateProductExpPart1_0(String internal_reference, int last_date_amount, String last_date){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put(COLUMN_LAST_DATE,last_date);
+        cv.put(COLUMN_LAST_DATE_AMOUNT,last_date_amount);
 
         long result = db.update(TABLE_NAME2, cv, "internal_reference=?", new String[]{internal_reference});
         if(result == -1)

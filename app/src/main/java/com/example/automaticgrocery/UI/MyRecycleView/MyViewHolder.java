@@ -207,9 +207,18 @@ public class MyViewHolder extends RecyclerView.ViewHolder {
                 //check if date conditions
                 if (isBeforeToday(last_date))
                     openConDialog(amountD,last_date);
-                else
-                    Toast.makeText(repository.getContext(), "מעדכן דאטה בייס, אין צורך להסיר", Toast.LENGTH_SHORT).show();
-                
+                else{
+                    repository.updateProductExpPart1_0(internal_reference,amountD,last_date);
+                    if(dialog1 != null)
+                        if(dialog1.isShowing())
+                            dialog1.dismiss();
+
+                    dialog2.dismiss();
+
+                    ExpiredFragment expiredFragment = new ExpiredFragment();
+                    ((AppCompatActivity)repository.getContext()).getSupportFragmentManager().beginTransaction().replace(R.id.contentFragment,expiredFragment).commit();
+
+                }
 
             }
         });

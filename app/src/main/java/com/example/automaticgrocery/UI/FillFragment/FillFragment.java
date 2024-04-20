@@ -96,28 +96,28 @@ public class FillFragment extends Fragment {
             }
         }
 
-        items.add(new FillItem("milk","11111111",50,200));
-        items.add(new FillItem("beef","22222222",100,300));
-        items.add(new FillItem("apple","33333333",200,400));
-        items.add(new FillItem("bamba","44444444",400,500));
-        items.add(new FillItem("milk","11111111",50,200));
-        items.add(new FillItem("beef","22222222",100,300));
-        items.add(new FillItem("apple","33333333",200,400));
-        items.add(new FillItem("bamba","44444444",400,500));
-        items.add(new FillItem("milk","11111111",50,200));
-        items.add(new FillItem("beef","22222222",100,300));
-        items.add(new FillItem("apple","33333333",200,400));
-        items.add(new FillItem("bamba","44444444",400,500));
-        items.add(new FillItem("milk","11111111",50,200));
-        items.add(new FillItem("beef","22222222",100,300));
-        items.add(new FillItem("apple","33333333",200,400));
-        items.add(new FillItem("bamba","44444444",400,500));
-        items.add(new FillItem("apple","33333333",200,400));
-        items.add(new FillItem("bamba","44444444",400,500));
-        items.add(new FillItem("milk","11111111",50,200));
-        items.add(new FillItem("beef","22222222",100,300));
-        items.add(new FillItem("apple","33333333",200,400));
-        items.add(new FillItem("bamba","44444444",400,500));
+//        items.add(new FillItem("milk","11111111",50,200));
+//        items.add(new FillItem("beef","22222222",100,300));
+//        items.add(new FillItem("apple","33333333",200,400));
+//        items.add(new FillItem("bamba","44444444",400,500));
+//        items.add(new FillItem("milk","11111111",50,200));
+//        items.add(new FillItem("beef","22222222",100,300));
+//        items.add(new FillItem("apple","33333333",200,400));
+//        items.add(new FillItem("bamba","44444444",400,500));
+//        items.add(new FillItem("milk","11111111",50,200));
+//        items.add(new FillItem("beef","22222222",100,300));
+//        items.add(new FillItem("apple","33333333",200,400));
+//        items.add(new FillItem("bamba","44444444",400,500));
+//        items.add(new FillItem("milk","11111111",50,200));
+//        items.add(new FillItem("beef","22222222",100,300));
+//        items.add(new FillItem("apple","33333333",200,400));
+//        items.add(new FillItem("bamba","44444444",400,500));
+//        items.add(new FillItem("apple","33333333",200,400));
+//        items.add(new FillItem("bamba","44444444",400,500));
+//        items.add(new FillItem("milk","11111111",50,200));
+//        items.add(new FillItem("beef","22222222",100,300));
+//        items.add(new FillItem("apple","33333333",200,400));
+//        items.add(new FillItem("bamba","44444444",400,500));
         //items.add(new FillItem("bamba","44444444",400));
 
 
