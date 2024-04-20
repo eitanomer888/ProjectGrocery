@@ -213,6 +213,25 @@ public class MyFillViewHolder extends RecyclerView.ViewHolder {
             }
         });
 
+        btnFillOk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String amount_to_fill = etD_ProductAmountToFill.getText().toString().trim();
+                if (amount_to_fill.equals(""))
+                    return;
+                int amount_toFill = Integer.parseInt(amount_to_fill);
+                if (amount_toFill <= 0)
+                    return;
+                if(amount_toFill > targetAmount - currentAmount){
+                    Toast.makeText(repository.getContext(), "too much products", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                //db action
+
+                Toast.makeText(repository.getContext(), "updated", Toast.LENGTH_SHORT).show();
+            }
+        });
 
 
 

@@ -2,6 +2,8 @@ package com.example.automaticgrocery.UI.AllProducts;
 
 import android.database.Cursor;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
@@ -62,35 +64,27 @@ public class AllProducts extends AppCompatActivity implements View.OnClickListen
             spiAllProducts = findViewById(R.id.spiAllProducts);
             etSearchProduct = findViewById(R.id.etSearchProduct);
             recycleViewAll = findViewById(R.id.recycleViewAll);
-            etSearchProduct.setOnKeyListener(new View.OnKeyListener() {
-                boolean isAdded = false;
+
+
+            TextWatcher textWatcher = new TextWatcher() {
                 @Override
-                public boolean onKey(View v, int keyCode, KeyEvent event) {
-                    if (!isAdded){
-                        char c = (char) event.getUnicodeChar();
-                        if(event.getUnicodeChar() == 0){
-                            if(!strSearch.equals("")){
-                                String str = "";
-                                for (int i = 0; i < strSearch.length() - 1; i++) {
-                                    str += strSearch.charAt(i);
-                                }
-                                strSearch = str;
-                            }
-                        }
-                        else{
-                            strSearch += c;
-                            isAdded = true;
-                        }
-                        allProductsModel.InitializeRecycleView(category,strSearch,recycleViewAll);
-                        Toast.makeText(AllProducts.this, category, Toast.LENGTH_SHORT).show();
-                    }
-                    else
-                        isAdded = false;
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-                    return false;
                 }
-            });
 
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+                    strSearch = etSearchProduct.getText().toString().trim();
+                    allProductsModel.InitializeRecycleView(category,strSearch,recycleViewAll);
+                    Toast.makeText(AllProducts.this, category, Toast.LENGTH_SHORT).show();
+                }
+
+                @Override
+                public void afterTextChanged(Editable s) {
+
+                }
+            };
+            etSearchProduct.addTextChangedListener(textWatcher);
 
 
             List<String> lst = new LinkedList<>();
