@@ -181,8 +181,8 @@ public class MyFillViewHolder extends RecyclerView.ViewHolder {
                     Toast.makeText(repository.getContext(), "current amount must be higher than 0", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if(targetAmount == -1){
-                    Toast.makeText(repository.getContext(), "target amount fail", Toast.LENGTH_SHORT).show();
+                if(currentAmount > targetAmount){
+                    Toast.makeText(repository.getContext(), "כמות גדולה מידי", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
