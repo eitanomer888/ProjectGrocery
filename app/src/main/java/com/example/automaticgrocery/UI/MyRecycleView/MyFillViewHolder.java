@@ -12,9 +12,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.automaticgrocery.R;
+import com.example.automaticgrocery.UI.ExpiredFragment.ExpiredFragment;
+import com.example.automaticgrocery.UI.FillFragment.FillFragment;
 import com.example.automaticgrocery.UI.Main.MainActivity;
 import com.example.automaticgrocery.data.Repository.Repository;
 
@@ -28,10 +31,13 @@ public class MyFillViewHolder extends RecyclerView.ViewHolder {
     private Calendar calendar1,calendar2;
     private int y1,m1,d1,y2,m2,d2;
 
+    private Dialog dialog1;
+
     TextView tvFillName,tvFillAmount,tvFillint;
     ImageView ivFillWarn;
 
     public int targetAmount;
+    String internal_reference;
     public MyFillViewHolder(@NonNull View itemView, Context context) {
         super(itemView);
 
@@ -62,35 +68,35 @@ public class MyFillViewHolder extends RecyclerView.ViewHolder {
 
     public void openDialog()
     {
-        Dialog dialog = new Dialog(repository.getContext());
+        dialog1 = new Dialog(repository.getContext());
 
-        dialog.setContentView(R.layout.custom_fill_dialog);
+        dialog1.setContentView(R.layout.custom_fill_dialog);
 
-        Button btnD_cancel = dialog.findViewById(R.id.btnD_cancel);
+        Button btnD_cancel = dialog1.findViewById(R.id.btnD_cancel);
         btnD_cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dialog.dismiss();
+                dialog1.dismiss();
             }
         });
 
-        TextView tvD_Name = dialog.findViewById(R.id.tvD_Name);
-        TextView tvD_ProductName = dialog.findViewById(R.id.tvD_ProductName);
+        TextView tvD_Name = dialog1.findViewById(R.id.tvD_Name);
+        TextView tvD_ProductName = dialog1.findViewById(R.id.tvD_ProductName);
         tvD_ProductName.setText(tvFillName.getText().toString());
 
-        TextView tvD_ProductAmount = dialog.findViewById(R.id.tvD_ProductAmount);
-        EditText etD_ProductAmount = dialog.findViewById(R.id.etD_ProductAmount);
+        TextView tvD_ProductAmount = dialog1.findViewById(R.id.tvD_ProductAmount);
+        EditText etD_ProductAmount = dialog1.findViewById(R.id.etD_ProductAmount);
         etD_ProductAmount.setText(tvFillAmount.getText().toString());
 
-        TextView tvD_ProductLastDate = dialog.findViewById(R.id.tvD_ProductLastDate);
-        Button btnD_ProductLastDate = dialog.findViewById(R.id.btnD_ProductLastDate);
-        TextView etD_ProductLastDate = dialog.findViewById(R.id.etD_ProductLastDate);
+        TextView tvD_ProductLastDate = dialog1.findViewById(R.id.tvD_ProductLastDate);
+        Button btnD_ProductLastDate = dialog1.findViewById(R.id.btnD_ProductLastDate);
+        TextView etD_ProductLastDate = dialog1.findViewById(R.id.etD_ProductLastDate);
 
-        TextView tvD_ProductFirstDate = dialog.findViewById(R.id.tvD_ProductFirstDate);
-        Button btnD_ProductFirstDate = dialog.findViewById(R.id.btnD_ProductFirstDate);
-        TextView etD_ProductFirstDate = dialog.findViewById(R.id.etD_ProductFirstDate);
+        TextView tvD_ProductFirstDate = dialog1.findViewById(R.id.tvD_ProductFirstDate);
+        Button btnD_ProductFirstDate = dialog1.findViewById(R.id.btnD_ProductFirstDate);
+        TextView etD_ProductFirstDate = dialog1.findViewById(R.id.etD_ProductFirstDate);
 
-        Button btnD_update = dialog.findViewById(R.id.btnD_update);
+        Button btnD_update = dialog1.findViewById(R.id.btnD_update);
 
 
         //scan the lastDate
@@ -187,7 +193,7 @@ public class MyFillViewHolder extends RecyclerView.ViewHolder {
         });
 
 
-        dialog.show();
+        dialog1.show();
     }
 
 
@@ -228,8 +234,15 @@ public class MyFillViewHolder extends RecyclerView.ViewHolder {
                 }
 
                 //db action
+                repository.updateProductFill(internal_reference,currentAmount,last_date,fill_date,amount_toFill);
 
-                Toast.makeText(repository.getContext(), "updated", Toast.LENGTH_SHORT).show();
+                dialog.dismiss();
+                if(dialog1 != null)
+                    if(dialog1.isShowing())
+                        dialog1.dismiss();
+
+                FillFragment fillFragment = new FillFragment();
+                ((AppCompatActivity)repository.getContext()).getSupportFragmentManager().beginTransaction().replace(R.id.contentFragment,fillFragment).commit();
 
             }
         });

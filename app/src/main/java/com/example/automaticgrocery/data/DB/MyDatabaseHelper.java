@@ -303,6 +303,22 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
 
     }
 
+    public void updateProductFill(String internal_reference, int current_amount, String last_date, String fill_date , int new_filled_amount){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put(COLUMN_AMOUNT,current_amount + new_filled_amount);
+        cv.put(COLUMN_LAST_DATE,last_date);
+        cv.put(COLUMN_FILL_DATE,fill_date);
 
+        long result = db.update(TABLE_NAME2, cv, "internal_reference=?", new String[]{internal_reference});
+        if(result == -1)
+        {
+            Toast.makeText(context, "Failed", Toast.LENGTH_SHORT).show();
+        }
+        else
+        {
+            Toast.makeText(context, "Updated Successfully!", Toast.LENGTH_SHORT).show();
+        }
 
+    }
 }

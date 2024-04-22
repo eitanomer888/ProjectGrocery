@@ -109,4 +109,8 @@ public class Repository {
     public void updateProductExpPart2(String internal_reference, int last_date_amount, String last_date, int other_expired_removed_items_amount , int amount){
         myDatabaseHelper.updateProductExpPart2(internal_reference,last_date_amount,last_date,other_expired_removed_items_amount,amount);
     }
+
+    public void updateProductFill(String internal_reference, int current_amount, String last_date, String fill_date , int new_filled_amount){
+        myDatabaseHelper.updateProductFill(internal_reference, current_amount, last_date, fill_date, new_filled_amount);
+    }
 }
