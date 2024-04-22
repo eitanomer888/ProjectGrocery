@@ -87,8 +87,9 @@ public class ExpiredFragment extends Fragment {
         int l = cursor.getCount();
         for (int i = 0; i < l; i++)
         {
-            //להוסיף בדיקה שהמוצר אכן לא בתוקף
-            items.add(new ExpiredItem(cursor.getString(1),cursor.getString(5),cursor.getInt(3),cursor.getString(0),cursor.getInt(8)));
+            if(expiredModel.isExpired(cursor.getString(5)))
+                items.add(new ExpiredItem(cursor.getString(1),cursor.getString(5),cursor.getInt(3),cursor.getString(0),cursor.getInt(8)));
+
             cursor.moveToNext();
         }
 

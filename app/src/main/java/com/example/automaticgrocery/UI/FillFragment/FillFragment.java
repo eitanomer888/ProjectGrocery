@@ -91,7 +91,9 @@ public class FillFragment extends Fragment {
             cursor.moveToFirst();
             for (int i = 0; i < l; i++)
             {
-                items.add(new FillItem(cursor.getString(1),cursor.getString(0),cursor.getInt(3),cursor.getInt(7)));
+                if (fillModel.isFillNeeded(cursor.getInt(7),cursor.getInt(3)))
+                    items.add(new FillItem(cursor.getString(1),cursor.getString(0),cursor.getInt(3),cursor.getInt(7)));
+
                 cursor.moveToNext();
             }
         }

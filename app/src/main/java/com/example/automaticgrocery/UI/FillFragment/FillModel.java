@@ -18,4 +18,8 @@ public class FillModel
     public Cursor getProductsByCategory(){return repository.getProductsByCategory(getCurrent_category());}
 
     public String getCurrent_category(){return repository.getCurrent_category();}
+
+    public boolean isFillNeeded(int target,int current){
+        return current / target < 0.75;
+    }
 }

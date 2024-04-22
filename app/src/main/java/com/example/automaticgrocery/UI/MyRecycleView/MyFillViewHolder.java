@@ -230,6 +230,7 @@ public class MyFillViewHolder extends RecyclerView.ViewHolder {
                 //db action
 
                 Toast.makeText(repository.getContext(), "updated", Toast.LENGTH_SHORT).show();
+
             }
         });
 
