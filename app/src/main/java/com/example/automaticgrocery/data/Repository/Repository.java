@@ -113,4 +113,8 @@ public class Repository {
     public void updateProductFill(String internal_reference, int current_amount, String last_date, String fill_date , int new_filled_amount){
         myDatabaseHelper.updateProductFill(internal_reference, current_amount, last_date, fill_date, new_filled_amount);
     }
+
+    public void updateProductAll(String internal_reference, int current_amount, String new_date, String last_date , int last_date_amount){
+        myDatabaseHelper.updateProductAll(internal_reference, current_amount, new_date, last_date, last_date_amount);
+    }
 }

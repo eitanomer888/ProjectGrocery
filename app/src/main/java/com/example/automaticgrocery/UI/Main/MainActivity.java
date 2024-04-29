@@ -127,6 +127,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(MainModel.isFill){
+            FillFragment fillFragment = new FillFragment();
+            getSupportFragmentManager().beginTransaction().replace(R.id.contentFragment,fillFragment).commit();
+        }
+        else{
+            ExpiredFragment expiredFragment = new ExpiredFragment();
+            getSupportFragmentManager().beginTransaction().replace(R.id.contentFragment,expiredFragment).commit();
+        }
+    }
 
     @Override
     public void onClick(View view)

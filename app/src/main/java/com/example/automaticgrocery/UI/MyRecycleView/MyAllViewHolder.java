@@ -23,6 +23,7 @@ public class MyAllViewHolder extends RecyclerView.ViewHolder {
     private Calendar calendar1,calendar2;
 
     private int y1,m1,d1,y2,m2,d2;
+    private Dialog dialog1;
 
     public String internal_reference,name,barcode;
     public int amount;
@@ -52,27 +53,27 @@ public class MyAllViewHolder extends RecyclerView.ViewHolder {
 
     public void openDialog()
     {
-        Dialog dialog = new Dialog(repository.getContext());
+        dialog1 = new Dialog(repository.getContext());
 
-        dialog.setContentView(R.layout.custom_all_dialog);
+        dialog1.setContentView(R.layout.custom_all_dialog);
 
 
-        Button btnD_back = dialog.findViewById(R.id.btnD_back);
+        Button btnD_back = dialog1.findViewById(R.id.btnD_back);
         btnD_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dialog.dismiss();
+                dialog1.dismiss();
             }
         });
 
-        TextView tvDP_Name = dialog.findViewById(R.id.tvDP_Name);
+        TextView tvDP_Name = dialog1.findViewById(R.id.tvDP_Name);
         tvDP_Name.setText(tvAllName.getText().toString().trim());
 
-        EditText etDP_CurrentAmount = dialog.findViewById(R.id.etDP_CurrentAmount);
+        EditText etDP_CurrentAmount = dialog1.findViewById(R.id.etDP_CurrentAmount);
         etDP_CurrentAmount.setText(amount + "");
 
-        Button btnDP_FillDate = dialog.findViewById(R.id.btnDP_FillDate);
-        TextView etDP_FillDate = dialog.findViewById(R.id.etDP_FillDate);
+        Button btnDP_FillDate = dialog1.findViewById(R.id.btnDP_FillDate);
+        TextView etDP_FillDate = dialog1.findViewById(R.id.etDP_FillDate);
         etDP_FillDate.setText(fill_date);
         btnDP_FillDate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -101,8 +102,8 @@ public class MyAllViewHolder extends RecyclerView.ViewHolder {
             }
         });
 
-        Button btnDP_LastDate= dialog.findViewById(R.id.btnDP_LastDate);
-        TextView etDP_LastDate = dialog.findViewById(R.id.etDP_LastDate);
+        Button btnDP_LastDate= dialog1.findViewById(R.id.btnDP_LastDate);
+        TextView etDP_LastDate = dialog1.findViewById(R.id.etDP_LastDate);
         etDP_LastDate.setText(last_date);
         btnDP_LastDate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -132,22 +133,24 @@ public class MyAllViewHolder extends RecyclerView.ViewHolder {
         });
 
 
-        EditText etDP_LastDateAmount = dialog.findViewById(R.id.etDP_LastDateAmount);
+        EditText etDP_LastDateAmount = dialog1.findViewById(R.id.etDP_LastDateAmount);
         etDP_LastDateAmount.setText(last_date_amount + "");
 
-        Button btnDP_Confirm = dialog.findViewById(R.id.btnDP_Confirm);
+        Button btnDP_Confirm = dialog1.findViewById(R.id.btnDP_Confirm);
         btnDP_Confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String new_date = etDP_FillDate.getText().toString().trim();
+                String last_date = etDP_LastDate.getText().toString().trim();
                 if(etDP_CurrentAmount.getText().toString().equals("")){
                     Toast.makeText(repository.getContext(), "אנא מלא כמות נוכחית", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if(etDP_FillDate.getText().toString().equals("אנא סרוק תאריך")){
+                if(new_date.equals("אנא סרוק תאריך")){
                     Toast.makeText(repository.getContext(), "סרוק תאריך חדש", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if(etDP_LastDate.getText().toString().equals("אנא סרוק תאריך")){
+                if(last_date.equals("אנא סרוק תאריך")){
                     Toast.makeText(repository.getContext(), "סרוק תאריך אחרון", Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -173,6 +176,9 @@ public class MyAllViewHolder extends RecyclerView.ViewHolder {
                     return;
                 }
 
+                repository.updateProductAll(internal_reference,amountC,new_date,last_date,amountLD);
+
+                dialog1.dismiss();
             }
         });
 
@@ -184,6 +190,6 @@ public class MyAllViewHolder extends RecyclerView.ViewHolder {
 
 
 
-        dialog.show();
+        dialog1.show();
     }
 }
