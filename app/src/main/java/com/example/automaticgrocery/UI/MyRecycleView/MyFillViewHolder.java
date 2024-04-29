@@ -173,7 +173,14 @@ public class MyFillViewHolder extends RecyclerView.ViewHolder {
                     return;
                 }
 
-                int currentAmount = Integer.parseInt(etD_ProductAmount.getText().toString().trim());
+                int currentAmount = 0;
+                try {
+                    currentAmount = Integer.parseInt(etD_ProductAmount.getText().toString().trim());
+                }
+                catch (Exception e){
+                    Toast.makeText(repository.getContext(), "invalid int", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 String lastDate = etD_ProductLastDate.getText().toString().trim();
                 String firstDate = etD_ProductFirstDate.getText().toString().trim();
 
@@ -225,7 +232,16 @@ public class MyFillViewHolder extends RecyclerView.ViewHolder {
                 String amount_to_fill = etD_ProductAmountToFill.getText().toString().trim();
                 if (amount_to_fill.equals(""))
                     return;
-                int amount_toFill = Integer.parseInt(amount_to_fill);
+
+                int amount_toFill = 0;
+                try {
+                    amount_toFill = Integer.parseInt(amount_to_fill);
+                }
+                catch (Exception e){
+                    Toast.makeText(repository.getContext(), "invalid int", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
                 if (amount_toFill <= 0)
                     return;
                 if(amount_toFill > targetAmount - currentAmount){

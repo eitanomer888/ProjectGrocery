@@ -161,7 +161,7 @@ public class MyAllViewHolder extends RecyclerView.ViewHolder {
                     amountLD = Integer.parseInt(etDP_LastDateAmount.getText().toString().trim());
                 }
                 catch (Exception e){
-                    Toast.makeText(repository.getContext(), "invalid amount input (integers only!)", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(repository.getContext(), "invalid int", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 if(amountC < 0 || amountLD < 0){

@@ -98,7 +98,14 @@ public class MyViewHolder extends RecyclerView.ViewHolder {
                 }
                 else
                 {
-                    int amountD = Integer.parseInt(etDExpProductAmount.getText().toString().trim());
+                    int amountD = 0;
+                    try{
+                        amountD = Integer.parseInt(etDExpProductAmount.getText().toString().trim());
+                    }
+                    catch (Exception e){
+                        Toast.makeText(repository.getContext(), "invalid int", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
                     String date = tvDExpProductLastDate.getText().toString().trim();
                     if(amountD >= amount){
                         Toast.makeText(repository.getContext(), "למלא מוצרים חדשים או לעדכן כמות", Toast.LENGTH_SHORT).show();
@@ -193,7 +200,14 @@ public class MyViewHolder extends RecyclerView.ViewHolder {
                     return;
                 }
                 String last_date = etDExpProductLastDate.getText().toString().trim();
-                int amountD = Integer.parseInt(etDUPEXPProductAmount.getText().toString().trim());
+                int amountD = 0;
+                try{
+                    amountD = Integer.parseInt(etDUPEXPProductAmount.getText().toString().trim());
+                }
+                catch (Exception e){
+                    Toast.makeText(repository.getContext(), "invalid int", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 if(amountD <= 0){
                     Toast.makeText(repository.getContext(), "כמות חייבת להיות גדולה מ-0", Toast.LENGTH_SHORT).show();
                     return;
@@ -337,8 +351,16 @@ public class MyViewHolder extends RecyclerView.ViewHolder {
                         Toast.makeText(repository.getContext(), "תאריך חייב להיות גדול מתאריך נוכחי", Toast.LENGTH_SHORT).show();
                         return;
                     }
-                    int last_date_amount = Integer.parseInt(etFINEXPProductAmount.getText().toString().trim());
-                    int removeAmount = Integer.parseInt(etFINEXPRemoveAmount.getText().toString().trim());
+                    int last_date_amount = 0;
+                    int removeAmount = 0;
+                    try{
+                        last_date_amount = Integer.parseInt(etFINEXPProductAmount.getText().toString().trim());
+                        removeAmount = Integer.parseInt(etFINEXPRemoveAmount.getText().toString().trim());
+                    }
+                    catch (Exception e){
+                        Toast.makeText(repository.getContext(), "invalid int", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
                     if(last_date_amount > 0 && removeAmount >= 0)
                     {
                         if(last_date_amount + removeAmount > amount)
