@@ -39,7 +39,14 @@ public class Repository {
         this.current_category = current_category;
     }
 
+    //FireBase////////////////
+
     public void LoginConfirm(String username,String password, FireBaseHelper.SearchComplete callback) { myFirebaseHelper.LoginConfirm(username,password,callback);}
+
+    public void SignUpConfirm(String username,String password, FireBaseHelper.ScanComplete callback){myFirebaseHelper.SignUpConfirm(username,password,callback);}
+
+    public void AddUser(String username, String password, FireBaseHelper.AddComplete callback){myFirebaseHelper.AddUser(username, password, callback);}
+    ///////////////////////////
 
     //user actions mydatabasehelper//
     public Cursor readData(){

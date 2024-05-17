@@ -78,25 +78,60 @@ public class FireBaseHelper {
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
     public interface DocsRetrievedListener
     {
-        void onDocsRetrieved(Task<QuerySnapshot> task);
+        void onDocsRetrieved(Task<QuerySnapshot> task,boolean isUsernameExist);
     }
 
+    public void ScanUsers(DocsRetrievedListener callback){
+        db.collection("users")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful())
+                        {
+                            callback.onDocsRetrieved(task,false);
+                        }
+                        else
+                        {
+                            callback.onDocsRetrieved(null,false);
+                        }
+                    }
+                });
+    }
 
+    public interface ScanComplete
+    {
+        void onScanComplete(boolean flag);
+    }
 
-    public void AddUser(String username,String password)
+    public void SignUpConfirm(String username,String password, ScanComplete callback)
+    {
+        if (username != null && password != null){
+
+            ScanUsers(new DocsRetrievedListener() {
+                @Override
+                public void onDocsRetrieved(Task<QuerySnapshot> task, boolean isUsernameExist) {
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        String name = document.getData().get("username").toString();
+                        String pass = document.getData().get("password").toString();
+                        if(username.equals(name)){
+                            isUsernameExist = true;
+                        }
+                    }
+                    callback.onScanComplete(!isUsernameExist);
+                }
+            });
+
+        }
+    }
+
+    public interface AddComplete{
+        void onAddComplete(boolean flag,String id);
+    }
+
+    public void AddUser(String username,String password,AddComplete callback)
     {
         // Create a new user with a first and last name
         Map<String, Object> user = new HashMap<>();
@@ -109,13 +144,15 @@ public class FireBaseHelper {
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override
                     public void onSuccess(DocumentReference documentReference) {
-                        Toast.makeText(context, "DocumentSnapshot added with ID: " + documentReference.getId(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "User added with ID: " + documentReference.getId(), Toast.LENGTH_SHORT).show();
+                        callback.onAddComplete(true,documentReference.getId());
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(context, "Error adding document", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "Error adding User", Toast.LENGTH_SHORT).show();
+                        callback.onAddComplete(false,"");
                     }
                 });
     }

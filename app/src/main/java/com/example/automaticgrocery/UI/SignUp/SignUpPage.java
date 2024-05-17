@@ -2,6 +2,7 @@ package com.example.automaticgrocery.UI.SignUp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -9,8 +10,11 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.automaticgrocery.UI.Login.LoginModel;
+import com.example.automaticgrocery.UI.Main.MainActivity;
+import com.example.automaticgrocery.data.DB.FireBaseHelper;
 import com.example.automaticgrocery.data.DB.MyDatabaseHelper;
 import com.example.automaticgrocery.R;
+import com.example.automaticgrocery.data.Items.CurrentUser;
 
 public class SignUpPage extends AppCompatActivity implements View.OnClickListener {
 
@@ -45,14 +49,44 @@ public class SignUpPage extends AppCompatActivity implements View.OnClickListene
             pass = SUuserPass.getText().toString().trim();
             if(signUpModel.sighUpValidation(name,pass))
             {
-                if(signUpModel.NoDuplicate(name))
-                {
-                    signUpModel.addUser(name,pass);
-                    finish();
-                }
-                else{
-                    Toast.makeText(this, "user name is already taken", Toast.LENGTH_SHORT).show();
-                }
+                signUpModel.SignUpConfirm(name, pass, new FireBaseHelper.ScanComplete() {
+                    @Override
+                    public void onScanComplete(boolean flag) {
+                        if (flag){
+                            signUpModel.AddUser(name, pass, new FireBaseHelper.AddComplete() {
+                                @Override
+                                public void onAddComplete(boolean flag, String id) {
+                                    if (flag)
+                                    {
+                                        //user added successfully
+                                        signUpModel.WriteStringToSharedPreferences(String.valueOf(R.string.user_name_key),name);
+                                        signUpModel.WriteStringToSharedPreferences(String.valueOf(R.string.user_password_key),pass);
+                                        signUpModel.WriteBooleanToSharedPreferences(String.valueOf(R.string.user_loggedIn_key),true);
+                                        CurrentUser.InitializeUser(name,pass,id);
+                                        Toast.makeText(signUpModel.getContext(), "logged in successfully", Toast.LENGTH_SHORT).show();
+                                        Intent intent = new Intent(SignUpPage.this, MainActivity.class);
+                                        startActivity(intent);
+                                    }
+                                }
+                            });
+                        }
+                        else{
+                            Toast.makeText(signUpModel.getContext(), "user is already exist", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+
+
+
+//
+//                if(signUpModel.NoDuplicate(name))
+//                {
+//                    signUpModel.addUser(name,pass);
+//                    finish();
+//                }
+//                else{
+//                    Toast.makeText(this, "user name is already taken", Toast.LENGTH_SHORT).show();
+//                }
             }
             else{
                 Toast.makeText(this, "pls fill all fields", Toast.LENGTH_SHORT).show();
