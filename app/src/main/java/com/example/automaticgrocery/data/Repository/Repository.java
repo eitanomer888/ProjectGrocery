@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 
 import com.example.automaticgrocery.R;
+import com.example.automaticgrocery.data.DB.FireBaseHelper;
 import com.example.automaticgrocery.data.DB.MyDatabaseHelper;
 
 
@@ -12,6 +13,7 @@ public class Repository {
 
     private MyDatabaseHelper myDatabaseHelper;
     private SharedPreferences sharedPreferences;
+    private FireBaseHelper myFirebaseHelper;
 
     private static String current_category;
 
@@ -23,6 +25,7 @@ public class Repository {
         if (current_category == null){
             current_category = "הכל";
         }
+        myFirebaseHelper = new FireBaseHelper(context);
     }
     public Context getContext() {
         return context;
@@ -36,6 +39,7 @@ public class Repository {
         this.current_category = current_category;
     }
 
+    public void LoginConfirm(String username,String password, FireBaseHelper.SearchComplete callback) { myFirebaseHelper.LoginConfirm(username,password,callback);}
 
     //user actions mydatabasehelper//
     public Cursor readData(){

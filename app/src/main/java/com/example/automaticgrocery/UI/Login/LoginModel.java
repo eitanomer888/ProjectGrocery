@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.widget.Toast;
 
+import com.example.automaticgrocery.data.DB.FireBaseHelper;
 import com.example.automaticgrocery.data.Repository.Repository;
 
 public class LoginModel {
@@ -24,12 +25,23 @@ public class LoginModel {
            return false;
        }
        if(password.equals("")){
-           Toast.makeText(context, "fill user name", Toast.LENGTH_SHORT).show();
+           Toast.makeText(context, "fill password", Toast.LENGTH_SHORT).show();
            return false;
        }
+        if(password.length() < 4 || password.length() > 12){
+            Toast.makeText(context, "password length between 4 to 12", Toast.LENGTH_SHORT).show();
+            return false;
+        }
 
        return true;
     }
+
+
+    public void LoginConfirm(String username,String password, FireBaseHelper.SearchComplete callback) { repository.LoginConfirm(username,password,callback);}
+
+
+
+
     public boolean searchUser(String name, String pass)
     {
         Cursor cursor = repository.readData();

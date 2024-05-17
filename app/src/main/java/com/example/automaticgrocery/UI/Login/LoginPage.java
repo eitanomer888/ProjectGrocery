@@ -13,9 +13,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.automaticgrocery.UI.Main.MainActivity;
+import com.example.automaticgrocery.data.DB.FireBaseHelper;
 import com.example.automaticgrocery.data.DB.MyDatabaseHelper;
 import com.example.automaticgrocery.R;
 import com.example.automaticgrocery.UI.SignUp.SignUpPage;
+import com.example.automaticgrocery.data.Items.CurrentUser;
 
 public class LoginPage extends AppCompatActivity implements View.OnClickListener {
 
@@ -25,12 +27,15 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
 
     private LoginModel loginModel;
 
+    private CurrentUser currentUser;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_page);
 
         loginModel = new LoginModel(this);
+        currentUser = new CurrentUser();
 
         btnLogin = findViewById(R.id.btnLogin);
         btnLogin.setOnClickListener(this);
@@ -57,18 +62,22 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
 
             if(loginModel.loginValidation(name,pass))
             {
-                if(loginModel.searchUser(name,pass))
-                {
-                    loginModel.WriteStringToSharedPreferences(String.valueOf(R.string.user_name_key),name);
-                    loginModel.WriteStringToSharedPreferences(String.valueOf(R.string.user_password_key),pass);
-                    loginModel.WriteBooleanToSharedPreferences(String.valueOf(R.string.user_loggedIn_key),true);
-                    Toast.makeText(this, "logged in successfully", Toast.LENGTH_SHORT).show();
-                    finish();
-                }
-                else{
-                    Toast.makeText(this, "user is not found", Toast.LENGTH_SHORT).show();
-                }
-
+                loginModel.LoginConfirm(name, pass, new FireBaseHelper.SearchComplete() {
+                    @Override
+                    public void onSearchComplete(Boolean flag,String id) {
+                        if(flag){
+                            loginModel.WriteStringToSharedPreferences(String.valueOf(R.string.user_name_key),name);
+                            loginModel.WriteStringToSharedPreferences(String.valueOf(R.string.user_password_key),pass);
+                            loginModel.WriteBooleanToSharedPreferences(String.valueOf(R.string.user_loggedIn_key),true);
+                            currentUser.InitializeUser(name,pass,id);
+                            Toast.makeText(loginModel.context, "logged in successfully", Toast.LENGTH_SHORT).show();
+                            finish();
+                        }
+                        else{
+                            Toast.makeText(loginModel.context, "user is not found", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
             }
         }
         else if(v == signUp)

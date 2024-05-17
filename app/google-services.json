@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "610134893417",
+    "project_id": "automaticgrocery-26085",
+    "storage_bucket": "automaticgrocery-26085.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:610134893417:android:75cc24715d7aef970f13f8",
+        "android_client_info": {
+          "package_name": "com.example.automaticgrocery"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAgKVg-3GFqm7Adw5L8crelekELscVquGQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
