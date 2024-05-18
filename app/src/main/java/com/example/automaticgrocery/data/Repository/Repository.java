@@ -43,9 +43,13 @@ public class Repository {
 
     public void LoginConfirm(String username,String password, FireBaseHelper.SearchComplete callback) { myFirebaseHelper.LoginConfirm(username,password,callback);}
 
-    public void SignUpConfirm(String username,String password, FireBaseHelper.ScanComplete callback){myFirebaseHelper.SignUpConfirm(username,password,callback);}
+    public void DataConfirm(String username,String password, FireBaseHelper.ScanComplete callback){myFirebaseHelper.DataConfirm(username,password,callback);}
 
     public void AddUser(String username, String password, FireBaseHelper.AddComplete callback){myFirebaseHelper.AddUser(username, password, callback);}
+
+    public void DeleteUser(FireBaseHelper.DeleteComplete callback){myFirebaseHelper.DeleteUser(callback);}
+
+    public void UpdateUser(String fireId, String username, String password, FireBaseHelper.UpdateComplete callback){myFirebaseHelper.UpdateUser(fireId,username, password, callback);}
     ///////////////////////////
 
     //user actions mydatabasehelper//

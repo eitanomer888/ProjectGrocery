@@ -35,7 +35,7 @@ public class SignUpModel {
         return true;
     }
 
-    public void SignUpConfirm(String username,String password, FireBaseHelper.ScanComplete callback){repository.SignUpConfirm(username,password,callback);}
+    public void SignUpConfirm(String username,String password, FireBaseHelper.ScanComplete callback){repository.DataConfirm(username,password,callback);}
 
     public void AddUser(String username, String password, FireBaseHelper.AddComplete callback){repository.AddUser(username, password, callback);}
 

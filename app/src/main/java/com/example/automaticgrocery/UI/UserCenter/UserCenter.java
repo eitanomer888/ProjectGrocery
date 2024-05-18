@@ -10,6 +10,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.automaticgrocery.R;
+import com.example.automaticgrocery.data.DB.FireBaseHelper;
+import com.example.automaticgrocery.data.Items.CurrentUser;
 
 public class UserCenter extends AppCompatActivity implements View.OnClickListener {
 
@@ -56,11 +58,20 @@ public class UserCenter extends AppCompatActivity implements View.OnClickListene
         }
         else if(btnDeleteUser == v){
             //delete user
-            userCenterModel.deleteOneRowUser(userCenterModel.ReadStringFromSharedPreferences(String.valueOf(R.string.user_name_key),""));
-
-            userCenterModel.clear_sharedPreference();
-
-            finish();
+            userCenterModel.DeleteUser(new FireBaseHelper.DeleteComplete() {
+                @Override
+                public void onDeleteComplete(boolean flag) {
+                    if (flag){
+                        Toast.makeText(userCenterModel.getContext(), "Deleted Successfully", Toast.LENGTH_SHORT).show();
+                        userCenterModel.clear_sharedPreference();
+                        CurrentUser.ClearUser();
+                        finish();
+                    }
+                    else{
+                        Toast.makeText(userCenterModel.getContext(), "Failed to Delete", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
         }
         else if(btnLogoutUser == v)
         {

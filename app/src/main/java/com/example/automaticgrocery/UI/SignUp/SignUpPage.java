@@ -61,6 +61,7 @@ public class SignUpPage extends AppCompatActivity implements View.OnClickListene
                                         //user added successfully
                                         signUpModel.WriteStringToSharedPreferences(String.valueOf(R.string.user_name_key),name);
                                         signUpModel.WriteStringToSharedPreferences(String.valueOf(R.string.user_password_key),pass);
+                                        signUpModel.WriteStringToSharedPreferences(String.valueOf(R.string.user_fireId_key),id);
                                         signUpModel.WriteBooleanToSharedPreferences(String.valueOf(R.string.user_loggedIn_key),true);
                                         CurrentUser.InitializeUser(name,pass,id);
                                         Toast.makeText(signUpModel.getContext(), "logged in successfully", Toast.LENGTH_SHORT).show();

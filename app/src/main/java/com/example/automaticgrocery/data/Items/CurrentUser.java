@@ -15,4 +15,34 @@ public class CurrentUser {
         password = Password;
         fireId = FireId;
     }
+
+    public static void ClearUser(){
+        username = "";
+        password = "";
+        fireId = "";
+    }
+
+    public static String getUsername() {
+        return username;
+    }
+
+    public static void setUsername(String username) {
+        CurrentUser.username = username;
+    }
+
+    public static String getPassword() {
+        return password;
+    }
+
+    public static void setPassword(String password) {
+        CurrentUser.password = password;
+    }
+
+    public static String getFireId() {
+        return fireId;
+    }
+
+    public static void setFireId(String fireId) {
+        CurrentUser.fireId = fireId;
+    }
 }

@@ -11,13 +11,40 @@ import android.widget.Toast;
 
 import com.example.automaticgrocery.R;
 import com.example.automaticgrocery.UI.Main.MainActivity;
+import com.example.automaticgrocery.data.DB.FireBaseHelper;
+import com.example.automaticgrocery.data.Items.CurrentUser;
 import com.example.automaticgrocery.data.Repository.Repository;
 
 public class UserCenterModel
 {
     private Repository repository;
+    private Context context;
     public UserCenterModel(Context context){
         repository = new Repository(context);
+        this.context = context;
+    }
+
+    public void DataConfirm(String username,String password, FireBaseHelper.ScanComplete callback){repository.DataConfirm(username,password,callback);}
+
+    public void DeleteUser(FireBaseHelper.DeleteComplete callback){repository.DeleteUser(callback);}
+
+    public void UpdateUser(String fireId,String username, String password, FireBaseHelper.UpdateComplete callback){repository.UpdateUser(fireId,username, password, callback);}
+
+
+
+    public void clear_sharedPreference(){
+        WriteStringToSharedPreferences(String.valueOf(R.string.user_name_key),"");
+        WriteStringToSharedPreferences(String.valueOf(R.string.user_password_key),"");
+        WriteStringToSharedPreferences(String.valueOf(R.string.user_fireId_key),"");
+        WriteBooleanToSharedPreferences(String.valueOf(R.string.user_loggedIn_key),false);
+    }
+
+    public Context getContext() {
+        return context;
+    }
+
+    public void setContext(Context context) {
+        this.context = context;
     }
 
     public void showUpdateDialog(TextView tvName) {
@@ -50,37 +77,52 @@ public class UserCenterModel
                 String pass = etUpDiUserPass.getText().toString().trim();
 
                 if(currnet_name.equals("") || name.equals("") || pass.equals(""))
-                    Toast.makeText(repository.getContext(), "pls fill all fields/saved data failed", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(repository.getContext(), "pls fill all fields", Toast.LENGTH_SHORT).show();
+                else if (pass.length() < 4 || pass.length() > 12)
+                Toast.makeText(context, "password length between 4 to 12", Toast.LENGTH_SHORT).show();
                 else if(currnet_name.equals(name))
                 {
                     //if user didn't change name
-                    boolean up = repository.updateUserData(currnet_name,name,pass);
-                    if(up)
-                    {
-                        WriteStringToSharedPreferences(String.valueOf(R.string.user_password_key),pass);
-                    }
+                    UpdateUser(CurrentUser.getFireId(), name, pass, new FireBaseHelper.UpdateComplete() {
+                        @Override
+                        public void onUpdateComplete(boolean flag) {
+                            if (flag){
+                                WriteStringToSharedPreferences(String.valueOf(R.string.user_password_key),pass);
+                                dialog.dismiss();
+                            }
 
-                    dialog.dismiss();
+                        }
+                    });
                 }
                 else
                 {
                     //if user changed name
-                    if(isNameTaken(name,currnet_name))
-                        Toast.makeText(repository.getContext(), "username is already taken", Toast.LENGTH_SHORT).show();
-                    else
-                    {
-                        boolean up = repository.updateUserData(currnet_name,name,pass);
-                        if(up)
-                        {
-                            WriteStringToSharedPreferences(String.valueOf(R.string.user_name_key),name);
-                            WriteStringToSharedPreferences(String.valueOf(R.string.user_password_key),pass);
-                            tvName.setText(name);
-                            if(name.equals(repository.getContext().getString(R.string.admin)))
-                                tvName.setText("Admin");
-                        }
+                    DataConfirm(name, pass, new FireBaseHelper.ScanComplete() {
+                        @Override
+                        public void onScanComplete(boolean flag) {
+                            if (flag)
+                            {
+                                UpdateUser(CurrentUser.getFireId(), name, pass, new FireBaseHelper.UpdateComplete() {
+                                    @Override
+                                    public void onUpdateComplete(boolean flag) {
+                                        if (flag){
+                                            WriteStringToSharedPreferences(String.valueOf(R.string.user_name_key),name);
+                                            WriteStringToSharedPreferences(String.valueOf(R.string.user_password_key),pass);
+                                            tvName.setText(name);
+                                            if(name.equals(repository.getContext().getString(R.string.admin)))
+                                                tvName.setText("Admin");
 
-                        dialog.dismiss();
-                    }
+                                            dialog.dismiss();
+                                        }
+                                    }
+                                });
+                            }
+                            else{
+                                Toast.makeText(repository.getContext(), "username is already taken", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+
 
                 }
             }
@@ -130,9 +172,5 @@ public class UserCenterModel
         return false;
     }
 
-    public void clear_sharedPreference(){
-       WriteStringToSharedPreferences(String.valueOf(R.string.user_name_key),"");
-       WriteStringToSharedPreferences(String.valueOf(R.string.user_password_key),"");
-       WriteBooleanToSharedPreferences(String.valueOf(R.string.user_loggedIn_key),false);
-    }
+
 }

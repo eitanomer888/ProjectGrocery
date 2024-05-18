@@ -27,6 +27,7 @@ import com.example.automaticgrocery.UI.UserCenter.UserCenter;
 import com.example.automaticgrocery.data.DB.MyDatabaseHelper;
 import com.example.automaticgrocery.R;
 import com.example.automaticgrocery.UI.Login.LoginPage;
+import com.example.automaticgrocery.data.Items.CurrentUser;
 import com.example.automaticgrocery.data.Repository.Repository;
 
 import java.util.Arrays;
@@ -55,6 +56,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         //initialize objects
         mainModel = new MainModel(this);
+        String name = mainModel.ReadStringFromSharedPreferences(String.valueOf(R.string.user_name_key),"");
+        String pass = mainModel.ReadStringFromSharedPreferences(String.valueOf(R.string.user_password_key),"");
+        String fireId = mainModel.ReadStringFromSharedPreferences(String.valueOf(R.string.user_fireId_key),"");
+
+        CurrentUser.InitializeUser(name,pass,fireId);
+
 
         userIcon = findViewById(R.id.userIcon);
         userIcon.setOnClickListener(this);

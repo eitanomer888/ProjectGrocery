@@ -7,6 +7,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import com.example.automaticgrocery.data.Items.CurrentUser;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -106,7 +107,7 @@ public class FireBaseHelper {
         void onScanComplete(boolean flag);
     }
 
-    public void SignUpConfirm(String username,String password, ScanComplete callback)
+    public void DataConfirm(String username,String password, ScanComplete callback)
     {
         if (username != null && password != null){
 
@@ -157,10 +158,52 @@ public class FireBaseHelper {
                 });
     }
 
+    public interface DeleteComplete{
+        void onDeleteComplete(boolean flag);
+    }
+
+    public void DeleteUser(DeleteComplete callback){
+        db.collection("users").document(CurrentUser.getFireId()).delete().addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()){
+                    callback.onDeleteComplete(true);
+                }
+                else{
+                    callback.onDeleteComplete(false);
+                }
+            }
+        });
+    }
 
 
+    public interface UpdateComplete{
+        void onUpdateComplete(boolean flag);
+    }
 
+    public void UpdateUser(String fireId,String username,String password,UpdateComplete callback)
+    {
+        // Create a new user with a first and last name
+        Map<String, Object> user = new HashMap<>();
+        user.put("username", username);
+        user.put("password", password);
 
+        // Add a new document with a generated ID
+        db.collection("users").document(fireId).update(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()){
+                    Toast.makeText(context, "User updated with ID: " + CurrentUser.getFireId(), Toast.LENGTH_SHORT).show();
+                    callback.onUpdateComplete(true);
+                }
+                else
+                {
+                    Toast.makeText(context, "Error updating User", Toast.LENGTH_SHORT).show();
+                    callback.onUpdateComplete(false);
+                }
+            }
+        });
+    }
 
 
 

@@ -3,6 +3,7 @@
     <string name="preference_file_key">sharedMain</string>
     <string name="user_name_key">nameKey</string>
     <string name="user_password_key">passKey</string>
+    <string name="user_fireId_key">fireIdKey</string>
     <string name="user_loggedIn_key">loggedInKey</string>
     <string name="admin">eitan</string>
     <!-- TODO: Remove or change this placeholder text -->

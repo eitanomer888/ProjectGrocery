@@ -68,6 +68,7 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
                         if(flag){
                             loginModel.WriteStringToSharedPreferences(String.valueOf(R.string.user_name_key),name);
                             loginModel.WriteStringToSharedPreferences(String.valueOf(R.string.user_password_key),pass);
+                            loginModel.WriteStringToSharedPreferences(String.valueOf(R.string.user_fireId_key),id);
                             loginModel.WriteBooleanToSharedPreferences(String.valueOf(R.string.user_loggedIn_key),true);
                             currentUser.InitializeUser(name,pass,id);
                             Toast.makeText(loginModel.context, "logged in successfully", Toast.LENGTH_SHORT).show();
