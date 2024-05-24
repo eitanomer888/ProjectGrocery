@@ -31,6 +31,8 @@ public class MyAllViewHolder extends RecyclerView.ViewHolder {
     public int target_amount,last_date_amount;
 
     TextView tvAllName, tvAllInternalReference;
+
+    TextView etSearchProduct;
     public MyAllViewHolder(@NonNull View itemView, Context context) {
         super(itemView);
         repository = new Repository(context);
@@ -47,6 +49,7 @@ public class MyAllViewHolder extends RecyclerView.ViewHolder {
             @Override
             public void onClick(View v) {
                 openDialog();
+                etSearchProduct.setText("");
             }
         });
     }

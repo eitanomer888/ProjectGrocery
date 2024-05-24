@@ -3,6 +3,7 @@ package com.example.automaticgrocery.UI.MyRecycleView;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,9 +18,12 @@ public class MyAllAdapter extends RecyclerView.Adapter<MyAllViewHolder> {
     Context context;
     List<AllItem> items;
 
-    public MyAllAdapter(Context context, List<AllItem> items) {
+    TextView etSearchProduct;
+
+    public MyAllAdapter(Context context, List<AllItem> items,TextView etSearchProduct) {
         this.context = context;
         this.items = items;
+        this.etSearchProduct = etSearchProduct;
     }
 
 
@@ -44,6 +48,8 @@ public class MyAllAdapter extends RecyclerView.Adapter<MyAllViewHolder> {
 
         holder.tvAllName.setText(items.get(position).getName());
         holder.tvAllInternalReference.setText(items.get(position).getInternal_reference());
+
+        holder.etSearchProduct = etSearchProduct;
     }
 
     @Override

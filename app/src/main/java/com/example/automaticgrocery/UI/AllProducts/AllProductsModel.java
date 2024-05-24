@@ -2,6 +2,7 @@ package com.example.automaticgrocery.UI.AllProducts;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.widget.TextView;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -29,7 +30,7 @@ public class AllProductsModel {
 
     public Cursor getProductsByCategoryAndString(String category, String str){return repository.getProductsByCategoryAndString(category,str);}
 
-    public  void InitializeRecycleView(String category, String str ,RecyclerView recyclerView){
+    public  void InitializeRecycleView(String category, String str , RecyclerView recyclerView , TextView etSearchProduct){
         List<AllItem> items = new ArrayList<>();
 
 
@@ -51,6 +52,6 @@ public class AllProductsModel {
         }
 
         recyclerView.setLayoutManager(new LinearLayoutManager(repository.getContext()));
-        recyclerView.setAdapter(new MyAllAdapter(recyclerView.getContext(),items));
+        recyclerView.setAdapter(new MyAllAdapter(recyclerView.getContext(),items,etSearchProduct));
     }
 }

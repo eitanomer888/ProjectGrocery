@@ -75,7 +75,7 @@ public class AllProducts extends AppCompatActivity implements View.OnClickListen
                 @Override
                 public void onTextChanged(CharSequence s, int start, int before, int count) {
                     strSearch = etSearchProduct.getText().toString().trim();
-                    allProductsModel.InitializeRecycleView(category,strSearch,recycleViewAll);
+                    allProductsModel.InitializeRecycleView(category,strSearch,recycleViewAll,etSearchProduct);
                     Toast.makeText(AllProducts.this, category, Toast.LENGTH_SHORT).show();
                 }
 
@@ -100,7 +100,7 @@ public class AllProducts extends AppCompatActivity implements View.OnClickListen
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     category = spiAllProducts.getItemAtPosition(position).toString();
-                    allProductsModel.InitializeRecycleView(category,strSearch,recycleViewAll);
+                    allProductsModel.InitializeRecycleView(category,strSearch,recycleViewAll,etSearchProduct);
                 }
 
                 @Override
@@ -115,7 +115,7 @@ public class AllProducts extends AppCompatActivity implements View.OnClickListen
 
 
 
-            allProductsModel.InitializeRecycleView(category,strSearch,recycleViewAll);
+            allProductsModel.InitializeRecycleView(category,strSearch,recycleViewAll,etSearchProduct);
 
 
             return insets;
