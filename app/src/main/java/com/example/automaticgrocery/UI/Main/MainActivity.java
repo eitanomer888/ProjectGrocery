@@ -1,15 +1,22 @@
 package com.example.automaticgrocery.UI.Main;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.FragmentTransaction;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -19,6 +26,8 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import android.Manifest;
 
 import com.example.automaticgrocery.UI.AllProducts.AllProducts;
 import com.example.automaticgrocery.UI.ExpiredFragment.ExpiredFragment;
@@ -39,6 +48,8 @@ import java.util.SortedSet;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
+    private static final String PERMISSION_NOTIFICATIONS = Manifest.permission.POST_NOTIFICATIONS;
+    private static final int NOTIFICATIONS_REQ_CODE = 100;
     private MainModel mainModel;
     private FragmentManager fm;
 
@@ -121,6 +132,81 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
 
+
+        //permission actions
+        requestRuntimePermission();
+
+    }
+
+    public void requestRuntimePermission(){
+        if(ActivityCompat.checkSelfPermission(this,PERMISSION_NOTIFICATIONS) == PackageManager.PERMISSION_GRANTED){
+            Toast.makeText(this, "Can use Notifications!", Toast.LENGTH_SHORT).show();
+        }
+        else if (ActivityCompat.shouldShowRequestPermissionRationale(this,PERMISSION_NOTIFICATIONS)) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage("This app requires NOTIFICATION permission in order to send important updates about the products")
+                    .setTitle("Permission Required")
+                    .setCancelable(false)
+                    .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            ActivityCompat.requestPermissions(MainActivity.this,new String[]{PERMISSION_NOTIFICATIONS},NOTIFICATIONS_REQ_CODE);
+                            dialog.dismiss();
+                        }
+                    })
+                    .setNegativeButton("Cancle", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+
+            builder.show();
+
+        }
+        else{
+            ActivityCompat.requestPermissions(this,new String[]{PERMISSION_NOTIFICATIONS},NOTIFICATIONS_REQ_CODE);
+        }
+    }
+
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        if (requestCode == NOTIFICATIONS_REQ_CODE){
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                Toast.makeText(this, "Can use Notifications!", Toast.LENGTH_SHORT).show();
+            }
+            else if (!ActivityCompat.shouldShowRequestPermissionRationale(this,PERMISSION_NOTIFICATIONS)){
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setMessage("Notifications is unavailable because you denied the notification permission. Please allow permission from settings to get this feature.")
+                        .setTitle("Permission Required")
+                        .setCancelable(false)
+                        .setPositiveButton("Settings", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                                Uri uri = Uri.fromParts("package",getPackageName(),null);
+                                intent.setData(uri);
+                                startActivity(intent);
+
+                                dialog.dismiss();
+                            }
+                        })
+                        .setNegativeButton("Cancle", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        });
+
+                builder.show();
+            }
+            else{
+                requestRuntimePermission();
+            }
+        }
     }
 
     @Override
