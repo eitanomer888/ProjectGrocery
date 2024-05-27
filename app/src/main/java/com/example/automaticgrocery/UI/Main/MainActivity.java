@@ -6,9 +6,12 @@ import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import android.app.AlarmManager;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.FragmentTransaction;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -33,6 +36,7 @@ import com.example.automaticgrocery.UI.AllProducts.AllProducts;
 import com.example.automaticgrocery.UI.ExpiredFragment.ExpiredFragment;
 import com.example.automaticgrocery.UI.FillFragment.FillFragment;
 import com.example.automaticgrocery.UI.UserCenter.UserCenter;
+import com.example.automaticgrocery.data.BroadcastReceiver.AlarmReceiver;
 import com.example.automaticgrocery.data.DB.MyDatabaseHelper;
 import com.example.automaticgrocery.R;
 import com.example.automaticgrocery.UI.Login.LoginPage;
@@ -136,7 +140,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //permission actions
         requestRuntimePermission();
 
+        //notification+alarm action
+        mainModel.scheduleAlarm();
     }
+
+//    private void scheduleAlarm() {
+//        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+//        Intent intent = new Intent(this, AlarmReceiver.class);
+//        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
+//
+//        long intervalMillis =  10 * 1000; // 1 hour in milliseconds
+//        long triggerTime = System.currentTimeMillis() + intervalMillis;
+//
+//        if (alarmManager != null) {
+//            alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, triggerTime, pendingIntent);
+//        }
+//    }
+
 
     public void requestRuntimePermission(){
         if(ActivityCompat.checkSelfPermission(this,PERMISSION_NOTIFICATIONS) == PackageManager.PERMISSION_GRANTED){

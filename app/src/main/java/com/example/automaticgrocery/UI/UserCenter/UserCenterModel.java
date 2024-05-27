@@ -1,7 +1,10 @@
 package com.example.automaticgrocery.UI.UserCenter;
 
+import android.app.AlarmManager;
 import android.app.Dialog;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.view.View;
 import android.widget.Button;
@@ -11,6 +14,7 @@ import android.widget.Toast;
 
 import com.example.automaticgrocery.R;
 import com.example.automaticgrocery.UI.Main.MainActivity;
+import com.example.automaticgrocery.data.BroadcastReceiver.AlarmReceiver;
 import com.example.automaticgrocery.data.DB.FireBaseHelper;
 import com.example.automaticgrocery.data.Items.CurrentUser;
 import com.example.automaticgrocery.data.Repository.Repository;
@@ -170,6 +174,10 @@ public class UserCenterModel
         }
 
         return false;
+    }
+
+    public void cancelAlarm() {
+        repository.cancelAlarm();
     }
 
 

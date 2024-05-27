@@ -1,8 +1,12 @@
 package com.example.automaticgrocery.UI.Main;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 
+import com.example.automaticgrocery.data.BroadcastReceiver.AlarmReceiver;
 import com.example.automaticgrocery.data.Repository.Repository;
 
 public class MainModel {
@@ -56,5 +60,11 @@ public class MainModel {
     }
 
 
+    public void scheduleAlarm() {
+        repository.scheduleAlarm();
+    }
+    public void cancelAlarm() {
+        repository.cancelAlarm();
+    }
 
 }

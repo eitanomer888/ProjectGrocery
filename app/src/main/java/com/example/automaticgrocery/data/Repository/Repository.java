@@ -1,10 +1,14 @@
 package com.example.automaticgrocery.data.Repository;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 
 import com.example.automaticgrocery.R;
+import com.example.automaticgrocery.data.BroadcastReceiver.AlarmReceiver;
 import com.example.automaticgrocery.data.DB.FireBaseHelper;
 import com.example.automaticgrocery.data.DB.MyDatabaseHelper;
 
@@ -132,4 +136,27 @@ public class Repository {
     public void updateProductAll(String internal_reference, int current_amount, String new_date, String last_date , int last_date_amount){
         myDatabaseHelper.updateProductAll(internal_reference, current_amount, new_date, last_date, last_date_amount);
     }
+
+    //alarmManagement
+    public void scheduleAlarm() {
+        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+        Intent intent = new Intent(context, AlarmReceiver.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
+
+        long intervalMillis =   60 * 60 * 1000; // 1 hour in milliseconds
+        long triggerTime = System.currentTimeMillis() + intervalMillis;
+
+        if (alarmManager != null) {
+            alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, triggerTime, pendingIntent);
+        }
+    }
+    public void cancelAlarm() {
+        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+        Intent intent = new Intent(context, AlarmReceiver.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
+        if (alarmManager != null) {
+            alarmManager.cancel(pendingIntent);
+        }
+    }
+
 }

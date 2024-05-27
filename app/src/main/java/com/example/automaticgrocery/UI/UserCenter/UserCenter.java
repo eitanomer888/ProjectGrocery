@@ -65,6 +65,7 @@ public class UserCenter extends AppCompatActivity implements View.OnClickListene
                         Toast.makeText(userCenterModel.getContext(), "Deleted Successfully", Toast.LENGTH_SHORT).show();
                         userCenterModel.clear_sharedPreference();
                         CurrentUser.ClearUser();
+                        userCenterModel.cancelAlarm();
                         finish();
                     }
                     else{
@@ -76,6 +77,7 @@ public class UserCenter extends AppCompatActivity implements View.OnClickListene
         else if(btnLogoutUser == v)
         {
            //logout user
+            userCenterModel.cancelAlarm();
 
            //clear sharedPreference
             userCenterModel.clear_sharedPreference();
