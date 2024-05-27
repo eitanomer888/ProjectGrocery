@@ -20,6 +20,6 @@ public class FillModel
     public String getCurrent_category(){return repository.getCurrent_category();}
 
     public boolean isFillNeeded(int target,int current){
-        return current / target < 0.75;
+        return current / target < 0.60;
     }
 }

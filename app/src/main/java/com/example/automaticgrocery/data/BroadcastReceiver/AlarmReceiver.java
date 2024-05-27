@@ -9,19 +9,34 @@ import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Build;
 
 import androidx.core.app.NotificationCompat;
 
 import com.example.automaticgrocery.R;
 import com.example.automaticgrocery.UI.Main.MainActivity;
+import com.example.automaticgrocery.data.Items.ExpiredItem;
+import com.example.automaticgrocery.data.Items.FillItem;
+import com.example.automaticgrocery.data.Repository.Repository;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 public class AlarmReceiver extends BroadcastReceiver {
 
     private static final String CHANNEL_ID = "CHANNEL_ID";
+    private Calendar calendar;
+    private Repository repository;
 
     @Override
     public void onReceive(Context context, Intent intent) {
+        repository = new Repository(context);
+
+        calendar =  Calendar.getInstance();
+        calendar.set(calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH) + 1,calendar.get(Calendar.DAY_OF_MONTH));
+
         // Create or get the notification channel
         createNotificationChannel(context);
 
@@ -32,11 +47,29 @@ public class AlarmReceiver extends BroadcastReceiver {
         // Create the PendingIntent
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
 
+        //collect data
+        int x = 0;
+        int y = 0;
+        Cursor cursor = repository.getProductsByCategory("הכל");
+        cursor.moveToFirst();
+        int l = cursor.getCount();
+        for (int i = 0; i < l; i++)
+        {
+            if(isExpired(cursor.getString(5)))
+                x++;
+
+            if (isFillNeeded(cursor.getInt(7),cursor.getInt(3)))
+                y++;
+
+            cursor.moveToNext();
+        }
+
+
         // Create the notification
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, CHANNEL_ID)
                 .setSmallIcon(R.drawable.ic_launcher_foreground)
                 .setContentTitle("Product Alert!!!")
-                .setContentText("x product are expired and y products are need a fill.")
+                .setContentText(x + " products are expired and  + " + y + " products are need a refill.")
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setContentIntent(pendingIntent)
                 .setAutoCancel(true); // Automatically removes the notification when clicked
@@ -68,5 +101,23 @@ public class AlarmReceiver extends BroadcastReceiver {
                 notificationManager.createNotificationChannel(channel);
             }
         }
+    }
+
+    public boolean isExpired(String date){
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        String today = calendar.get(Calendar.DAY_OF_MONTH) + "/" + (calendar.get(Calendar.MONTH)) + "/" + calendar.get(Calendar.YEAR);
+        try {
+            Date date1 = dateFormat.parse(today);
+            Date date2 = dateFormat.parse(date);
+
+            long differenceInMillis = date2.getTime() - date1.getTime();
+            return differenceInMillis < 0;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public boolean isFillNeeded(int target,int current){
+        return current / target < 0.60;
     }
 }
