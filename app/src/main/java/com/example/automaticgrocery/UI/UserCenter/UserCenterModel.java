@@ -155,26 +155,6 @@ public class UserCenterModel
         return repository.ReadBooleanFromSharedPreferences(key, defaultValue);
     }
 
-    public void deleteOneRowUser(String username){repository.deleteOneRowUser(username);}
-
-    public boolean isNameTaken(String name,String currnet_name)
-    {
-        Cursor cursor = repository.readData();
-        if(cursor == null)
-            return false;
-
-        cursor.moveToFirst();
-        int l = cursor.getCount();
-        for (int i = 0; i < l; i++)
-        {
-            if(cursor.getString(0).equals(name) && !currnet_name.equals(name))
-                return true;
-
-            cursor.moveToNext();
-        }
-
-        return false;
-    }
 
     public void cancelAlarm() {
         repository.cancelAlarm();

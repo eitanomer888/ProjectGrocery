@@ -6,22 +6,26 @@ public class CurrentUser {
 
     static String fireId;
 
+    //constructor
     public CurrentUser() {
 
     }
 
+    //initialize current user with data
     public static void InitializeUser(String Username, String Password, String FireId){
         username = Username;
         password = Password;
         fireId = FireId;
     }
 
+    //clear current user data
     public static void ClearUser(){
         username = "";
         password = "";
         fireId = "";
     }
 
+    //getters and setters//
     public static String getUsername() {
         return username;
     }
@@ -45,4 +49,6 @@ public class CurrentUser {
     public static void setFireId(String fireId) {
         CurrentUser.fireId = fireId;
     }
+
+    //#################//
 }

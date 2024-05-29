@@ -9,6 +9,8 @@ import android.content.Intent;
 public class BootReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
+
+        //when the device is booted, restart the notification+alarm service
         if (Intent.ACTION_BOOT_COMPLETED.equals(intent.getAction())) {
             // Reschedule your alarms here
             AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);

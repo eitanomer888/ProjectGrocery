@@ -18,9 +18,6 @@ public class MainModel {
         isFill=true;
     }
 
-    public void deleteUsersHelper(){
-        repository.deleteAllUsers();
-    }
 
     public void WriteStringToSharedPreferences(String key,String value)
     {

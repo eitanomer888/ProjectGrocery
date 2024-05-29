@@ -40,24 +40,6 @@ public class LoginModel {
     public void LoginConfirm(String username,String password, FireBaseHelper.SearchComplete callback) { repository.LoginConfirm(username,password,callback);}
 
 
-
-
-    public boolean searchUser(String name, String pass)
-    {
-        Cursor cursor = repository.readData();
-        int n = cursor.getCount();
-        cursor.moveToFirst();
-        for (int i = 0; i < n; i++)
-        {
-            if(name.equals(cursor.getString(0)) && pass.equals(cursor.getString(1)))
-                return true;
-
-            cursor.moveToNext();
-        }
-
-        return false;
-    }
-
     public void WriteStringToSharedPreferences(String key,String value)
     {
         repository.WriteStringToSharedPreferences(key,value);

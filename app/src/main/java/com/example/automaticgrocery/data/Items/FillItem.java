@@ -7,6 +7,7 @@ public class FillItem {
 
     private int targetAmount;
 
+    //constructor
     public FillItem(String name, String internal_reference, int amount, int targetAmount) {
         this.name = name;
         this.internal_reference = internal_reference;
@@ -14,6 +15,7 @@ public class FillItem {
         this.targetAmount = targetAmount;
     }
 
+    //getters and setters//
     public String getName() {
         return name;
     }
@@ -45,4 +47,6 @@ public class FillItem {
     public void setTargetAmount(int targetAmount) {
         this.targetAmount = targetAmount;
     }
+
+    //############//
 }

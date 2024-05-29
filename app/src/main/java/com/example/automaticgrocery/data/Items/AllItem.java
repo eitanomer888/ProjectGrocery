@@ -7,6 +7,8 @@ public class AllItem {
     private String fill_date,last_date,category;
     private int target_amount,last_date_amount;
 
+
+    //constructor
     public AllItem(String internal_reference, String name, String barcode, int amount, String fill_date, String last_date, String category, int target_amount, int last_date_amount) {
         this.internal_reference = internal_reference;
         this.name = name;
@@ -19,6 +21,7 @@ public class AllItem {
         this.last_date_amount = last_date_amount;
     }
 
+    //getters and setters//
     public String getInternal_reference() {
         return internal_reference;
     }
@@ -90,4 +93,6 @@ public class AllItem {
     public void setLast_date_amount(int last_date_amount) {
         this.last_date_amount = last_date_amount;
     }
+
+    //###########//
 }

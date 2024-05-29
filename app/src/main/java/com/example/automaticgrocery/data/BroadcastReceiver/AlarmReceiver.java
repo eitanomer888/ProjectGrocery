@@ -47,7 +47,7 @@ public class AlarmReceiver extends BroadcastReceiver {
         // Create the PendingIntent
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
 
-        //collect data
+        //collect products data
         int x = 0;
         int y = 0;
         Cursor cursor = repository.getProductsByCategory("הכל");
@@ -87,6 +87,7 @@ public class AlarmReceiver extends BroadcastReceiver {
         }
     }
 
+    // Create the notification channel
     private void createNotificationChannel(Context context) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
@@ -103,6 +104,7 @@ public class AlarmReceiver extends BroadcastReceiver {
         }
     }
 
+    //check if product is expired
     public boolean isExpired(String date){
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         String today = calendar.get(Calendar.DAY_OF_MONTH) + "/" + (calendar.get(Calendar.MONTH)) + "/" + calendar.get(Calendar.YEAR);
@@ -117,6 +119,7 @@ public class AlarmReceiver extends BroadcastReceiver {
         }
     }
 
+    //check if product need a fill
     public boolean isFillNeeded(int target,int current){
         return current / target < 0.60;
     }

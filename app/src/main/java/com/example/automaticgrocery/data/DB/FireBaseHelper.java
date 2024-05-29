@@ -35,6 +35,7 @@ public class FireBaseHelper {
         void onUsersRetrieved(Task<QuerySnapshot> task,boolean isUserFound,String id);
     }
 
+    //Read users data from firebase
     public void ReadUsers(UsersRetrievedListener callback){
         db.collection("users")
                 .get()
@@ -58,6 +59,7 @@ public class FireBaseHelper {
         void onSearchComplete(Boolean flag,String fireId);
     }
 
+    //login confirm
     public void LoginConfirm(String username,String password, SearchComplete callback)
     {
         if (username != null && password != null){
@@ -107,6 +109,7 @@ public class FireBaseHelper {
         void onScanComplete(boolean flag);
     }
 
+    //check if username exist/taken
     public void DataConfirm(String username,String password, ScanComplete callback)
     {
         if (username != null && password != null){
@@ -132,6 +135,7 @@ public class FireBaseHelper {
         void onAddComplete(boolean flag,String id);
     }
 
+    //add new user to firebase
     public void AddUser(String username,String password,AddComplete callback)
     {
         // Create a new user with a first and last name
@@ -162,6 +166,7 @@ public class FireBaseHelper {
         void onDeleteComplete(boolean flag);
     }
 
+    //delete user from firebase
     public void DeleteUser(DeleteComplete callback){
         db.collection("users").document(CurrentUser.getFireId()).delete().addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
@@ -181,6 +186,7 @@ public class FireBaseHelper {
         void onUpdateComplete(boolean flag);
     }
 
+    //update user in firebase
     public void UpdateUser(String fireId,String username,String password,UpdateComplete callback)
     {
         // Create a new user with a first and last name

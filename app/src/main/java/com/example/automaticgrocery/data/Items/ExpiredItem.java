@@ -9,6 +9,8 @@ public class ExpiredItem {
     private String internal_reference;
     private int last_date_amount;
 
+
+    // Constructor
     public ExpiredItem(String name, String last_date, int amount, String internal_reference, int last_date_amount) {
         this.name = name;
         this.last_date = last_date;
@@ -17,6 +19,7 @@ public class ExpiredItem {
         this.last_date_amount = last_date_amount;
     }
 
+    //getters + setters//
     public String getName() {
         return name;
     }
@@ -56,4 +59,6 @@ public class ExpiredItem {
     public void setLast_date_amount(int last_date_amount) {
         this.last_date_amount = last_date_amount;
     }
+
+    //###############//
 }
