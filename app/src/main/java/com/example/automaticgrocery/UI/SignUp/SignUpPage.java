@@ -18,7 +18,7 @@ import com.example.automaticgrocery.data.Items.CurrentUser;
 
 public class SignUpPage extends AppCompatActivity implements View.OnClickListener {
 
-    private Button btnSignUp;
+    private Button btnSignUp,SuBack;
     private EditText SUuserName,SUuserPass;
     private SignUpModel signUpModel;
 
@@ -31,11 +31,12 @@ public class SignUpPage extends AppCompatActivity implements View.OnClickListene
 
         signUpModel = new SignUpModel(this);
 
+        SuBack = findViewById(R.id.SuBack);
         btnSignUp = findViewById(R.id.btnSignUp);
         SUuserName = findViewById(R.id.SUuserName);
         SUuserPass = findViewById(R.id.SUuserPass);
 
-
+        SuBack.setOnClickListener(this);
         btnSignUp.setOnClickListener(this);
     }
 
@@ -80,6 +81,9 @@ public class SignUpPage extends AppCompatActivity implements View.OnClickListene
                     }
                 });
             }
+        }
+        else if (SuBack == v){
+            finish();
         }
     }
 }

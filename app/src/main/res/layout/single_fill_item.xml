@@ -3,7 +3,7 @@
     android:layout_width="200dp"
     android:layout_height="150dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardBackgroundColor="#A489D3"
+    app:cardBackgroundColor="@color/green2"
     android:layout_margin="7dp"
     app:cardCornerRadius="15dp">
 
@@ -61,7 +61,7 @@
         android:layout_height="35dp"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
-        android:background="#E82213"
+        android:background="#FF5722"
         android:src="@drawable/wraning_icon"
         android:layout_gravity="center"
         />

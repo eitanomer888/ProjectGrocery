@@ -63,6 +63,7 @@
             android:text="הצג פגי תוקף"
             android:textSize="12sp"
             android:layout_marginTop="8dp"
+            android:textColor="@color/black"
             android:layout_marginBottom="8dp" />
 
 </androidx.appcompat.widget.Toolbar>

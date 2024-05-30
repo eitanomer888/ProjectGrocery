@@ -8,6 +8,16 @@
     tools:context=".UI.SignUp.SignUpPage"
     android:layoutDirection="ltr">
 
+    <Button
+        android:id="@+id/SuBack"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_gravity="right"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/return_icon"
+        />
+
     <TextView
         android:id="@+id/SUhead"
         android:layout_width="wrap_content"
