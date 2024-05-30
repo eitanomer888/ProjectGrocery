@@ -194,7 +194,6 @@ public class MyFillViewHolder extends RecyclerView.ViewHolder {
                 }
 
                 //update DB + Holder Objects
-                Toast.makeText(repository.getContext(), currentAmount + " " + lastDate + "\n" + firstDate, Toast.LENGTH_SHORT).show();
                 openFinalDialog(currentAmount,lastDate,firstDate);
             }
         });

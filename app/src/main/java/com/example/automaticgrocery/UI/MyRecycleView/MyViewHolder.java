@@ -245,7 +245,7 @@ public class MyViewHolder extends RecyclerView.ViewHolder {
 
     public void openConDialog(int last_date_amount,String date){
         if(last_date_amount > amount){
-            Toast.makeText(repository.getContext(), "too big", Toast.LENGTH_SHORT).show();
+            Toast.makeText(repository.getContext(), "כמות לא הגיונית של של תוקף אחרון", Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -269,14 +269,13 @@ public class MyViewHolder extends RecyclerView.ViewHolder {
         btnConfirmOK.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(repository.getContext(), "update all data and views", Toast.LENGTH_SHORT).show();
                 if(internal_reference.equals("")){
-                    Toast.makeText(repository.getContext(), "internal_reference is blank", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(repository.getContext(), "error code 101", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 if(amount == -1)
                 {
-                    Toast.makeText(repository.getContext(), "amount is invalid", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(repository.getContext(), "error code 102", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
@@ -439,7 +438,7 @@ public class MyViewHolder extends RecyclerView.ViewHolder {
              return  false;
         }
         catch (Exception e){
-            Toast.makeText(repository.getContext(), e + " ", Toast.LENGTH_SHORT).show();
+            Toast.makeText(repository.getContext(), e + "", Toast.LENGTH_SHORT).show();
             return false;
         }
     }
