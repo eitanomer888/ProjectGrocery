@@ -31,7 +31,7 @@ public class UserCenter extends AppCompatActivity implements View.OnClickListene
         backButton.setOnClickListener(this);
 
         tvName = findViewById(R.id.tvName);
-        String Uname = userCenterModel.ReadStringFromSharedPreferences(String.valueOf(R.string.user_name_key),"");
+        String Uname = CurrentUser.getUsername();
         tvName.setText(Uname);
         if(Uname.equals(getString(R.string.admin)))
             tvName.setText("Admin");

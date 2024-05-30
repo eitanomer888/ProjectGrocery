@@ -11,11 +11,14 @@ public class SignUpModel {
 
     private Repository repository;
     private Context context;
+
+    //Constructor
     public SignUpModel(Context context){
         repository = new Repository(context);
         this.context = context;
     }
 
+    //user input data validation
     public boolean sighUpValidation(String name,String password)
     {
         if(name.equals(""))
@@ -35,10 +38,13 @@ public class SignUpModel {
         return true;
     }
 
+    //check if username is already exist
     public void SignUpConfirm(String username,String password, FireBaseHelper.ScanComplete callback){repository.DataConfirm(username,password,callback);}
 
+    //add user to firebase
     public void AddUser(String username, String password, FireBaseHelper.AddComplete callback){repository.AddUser(username, password, callback);}
 
+    //getter and setter
     public Context getContext() {
         return context;
     }
@@ -46,26 +52,17 @@ public class SignUpModel {
     public void setContext(Context context) {
         this.context = context;
     }
+    //##########//
 
 
+    //shared preferences//
     public void WriteStringToSharedPreferences(String key,String value)
     {
         repository.WriteStringToSharedPreferences(key,value);
     }
-
-    public String ReadStringFromSharedPreferences(String key,String defaultValue)
-    {
-        return repository.ReadStringFromSharedPreferences(key, defaultValue);
-    }
-
     public void WriteBooleanToSharedPreferences(String key,boolean value)
     {
         repository.WriteBooleanToSharedPreferences(key, value);
     }
-
-    public boolean ReadBooleanFromSharedPreferences(String key,boolean defaultValue)
-    {
-        return repository.ReadBooleanFromSharedPreferences(key, defaultValue);
-    }
-
+    //##########//
 }

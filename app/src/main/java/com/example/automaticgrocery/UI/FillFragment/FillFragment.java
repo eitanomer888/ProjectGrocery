@@ -81,10 +81,9 @@ public class FillFragment extends Fragment {
         recycleView2 = view.findViewById(R.id.recycleView2);
         fillModel = new FillModel(getActivity());
 
+        //get fill needed products
         List<FillItem> items = new ArrayList<>();
-
         Cursor cursor = fillModel.getProductsByCategory();
-
         if(cursor != null)
         {
             int l = cursor.getCount();
@@ -123,6 +122,7 @@ public class FillFragment extends Fragment {
         //items.add(new FillItem("bamba","44444444",400));
 
 
+        //initialize recycler view
         recycleView2.setLayoutManager(new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL));
         recycleView2.setAdapter(new MyFillAdapter(getActivity().getApplicationContext(),items));
 

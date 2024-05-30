@@ -66,6 +66,7 @@ public class AllProducts extends AppCompatActivity implements View.OnClickListen
             recycleViewAll = findViewById(R.id.recycleViewAll);
 
 
+            //text watcher for enabling search by text
             TextWatcher textWatcher = new TextWatcher() {
                 @Override
                 public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -87,6 +88,7 @@ public class AllProducts extends AppCompatActivity implements View.OnClickListen
             etSearchProduct.addTextChangedListener(textWatcher);
 
 
+            //spinner for choosing categories
             List<String> lst = new LinkedList<>();
             lst.add("הכל");
             lst.add("חטיפים, מתוקים ודגני בוקר");
@@ -115,6 +117,7 @@ public class AllProducts extends AppCompatActivity implements View.OnClickListen
 
 
 
+            //initialize recycle view
             allProductsModel.InitializeRecycleView(category,strSearch,recycleViewAll,etSearchProduct);
 
 

@@ -12,34 +12,22 @@ import java.util.Date;
 public class ExpiredModel
 {
     private Repository repository;
-
     private Calendar calendar;
+
+    //Constructor
     public ExpiredModel(Context context){
         repository = new Repository(context);
         calendar =  Calendar.getInstance();
         calendar.set(calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH) + 1,calendar.get(Calendar.DAY_OF_MONTH));
     }
 
-    public Cursor getAllProducts(){return repository.getAllProducts();}
-
+    //get products by category
     public Cursor getProductsByCategory(){return repository.getProductsByCategory(getCurrent_category());}
 
+    //get selected category
     public String getCurrent_category(){return repository.getCurrent_category();}
 
-    public static double getDifferenceInDays(String dateString1, String dateString2) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        try {
-            Date date1 = dateFormat.parse(dateString1);
-            Date date2 = dateFormat.parse(dateString2);
-
-            long differenceInMillis = date2.getTime() - date1.getTime();
-            double differenceInDays = (double) (differenceInMillis / (1000 * 60 * 60 * 24));
-            return differenceInDays;
-        } catch (Exception e) {
-            return -1.0;
-        }
-    }
-
+    //check if product is expired
     public boolean isExpired(String date){
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         String today = calendar.get(Calendar.DAY_OF_MONTH) + "/" + (calendar.get(Calendar.MONTH)) + "/" + calendar.get(Calendar.YEAR);

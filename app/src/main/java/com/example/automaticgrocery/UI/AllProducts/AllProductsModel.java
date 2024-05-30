@@ -16,20 +16,22 @@ import java.util.List;
 
 public class AllProductsModel {
     private Repository repository;
+
+    //Constructor
     public AllProductsModel(Context context){
         this.repository = new Repository(context);
     }
 
-    public Cursor getAllProducts(){
-        return repository.getAllProducts();
-    }
-
+    //get products by category selected
     public Cursor getProductsByCategory(String category){
         return repository.getProductsByCategory(category);
     }
 
+    //get products by category selected and search string
     public Cursor getProductsByCategoryAndString(String category, String str){return repository.getProductsByCategoryAndString(category,str);}
 
+
+    //initialize recycle view
     public  void InitializeRecycleView(String category, String str , RecyclerView recyclerView , TextView etSearchProduct){
         List<AllItem> items = new ArrayList<>();
 
@@ -54,4 +56,11 @@ public class AllProductsModel {
         recyclerView.setLayoutManager(new LinearLayoutManager(repository.getContext()));
         recyclerView.setAdapter(new MyAllAdapter(recyclerView.getContext(),items,etSearchProduct));
     }
+
+
+
+    //////////////////////////////////////////////
+
+
+
 }

@@ -44,6 +44,7 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
         signUp = findViewById(R.id.signUp);
         signUp.setOnClickListener(this);
 
+        //check if user already logged in
         if(loginModel.ReadBooleanFromSharedPreferences(String.valueOf(R.string.user_loggedIn_key),false))
         {
             //initialize current user
@@ -71,6 +72,7 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
             //check if user data is valid
             if(loginModel.loginValidation(name,pass))
             {
+                //check if user exists
                 loginModel.LoginConfirm(name, pass, new FireBaseHelper.SearchComplete() {
                     @Override
                     public void onSearchComplete(Boolean flag,String id) {

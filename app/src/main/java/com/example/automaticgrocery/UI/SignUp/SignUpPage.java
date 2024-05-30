@@ -47,11 +47,14 @@ public class SignUpPage extends AppCompatActivity implements View.OnClickListene
             String name , pass;
             name = SUuserName.getText().toString().trim();
             pass = SUuserPass.getText().toString().trim();
+            //check if user input is valid
             if(signUpModel.sighUpValidation(name,pass))
             {
+                //check if username is already exist
                 signUpModel.SignUpConfirm(name, pass, new FireBaseHelper.ScanComplete() {
                     @Override
                     public void onScanComplete(boolean flag) {
+                        //add user to firebase
                         if (flag){
                             signUpModel.AddUser(name, pass, new FireBaseHelper.AddComplete() {
                                 @Override
@@ -76,21 +79,6 @@ public class SignUpPage extends AppCompatActivity implements View.OnClickListene
                         }
                     }
                 });
-
-
-
-//
-//                if(signUpModel.NoDuplicate(name))
-//                {
-//                    signUpModel.addUser(name,pass);
-//                    finish();
-//                }
-//                else{
-//                    Toast.makeText(this, "user name is already taken", Toast.LENGTH_SHORT).show();
-//                }
-            }
-            else{
-                Toast.makeText(this, "pls fill all fields", Toast.LENGTH_SHORT).show();
             }
         }
     }

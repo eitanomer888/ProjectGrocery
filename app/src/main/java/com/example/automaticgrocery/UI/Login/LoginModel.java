@@ -11,12 +11,15 @@ import com.example.automaticgrocery.data.Repository.Repository;
 public class LoginModel {
     Repository repository;
     Context context;
+
+    //Constructor
     public LoginModel(Context context)
     {
         repository = new Repository(context);
         this.context = context;
     }
 
+    //user input data check
     public boolean loginValidation(String name,String password)
     {
        if(name.equals(""))
@@ -37,9 +40,11 @@ public class LoginModel {
     }
 
 
+    //login confirm
     public void LoginConfirm(String username,String password, FireBaseHelper.SearchComplete callback) { repository.LoginConfirm(username,password,callback);}
 
 
+    //shared preferences actions//
     public void WriteStringToSharedPreferences(String key,String value)
     {
         repository.WriteStringToSharedPreferences(key,value);
@@ -59,5 +64,5 @@ public class LoginModel {
     {
         return repository.ReadBooleanFromSharedPreferences(key, defaultValue);
     }
-
+    //#####################//
 }

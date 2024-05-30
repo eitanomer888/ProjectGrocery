@@ -79,14 +79,14 @@ public class ExpiredFragment extends Fragment {
         recyclerView = view.findViewById(R.id.recycleView);
         expiredModel = new ExpiredModel(getActivity());
 
+        //get expired items
         List<ExpiredItem> items = new ArrayList<ExpiredItem>();
-
-
         Cursor cursor = expiredModel.getProductsByCategory();
         cursor.moveToFirst();
         int l = cursor.getCount();
         for (int i = 0; i < l; i++)
         {
+            //check if expired
             if(expiredModel.isExpired(cursor.getString(5)))
                 items.add(new ExpiredItem(cursor.getString(1),cursor.getString(5),cursor.getInt(3),cursor.getString(0),cursor.getInt(8)));
 
@@ -94,10 +94,6 @@ public class ExpiredFragment extends Fragment {
         }
 
 
-
-
-
-
 //        items.add(new ExpiredItem("milk","24/8/26",50,"111111111",20));
 //        items.add(new ExpiredItem("beef","1/2/80",800,"222222222222",300));
 //        items.add(new ExpiredItem("apple","18/7/06",12,"33333333333",1));
@@ -138,20 +134,9 @@ public class ExpiredFragment extends Fragment {
 //        items.add(new ExpiredItem("beef","1/2/80",800,"222222222222",300));
 //        items.add(new ExpiredItem("apple","18/7/06",12,"33333333333",1));
 
-
-
-
-
-
-
-
-
+        //initialize recyclerview
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(new MyAdapter(getActivity().getApplicationContext(),items));
-
-
-
-
 
         return view;
     }

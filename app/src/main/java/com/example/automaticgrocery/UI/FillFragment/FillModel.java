@@ -9,16 +9,18 @@ public class FillModel
 {
     private Repository repository;
 
+    //Constructor
     public FillModel (Context context){
         repository = new Repository(context);
     }
 
-    public Cursor getAllProducts(){return repository.getAllProducts();}
-
+    //get products by category
     public Cursor getProductsByCategory(){return repository.getProductsByCategory(getCurrent_category());}
 
+    //get selected category
     public String getCurrent_category(){return repository.getCurrent_category();}
 
+    //check if fill needed
     public boolean isFillNeeded(int target,int current){
         return current / target < 0.60;
     }

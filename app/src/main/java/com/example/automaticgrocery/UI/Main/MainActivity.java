@@ -83,6 +83,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         tvSelectedClass = findViewById(R.id.tvSelectedClass);
 
+        //initialize spinner
         spI = findViewById(R.id.spI);
         List<String> lst = new LinkedList<>();
         lst.add("הכל");
@@ -101,7 +102,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 tvSelectedClass.setText(category);
                 mainModel.setCurrent_category(category);
 
-                //communicte with fragments
+                //communicate with fragments
                 if(MainModel.isFill){
                     FillFragment fillFragment = new FillFragment();
                     getSupportFragmentManager().beginTransaction().replace(R.id.contentFragment,fillFragment).commit();
@@ -118,6 +119,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
+        //initialize fragment
         fm = getSupportFragmentManager();
         fm.beginTransaction().replace(R.id.contentFragment,FillFragment.class,null).commit();
 
@@ -131,9 +133,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
+    //Runtime permission
     public void requestRuntimePermission(){
         if(ActivityCompat.checkSelfPermission(this,PERMISSION_NOTIFICATIONS) == PackageManager.PERMISSION_GRANTED){
-            Toast.makeText(this, "Can use Notifications!", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, "Can use Notifications!", Toast.LENGTH_SHORT).show();
         }
         else if (ActivityCompat.shouldShowRequestPermissionRationale(this,PERMISSION_NOTIFICATIONS)) {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -147,7 +150,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             dialog.dismiss();
                         }
                     })
-                    .setNegativeButton("Cancle", new DialogInterface.OnClickListener() {
+                    .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             dialog.dismiss();
@@ -162,14 +165,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-
+    //runtime permission (after result)
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
         if (requestCode == NOTIFICATIONS_REQ_CODE){
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
-                Toast.makeText(this, "Can use Notifications!", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(this, "Can use Notifications!", Toast.LENGTH_SHORT).show();
             }
             else if (!ActivityCompat.shouldShowRequestPermissionRationale(this,PERMISSION_NOTIFICATIONS)){
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -187,7 +190,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 dialog.dismiss();
                             }
                         })
-                        .setNegativeButton("Cancle", new DialogInterface.OnClickListener() {
+                        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 dialog.dismiss();
