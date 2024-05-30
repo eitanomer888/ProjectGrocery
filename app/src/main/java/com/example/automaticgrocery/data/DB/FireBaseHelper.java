@@ -149,7 +149,7 @@ public class FireBaseHelper {
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override
                     public void onSuccess(DocumentReference documentReference) {
-                        Toast.makeText(context, "User added with ID: " + documentReference.getId(), Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(context, "User added with ID: " + documentReference.getId(), Toast.LENGTH_SHORT).show();
                         callback.onAddComplete(true,documentReference.getId());
                     }
                 })
@@ -199,7 +199,7 @@ public class FireBaseHelper {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()){
-                    Toast.makeText(context, "User updated with ID: " + CurrentUser.getFireId(), Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(context, "User updated with ID: " + CurrentUser.getFireId(), Toast.LENGTH_SHORT).show();
                     callback.onUpdateComplete(true);
                 }
                 else

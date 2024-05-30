@@ -47,7 +47,8 @@
         android:text="Update User"
         android:layout_below="@id/tvName"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="32dp" />
+        android:layout_marginTop="32dp"
+        />
 
     <!-- Delete User Button -->
     <Button

@@ -22,11 +22,6 @@ public class AllProductsModel {
         this.repository = new Repository(context);
     }
 
-    //get products by category selected
-    public Cursor getProductsByCategory(String category){
-        return repository.getProductsByCategory(category);
-    }
-
     //get products by category selected and search string
     public Cursor getProductsByCategoryAndString(String category, String str){return repository.getProductsByCategoryAndString(category,str);}
 
@@ -35,18 +30,13 @@ public class AllProductsModel {
     public  void InitializeRecycleView(String category, String str , RecyclerView recyclerView , TextView etSearchProduct){
         List<AllItem> items = new ArrayList<>();
 
-
         Cursor cursor;
-        if(str.equals(""))
-            cursor = getProductsByCategory(category);
-        else
-            cursor = getProductsByCategoryAndString(category, str);
+        cursor = getProductsByCategoryAndString(category, str);
 
         cursor.moveToFirst();
         int l = cursor.getCount();
         for (int i = 0; i < l; i++)
         {
-            //להוסיף בדיקה שהמוצר אכן לא בתוקף
             items.add(new AllItem(cursor.getString(0),cursor.getString(1),cursor.getString(2),
                     cursor.getInt(3),cursor.getString(4),cursor.getString(5),
                     cursor.getString(6),cursor.getInt(7),cursor.getInt(8)));

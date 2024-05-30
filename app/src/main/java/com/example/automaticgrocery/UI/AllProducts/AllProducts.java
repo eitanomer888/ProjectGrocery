@@ -65,29 +65,6 @@ public class AllProducts extends AppCompatActivity implements View.OnClickListen
             etSearchProduct = findViewById(R.id.etSearchProduct);
             recycleViewAll = findViewById(R.id.recycleViewAll);
 
-
-            //text watcher for enabling search by text
-            TextWatcher textWatcher = new TextWatcher() {
-                @Override
-                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-                }
-
-                @Override
-                public void onTextChanged(CharSequence s, int start, int before, int count) {
-                    strSearch = etSearchProduct.getText().toString().trim();
-                    allProductsModel.InitializeRecycleView(category,strSearch,recycleViewAll,etSearchProduct);
-                    Toast.makeText(AllProducts.this, category, Toast.LENGTH_SHORT).show();
-                }
-
-                @Override
-                public void afterTextChanged(Editable s) {
-
-                }
-            };
-            etSearchProduct.addTextChangedListener(textWatcher);
-
-
             //spinner for choosing categories
             List<String> lst = new LinkedList<>();
             lst.add("הכל");
@@ -112,8 +89,24 @@ public class AllProducts extends AppCompatActivity implements View.OnClickListen
             });
 
 
+            //text watcher for enabling search by text
+            etSearchProduct.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
+                }
 
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+                    strSearch = etSearchProduct.getText().toString().trim();
+                    allProductsModel.InitializeRecycleView(category,strSearch,recycleViewAll,etSearchProduct);
+                }
+
+                @Override
+                public void afterTextChanged(Editable s) {
+
+                }
+            });
 
 
 

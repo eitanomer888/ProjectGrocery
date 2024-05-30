@@ -87,7 +87,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
             Toast.makeText(context, "Failed", Toast.LENGTH_SHORT).show();
         }else
         {
-            Toast.makeText(context, "Added Successfully!", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(context, "Added Successfully!", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -111,7 +111,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         }
         else
         {
-            Toast.makeText(context, "Updated Successfully!", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(context, "Updated Successfully!", Toast.LENGTH_SHORT).show();
         }
 
     }
@@ -127,7 +127,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
             Toast.makeText(context, "Failed to Delete.", Toast.LENGTH_SHORT).show();
         }else
         {
-            Toast.makeText(context, "Successfully Deleted.", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(context, "Successfully Deleted.", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -191,7 +191,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         }
         else
         {
-            Toast.makeText(context, "Updated Successfully!", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(context, "Updated Successfully!", Toast.LENGTH_SHORT).show();
         }
 
     }
@@ -210,7 +210,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         }
         else
         {
-            Toast.makeText(context, "Updated Successfully!", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(context, "Updated Successfully!", Toast.LENGTH_SHORT).show();
         }
 
     }
@@ -230,7 +230,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         }
         else
         {
-            Toast.makeText(context, "Updated Successfully!", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(context, "Updated Successfully!", Toast.LENGTH_SHORT).show();
         }
 
     }
@@ -250,7 +250,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         }
         else
         {
-            Toast.makeText(context, "Updated Successfully!", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(context, "Updated Successfully!", Toast.LENGTH_SHORT).show();
         }
 
     }
@@ -271,7 +271,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         }
         else
         {
-            Toast.makeText(context, "Updated Successfully!", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(context, "Updated Successfully!", Toast.LENGTH_SHORT).show();
         }
     }
 }
