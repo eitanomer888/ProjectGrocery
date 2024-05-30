@@ -56,11 +56,4 @@ public class AllProductsModel {
         recyclerView.setLayoutManager(new LinearLayoutManager(repository.getContext()));
         recyclerView.setAdapter(new MyAllAdapter(recyclerView.getContext(),items,etSearchProduct));
     }
-
-
-
-    //////////////////////////////////////////////
-
-
-
 }
