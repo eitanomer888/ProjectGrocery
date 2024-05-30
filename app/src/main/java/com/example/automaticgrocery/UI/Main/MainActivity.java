@@ -71,12 +71,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         //initialize objects
         mainModel = new MainModel(this);
-        String name = mainModel.ReadStringFromSharedPreferences(String.valueOf(R.string.user_name_key),"");
-        String pass = mainModel.ReadStringFromSharedPreferences(String.valueOf(R.string.user_password_key),"");
-        String fireId = mainModel.ReadStringFromSharedPreferences(String.valueOf(R.string.user_fireId_key),"");
-
-        CurrentUser.InitializeUser(name,pass,fireId);
-
 
         userIcon = findViewById(R.id.userIcon);
         userIcon.setOnClickListener(this);
@@ -128,14 +122,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         fm.beginTransaction().replace(R.id.contentFragment,FillFragment.class,null).commit();
 
 
-        //check if user is logged in
-        if(!mainModel.ReadBooleanFromSharedPreferences(String.valueOf(R.string.user_loggedIn_key),false))
-        {
-            Intent i = new Intent(MainActivity.this, LoginPage.class);
-            startActivity(i);
-        }
-
-
 
         //permission actions
         requestRuntimePermission();
@@ -143,19 +129,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //notification+alarm action
         mainModel.scheduleAlarm();
     }
-
-//    private void scheduleAlarm() {
-//        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-//        Intent intent = new Intent(this, AlarmReceiver.class);
-//        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
-//
-//        long intervalMillis =  10 * 1000; // 1 hour in milliseconds
-//        long triggerTime = System.currentTimeMillis() + intervalMillis;
-//
-//        if (alarmManager != null) {
-//            alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, triggerTime, pendingIntent);
-//        }
-//    }
 
 
     public void requestRuntimePermission(){

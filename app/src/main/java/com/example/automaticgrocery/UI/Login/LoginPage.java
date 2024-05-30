@@ -27,15 +27,12 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
 
     private LoginModel loginModel;
 
-    private CurrentUser currentUser;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_page);
 
         loginModel = new LoginModel(this);
-        currentUser = new CurrentUser();
 
         btnLogin = findViewById(R.id.btnLogin);
         btnLogin.setOnClickListener(this);
@@ -47,19 +44,31 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
         signUp = findViewById(R.id.signUp);
         signUp.setOnClickListener(this);
 
+        if(loginModel.ReadBooleanFromSharedPreferences(String.valueOf(R.string.user_loggedIn_key),false))
+        {
+            //initialize current user
+            String name = loginModel.ReadStringFromSharedPreferences(String.valueOf(R.string.user_name_key),"");
+            String pass = loginModel.ReadStringFromSharedPreferences(String.valueOf(R.string.user_password_key),"");
+            String id = loginModel.ReadStringFromSharedPreferences(String.valueOf(R.string.user_fireId_key),"");
+            CurrentUser.InitializeUser(name,pass,id);
+
+            //send to the main page
+            Intent i = new Intent(LoginPage.this, MainActivity.class);
+            startActivity(i);
+        }
+
     }
 
     @Override
     public void onClick(View v) {
         if(v == btnLogin)
         {
-            //send to the main page with the planogram
-
             //get user name + password
             String name , pass;
             name = userName.getText().toString().trim();
             pass = userPass.getText().toString().trim();
 
+            //check if user data is valid
             if(loginModel.loginValidation(name,pass))
             {
                 loginModel.LoginConfirm(name, pass, new FireBaseHelper.SearchComplete() {
@@ -70,7 +79,7 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
                             loginModel.WriteStringToSharedPreferences(String.valueOf(R.string.user_password_key),pass);
                             loginModel.WriteStringToSharedPreferences(String.valueOf(R.string.user_fireId_key),id);
                             loginModel.WriteBooleanToSharedPreferences(String.valueOf(R.string.user_loggedIn_key),true);
-                            currentUser.InitializeUser(name,pass,id);
+                            CurrentUser.InitializeUser(name,pass,id);
                             Toast.makeText(loginModel.context, "logged in successfully", Toast.LENGTH_SHORT).show();
                             finish();
                         }
