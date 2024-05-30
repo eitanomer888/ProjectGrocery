@@ -64,6 +64,7 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
     public void onClick(View v) {
         if(v == btnLogin)
         {
+            btnLogin.setClickable(false);
             //get user name + password
             String name , pass;
             name = userName.getText().toString().trim();
@@ -83,13 +84,21 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
                             loginModel.WriteBooleanToSharedPreferences(String.valueOf(R.string.user_loggedIn_key),true);
                             CurrentUser.InitializeUser(name,pass,id);
                             Toast.makeText(loginModel.context, "logged in successfully", Toast.LENGTH_SHORT).show();
-                            finish();
+
+                            btnLogin.setClickable(true);
+
+                            Intent i = new Intent(LoginPage.this, MainActivity.class);
+                            startActivity(i);
                         }
                         else{
+                            btnLogin.setClickable(true);
                             Toast.makeText(loginModel.context, "user is not found", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
+            }
+            else{
+                btnLogin.setClickable(true);
             }
         }
         else if(v == signUp)
