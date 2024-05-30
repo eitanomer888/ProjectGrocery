@@ -16,7 +16,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.automaticgrocery.R;
 import com.example.automaticgrocery.data.Repository.Repository;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 public class MyAllViewHolder extends RecyclerView.ViewHolder {
     private Repository repository;
@@ -49,7 +51,6 @@ public class MyAllViewHolder extends RecyclerView.ViewHolder {
             @Override
             public void onClick(View v) {
                 openDialog();
-                etSearchProduct.setText("");
             }
         });
     }
@@ -67,6 +68,7 @@ public class MyAllViewHolder extends RecyclerView.ViewHolder {
             @Override
             public void onClick(View v) {
                 dialog1.dismiss();
+                etSearchProduct.setText("");
             }
         });
 
@@ -180,9 +182,17 @@ public class MyAllViewHolder extends RecyclerView.ViewHolder {
                     return;
                 }
 
+                double d = getDifferenceInDays(etDP_LastDate.getText().toString().trim(),etDP_FillDate.getText().toString().trim());
+                if (d < 0){
+                    Toast.makeText(repository.getContext(), "תאריך חדש חייב להיות גדול או שווה לתאריך אחרון", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+
                 repository.updateProductAll(internal_reference,amountC,new_date,last_date,amountLD);
 
                 dialog1.dismiss();
+                etSearchProduct.setText("");
             }
         });
 
@@ -196,4 +206,20 @@ public class MyAllViewHolder extends RecyclerView.ViewHolder {
 
         dialog1.show();
     }
+
+    //difference in days between two dates
+    public static double getDifferenceInDays(String dateString1, String dateString2) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        try {
+            Date date1 = dateFormat.parse(dateString1);
+            Date date2 = dateFormat.parse(dateString2);
+
+            long differenceInMillis = date2.getTime() - date1.getTime();
+            double differenceInDays = (double) (differenceInMillis / (1000 * 60 * 60 * 24));
+            return differenceInDays;
+        } catch (Exception e) {
+            return -1.0;
+        }
+    }
+
 }
