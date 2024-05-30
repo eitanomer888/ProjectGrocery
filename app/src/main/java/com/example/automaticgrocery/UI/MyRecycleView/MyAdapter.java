@@ -17,6 +17,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
     Context context;
     List<ExpiredItem> items;
 
+    //Constructor
     public MyAdapter(Context context, List<ExpiredItem> items) {
         this.context = context;
         this.items = items;
@@ -28,6 +29,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
         return new MyViewHolder(LayoutInflater.from(context).inflate(R.layout.single_expired_item,parent,false), parent.getContext());
     }
 
+    //initialize parameters
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         holder.tvExpName.setText(items.get(position).getName());
@@ -37,6 +39,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
         holder.amount = items.get(position).getAmount();
     }
 
+    //return number of items
     @Override
     public int getItemCount() {
         return items.size();

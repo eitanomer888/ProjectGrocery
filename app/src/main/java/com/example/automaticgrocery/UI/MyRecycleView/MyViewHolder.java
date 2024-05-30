@@ -62,6 +62,7 @@ public class MyViewHolder extends RecyclerView.ViewHolder {
 
     }
 
+    //dialogs for exp actions//
     public void openDialog()
     {
         dialog1 = new Dialog(repository.getContext());
@@ -413,6 +414,7 @@ public class MyViewHolder extends RecyclerView.ViewHolder {
         dialog.show();
     }
 
+    //################//
 
 
 
@@ -420,6 +422,7 @@ public class MyViewHolder extends RecyclerView.ViewHolder {
 
 
 
+    //check if date is before today
     public boolean isBeforeToday(String date)
     {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");

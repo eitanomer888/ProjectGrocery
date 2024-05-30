@@ -18,6 +18,7 @@ public class MyFillAdapter extends RecyclerView.Adapter<MyFillViewHolder> {
     Context context;
     List<FillItem> items;
 
+    //Constructor
     public MyFillAdapter(Context context, List<FillItem> items) {
         this.context = context;
         this.items = items;
@@ -29,6 +30,7 @@ public class MyFillAdapter extends RecyclerView.Adapter<MyFillViewHolder> {
         return new MyFillViewHolder(LayoutInflater.from(context).inflate(R.layout.single_fill_item,parent,false), parent.getContext());
     }
 
+    //initialize parameters
     @Override
     public void onBindViewHolder(@NonNull MyFillViewHolder holder, int position) {
         holder.tvFillName.setText(items.get(position).getName());
@@ -42,6 +44,7 @@ public class MyFillAdapter extends RecyclerView.Adapter<MyFillViewHolder> {
 
     }
 
+    //return the number of items
     @Override
     public int getItemCount() {
         return items.size();

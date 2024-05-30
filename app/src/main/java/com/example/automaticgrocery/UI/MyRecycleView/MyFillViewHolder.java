@@ -42,15 +42,14 @@ public class MyFillViewHolder extends RecyclerView.ViewHolder {
         super(itemView);
 
         repository = new Repository(context);
+
         y1=0;m1=0;d1=0;y2=0;m2=0;d2=0;
         calendar1 = Calendar.getInstance();
         calendar1.set(calendar1.get(Calendar.YEAR) + 5,calendar1.get(Calendar.MONTH),calendar1.get(Calendar.DAY_OF_MONTH));
         calendar2 = Calendar.getInstance();
         calendar2.set(calendar2.get(Calendar.YEAR),calendar2.get(Calendar.MONTH),calendar2.get(Calendar.DAY_OF_MONTH));
 
-
         targetAmount = -1;
-
 
         tvFillName = itemView.findViewById(R.id.tvFillName);
         tvFillAmount = itemView.findViewById(R.id.tvFillAmount);
@@ -66,6 +65,7 @@ public class MyFillViewHolder extends RecyclerView.ViewHolder {
         });
     }
 
+    //dialogs for fill actions//
     public void openDialog()
     {
         dialog1 = new Dialog(repository.getContext());
@@ -270,8 +270,11 @@ public class MyFillViewHolder extends RecyclerView.ViewHolder {
         dialog.show();
     }
 
+    //#######################//
 
 
+
+    //difference in days between two dates
     public static double getDifferenceInDays(String dateString1, String dateString2) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         try {
@@ -287,6 +290,7 @@ public class MyFillViewHolder extends RecyclerView.ViewHolder {
     }
 
 
+    //formula for calculating amount to fill
     public int secretFormula(int currentAmount,String last_date, String fill_date)
     {
         String today = calendar2.get(Calendar.DAY_OF_MONTH) + "/" + (calendar2.get(Calendar.MONTH) + 1) + "/" + calendar2.get(Calendar.YEAR);

@@ -20,6 +20,7 @@ public class MyAllAdapter extends RecyclerView.Adapter<MyAllViewHolder> {
 
     TextView etSearchProduct;
 
+    //Constructor
     public MyAllAdapter(Context context, List<AllItem> items,TextView etSearchProduct) {
         this.context = context;
         this.items = items;
@@ -34,6 +35,7 @@ public class MyAllAdapter extends RecyclerView.Adapter<MyAllViewHolder> {
         return new MyAllViewHolder(LayoutInflater.from(context).inflate(R.layout.single_all_item,parent,false), parent.getContext());
     }
 
+    //initialize parameters
     @Override
     public void onBindViewHolder(@NonNull MyAllViewHolder holder, int position) {
         holder.internal_reference = items.get(position).getInternal_reference();
@@ -52,6 +54,7 @@ public class MyAllAdapter extends RecyclerView.Adapter<MyAllViewHolder> {
         holder.etSearchProduct = etSearchProduct;
     }
 
+    //return number of items
     @Override
     public int getItemCount() {
         return items.size();

@@ -54,6 +54,7 @@ public class MyAllViewHolder extends RecyclerView.ViewHolder {
         });
     }
 
+    //dialog for editing product
     public void openDialog()
     {
         dialog1 = new Dialog(repository.getContext());
