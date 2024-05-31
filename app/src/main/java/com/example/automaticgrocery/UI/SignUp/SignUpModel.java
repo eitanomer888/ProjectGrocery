@@ -9,7 +9,10 @@ import com.example.automaticgrocery.data.Repository.Repository;
 
 public class SignUpModel {
 
+    //repository instance for communication
     private Repository repository;
+
+    //context for function usage
     private Context context;
 
     //Constructor

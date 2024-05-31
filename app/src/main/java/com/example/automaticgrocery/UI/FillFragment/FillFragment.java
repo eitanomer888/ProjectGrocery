@@ -37,8 +37,11 @@ public class FillFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
+    //UI components
     private RecyclerView recycleView2;
     private View view;
+
+    //model instance
     private FillModel fillModel;
 
     public FillFragment() {
@@ -96,30 +99,6 @@ public class FillFragment extends Fragment {
                 cursor.moveToNext();
             }
         }
-
-//        items.add(new FillItem("milk","11111111",50,200));
-//        items.add(new FillItem("beef","22222222",100,300));
-//        items.add(new FillItem("apple","33333333",200,400));
-//        items.add(new FillItem("bamba","44444444",400,500));
-//        items.add(new FillItem("milk","11111111",50,200));
-//        items.add(new FillItem("beef","22222222",100,300));
-//        items.add(new FillItem("apple","33333333",200,400));
-//        items.add(new FillItem("bamba","44444444",400,500));
-//        items.add(new FillItem("milk","11111111",50,200));
-//        items.add(new FillItem("beef","22222222",100,300));
-//        items.add(new FillItem("apple","33333333",200,400));
-//        items.add(new FillItem("bamba","44444444",400,500));
-//        items.add(new FillItem("milk","11111111",50,200));
-//        items.add(new FillItem("beef","22222222",100,300));
-//        items.add(new FillItem("apple","33333333",200,400));
-//        items.add(new FillItem("bamba","44444444",400,500));
-//        items.add(new FillItem("apple","33333333",200,400));
-//        items.add(new FillItem("bamba","44444444",400,500));
-//        items.add(new FillItem("milk","11111111",50,200));
-//        items.add(new FillItem("beef","22222222",100,300));
-//        items.add(new FillItem("apple","33333333",200,400));
-//        items.add(new FillItem("bamba","44444444",400,500));
-        //items.add(new FillItem("bamba","44444444",400));
 
 
         //initialize recycler view

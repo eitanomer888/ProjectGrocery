@@ -9,7 +9,11 @@ import com.example.automaticgrocery.data.DB.FireBaseHelper;
 import com.example.automaticgrocery.data.Repository.Repository;
 
 public class LoginModel {
+
+    //repository instance for communication
     Repository repository;
+
+    //context for function usage
     Context context;
 
     //Constructor

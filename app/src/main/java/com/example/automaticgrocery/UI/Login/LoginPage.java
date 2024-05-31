@@ -21,6 +21,7 @@ import com.example.automaticgrocery.data.Items.CurrentUser;
 
 public class LoginPage extends AppCompatActivity implements View.OnClickListener {
 
+    //UI objects
     private Button btnLogin;
     private TextView signUp;
     private EditText userPass, userName;

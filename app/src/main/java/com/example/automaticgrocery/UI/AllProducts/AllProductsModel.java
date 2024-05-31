@@ -15,6 +15,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AllProductsModel {
+
+    //repository instance for communication
     private Repository repository;
 
     //Constructor

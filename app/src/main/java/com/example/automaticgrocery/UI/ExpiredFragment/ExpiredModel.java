@@ -11,7 +11,10 @@ import java.util.Date;
 
 public class ExpiredModel
 {
+    //repository instance for communication
     private Repository repository;
+
+    //calender instance
     private Calendar calendar;
 
     //Constructor

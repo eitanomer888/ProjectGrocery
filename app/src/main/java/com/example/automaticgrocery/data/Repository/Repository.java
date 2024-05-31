@@ -1,5 +1,6 @@
 package com.example.automaticgrocery.data.Repository;
 
+import android.annotation.SuppressLint;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -130,6 +131,7 @@ public class Repository {
 
 
     //alarmManager
+    @SuppressLint("ScheduleExactAlarm")
     public void scheduleAlarm() {
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(context, AlarmReceiver.class);

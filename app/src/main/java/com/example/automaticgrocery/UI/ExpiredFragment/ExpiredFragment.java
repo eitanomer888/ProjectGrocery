@@ -34,9 +34,11 @@ public class ExpiredFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
+    //UI components
     private RecyclerView recyclerView;
     private View view;
 
+    //model instance
     private ExpiredModel expiredModel;
 
     public ExpiredFragment() {
@@ -93,46 +95,6 @@ public class ExpiredFragment extends Fragment {
             cursor.moveToNext();
         }
 
-
-//        items.add(new ExpiredItem("milk","24/8/26",50,"111111111",20));
-//        items.add(new ExpiredItem("beef","1/2/80",800,"222222222222",300));
-//        items.add(new ExpiredItem("apple","18/7/06",12,"33333333333",1));
-//        items.add(new ExpiredItem("milk","24/8/26",50,"111111111",20));
-//        items.add(new ExpiredItem("beef","1/2/80",800,"222222222222",300));
-//        items.add(new ExpiredItem("apple","18/7/06",12,"33333333333",1));
-//        items.add(new ExpiredItem("milk","24/8/26",50,"111111111",20));
-//        items.add(new ExpiredItem("beef","1/2/80",800,"222222222222",300));
-//        items.add(new ExpiredItem("apple","18/7/06",12,"33333333333",1));
-//        items.add(new ExpiredItem("milk","24/8/26",50,"111111111",20));
-//        items.add(new ExpiredItem("beef","1/2/80",800,"222222222222",300));
-//        items.add(new ExpiredItem("apple","18/7/06",12,"33333333333",1));
-//        items.add(new ExpiredItem("milk","24/8/26",50,"111111111",20));
-//        items.add(new ExpiredItem("beef","1/2/80",800,"222222222222",300));
-//        items.add(new ExpiredItem("apple","18/7/06",12,"33333333333",1));
-//        items.add(new ExpiredItem("milk","24/8/26",50,"111111111",20));
-//        items.add(new ExpiredItem("beef","1/2/80",800,"222222222222",300));
-//        items.add(new ExpiredItem("apple","18/7/06",12,"33333333333",1));
-//        items.add(new ExpiredItem("milk","24/8/26",50,"111111111",20));
-//        items.add(new ExpiredItem("beef","1/2/80",800,"222222222222",300));
-//        items.add(new ExpiredItem("apple","18/7/06",12,"33333333333",1));
-//        items.add(new ExpiredItem("milk","24/8/26",50,"111111111",20));
-//        items.add(new ExpiredItem("beef","1/2/80",800,"222222222222",300));
-//        items.add(new ExpiredItem("apple","18/7/06",12,"33333333333",1));
-//        items.add(new ExpiredItem("milk","24/8/26",50,"111111111",20));
-//        items.add(new ExpiredItem("beef","1/2/80",800,"222222222222",300));
-//        items.add(new ExpiredItem("apple","18/7/06",12,"33333333333",1));
-//        items.add(new ExpiredItem("milk","24/8/26",50,"111111111",20));
-//        items.add(new ExpiredItem("beef","1/2/80",800,"222222222222",300));
-//        items.add(new ExpiredItem("apple","18/7/06",12,"33333333333",1));
-//        items.add(new ExpiredItem("milk","24/8/26",50,"111111111",20));
-//        items.add(new ExpiredItem("beef","1/2/80",800,"222222222222",300));
-//        items.add(new ExpiredItem("apple","18/7/06",12,"33333333333",1));
-//        items.add(new ExpiredItem("milk","24/8/26",50,"111111111",20));
-//        items.add(new ExpiredItem("beef","1/2/80",800,"222222222222",300));
-//        items.add(new ExpiredItem("apple","18/7/06",12,"33333333333",1));
-//        items.add(new ExpiredItem("milk","24/8/26",50,"111111111",20));
-//        items.add(new ExpiredItem("beef","1/2/80",800,"222222222222",300));
-//        items.add(new ExpiredItem("apple","18/7/06",12,"33333333333",1));
 
         //initialize recyclerview
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));

@@ -10,8 +10,11 @@ import com.example.automaticgrocery.data.BroadcastReceiver.AlarmReceiver;
 import com.example.automaticgrocery.data.Repository.Repository;
 
 public class MainModel {
+
+    //repository instance for communication
     private Repository repository;
 
+    //static helper for current fragment
     public static boolean isFill;
 
     //Constructor

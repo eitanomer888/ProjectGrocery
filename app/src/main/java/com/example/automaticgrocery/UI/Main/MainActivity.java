@@ -52,9 +52,13 @@ import java.util.SortedSet;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
+    //static values
     private static final String PERMISSION_NOTIFICATIONS = Manifest.permission.POST_NOTIFICATIONS;
     private static final int NOTIFICATIONS_REQ_CODE = 100;
+    //model instance
     private MainModel mainModel;
+
+    //UI components
     private FragmentManager fm;
 
     private ImageView userIcon,barcodeIcon;

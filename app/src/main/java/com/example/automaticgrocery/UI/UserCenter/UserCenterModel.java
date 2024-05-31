@@ -21,7 +21,10 @@ import com.example.automaticgrocery.data.Repository.Repository;
 
 public class UserCenterModel
 {
+    //repository instance for communication
     private Repository repository;
+
+    //context instance for functions
     private Context context;
 
     //Constructor
@@ -41,7 +44,7 @@ public class UserCenterModel
 
 
 
-    //sharedPreferences actions//
+    //sharedPreference actions//
     public void WriteStringToSharedPreferences(String key,String value)
     {
         repository.WriteStringToSharedPreferences(key,value);

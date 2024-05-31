@@ -18,8 +18,11 @@ import com.example.automaticgrocery.data.Items.CurrentUser;
 
 public class SignUpPage extends AppCompatActivity implements View.OnClickListener {
 
+    //UI components
     private Button btnSignUp,SuBack;
     private EditText SUuserName,SUuserPass;
+
+    //model instance
     private SignUpModel signUpModel;
 
 

@@ -36,13 +36,16 @@ import java.util.List;
 
 public class AllProducts extends AppCompatActivity implements View.OnClickListener {
 
+    //model instance
     private AllProductsModel allProductsModel;
-    private ImageView btnReturn;
 
+    //UI elements
+    private ImageView btnReturn;
     private Spinner spiAllProducts;
     private EditText etSearchProduct;
     private RecyclerView recycleViewAll;
 
+    //variables
     private String category,strSearch;
 
 

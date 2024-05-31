@@ -7,6 +7,7 @@ import com.example.automaticgrocery.data.Repository.Repository;
 
 public class FillModel
 {
+    //repository instance for communication
     private Repository repository;
 
     //Constructor

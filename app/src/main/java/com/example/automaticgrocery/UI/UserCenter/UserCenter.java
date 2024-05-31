@@ -15,7 +15,10 @@ import com.example.automaticgrocery.data.Items.CurrentUser;
 
 public class UserCenter extends AppCompatActivity implements View.OnClickListener {
 
+    //model instance
     private UserCenterModel userCenterModel;
+
+    //UI elements
     private Button btnUpdateUser,btnDeleteUser,btnLogoutUser;
     private TextView tvName;
     private ImageView backButton;
