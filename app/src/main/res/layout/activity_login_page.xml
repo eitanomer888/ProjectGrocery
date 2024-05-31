@@ -73,7 +73,7 @@
         android:layout_marginTop="80dp"
         android:text="dont have an account? sign up!"
         android:layout_gravity="center"
-        android:textColor="#2196F3"
+        android:textColor="#095E9F"
         />
 
 
