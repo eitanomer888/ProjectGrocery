@@ -2,6 +2,7 @@ package com.example.automaticgrocery.data.BroadcastReceiver;
 
 
 
+import android.annotation.SuppressLint;
 import android.app.AlarmManager;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -30,6 +31,7 @@ public class AlarmReceiver extends BroadcastReceiver {
     private Calendar calendar;
     private Repository repository;
 
+    @SuppressLint("ScheduleExactAlarm")
     @Override
     public void onReceive(Context context, Intent intent) {
         repository = new Repository(context);
