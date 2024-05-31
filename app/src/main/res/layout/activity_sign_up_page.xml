@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".UI.SignUp.SignUpPage"
-    android:layoutDirection="ltr">
+    android:layoutDirection="ltr"
+    android:background="@drawable/app_background_2">
 
     <Button
         android:id="@+id/SuBack"

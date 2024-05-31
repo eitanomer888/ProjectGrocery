@@ -15,12 +15,14 @@
         android:text="שם מוצר"
         android:textSize="18sp"
         android:textStyle="bold"
-        android:layout_marginBottom="4dp" />
+        android:layout_marginBottom="4dp"
+        android:textColor="@color/black"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        >
 
         <TextView
             android:layout_marginRight="10dp"
@@ -29,7 +31,8 @@
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:text="כמות"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:textColor="@color/black"/>
 
         <TextView
             android:id="@+id/tvExpDate"
@@ -37,7 +40,8 @@
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:text="תוקף"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:textColor="@color/black"/>
 
     </LinearLayout>
 
@@ -45,6 +49,6 @@
         android:layout_marginTop="5dp"
         android:layout_width="match_parent"
         android:layout_height="3dp"
-        android:background="@color/green2"/>
+        android:background="@color/green1"/>
 
 </LinearLayout>

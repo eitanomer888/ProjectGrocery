@@ -7,13 +7,16 @@
     android:layout_height="match_parent"
     tools:context=".UI.AllProducts.AllProducts"
     android:orientation="vertical"
-    android:layoutDirection="rtl">
+    android:layoutDirection="rtl"
+    android:background="@drawable/app_background_3"
+    >
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layoutDirection="rtl">
+        android:layoutDirection="rtl"
+        android:background="@color/green1">
 
         <ImageView
             android:id="@+id/btnReturn"
@@ -53,9 +56,11 @@
     <EditText
         android:id="@+id/etSearchProduct"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:hint="search product"
-        android:layout_marginTop="10dp"
+        android:textColor="@color/black"
+        android:background="@color/green1"
+        android:layout_marginBottom="16dp"
         />
 
     <androidx.recyclerview.widget.RecyclerView
