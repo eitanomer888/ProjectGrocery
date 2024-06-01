@@ -21,20 +21,30 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class MyAllViewHolder extends RecyclerView.ViewHolder {
+
+    //repository instance for communication with data
     private Repository repository;
+
+    //calendar for dates
     private Calendar calendar1,calendar2;
 
+    //date variables
     private int y1,m1,d1,y2,m2,d2;
+
+    //UI components
     private Dialog dialog1;
+    TextView tvAllName, tvAllInternalReference;
+    TextView etSearchProduct;
+
+    //variables
 
     public String internal_reference,name,barcode;
     public int amount;
     public String fill_date,last_date,category;
     public int target_amount,last_date_amount;
 
-    TextView tvAllName, tvAllInternalReference;
 
-    TextView etSearchProduct;
+    //Constructor
     public MyAllViewHolder(@NonNull View itemView, Context context) {
         super(itemView);
         repository = new Repository(context);
@@ -125,7 +135,6 @@ public class MyAllViewHolder extends RecyclerView.ViewHolder {
                 }
 
                 datePicker.show();
-
                 datePicker.setOnDateSetListener(new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker datePicker2, int i, int i1, int i2) {

@@ -27,17 +27,28 @@ import java.util.Date;
 
 public class MyFillViewHolder extends RecyclerView.ViewHolder {
 
+    //repository instance for communication
     private Repository repository;
+
+    //calendars for date picker
     private Calendar calendar1,calendar2;
+
+    //date variables
     private int y1,m1,d1,y2,m2,d2;
 
+    //dialog
     private Dialog dialog1;
 
+    //UI components
     TextView tvFillName,tvFillAmount,tvFillint;
     ImageView ivFillWarn;
 
+    //variables
     public int targetAmount;
     String internal_reference;
+
+
+    //Constructor
     public MyFillViewHolder(@NonNull View itemView, Context context) {
         super(itemView);
 

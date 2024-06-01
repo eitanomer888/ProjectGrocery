@@ -28,15 +28,26 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class MyViewHolder extends RecyclerView.ViewHolder {
+
+    //UI components
     TextView tvExpName,tvExpAmount,tvExpDate;
+
+    //variables
     public String internal_reference;
     public int amount;
 
+    //repository instance for communication with data
     private Repository repository;
-    private Calendar calendar1,calendar2;
-    private int y1,m1,d1,y2,m2,d2;
 
+    //calendar for date picker
+    private Calendar calendar1,calendar2;
+
+    //calendar variables for date picker
+    private int y1,m1,d1,y2,m2,d2;
+    //dialogs
     private Dialog dialog1,dialog2,dialog3;
+
+    //Constructor
     public MyViewHolder(@NonNull View itemView, Context context) {
         super(itemView);
         repository = new Repository(context);
@@ -372,7 +383,6 @@ public class MyViewHolder extends RecyclerView.ViewHolder {
                             repository.updateProductExpPart2(internal_reference,last_date_amount,lastdate,removeAmount,amount);
                             amount -= removeAmount;
 
-
                             if(dialog1 != null)
                                 if(dialog1.isShowing())
                                     dialog1.dismiss();
@@ -397,19 +407,6 @@ public class MyViewHolder extends RecyclerView.ViewHolder {
                 }
             }
         });
-
-
-
-
-
-
-
-
-
-
-
-
-
         dialog.show();
     }
 

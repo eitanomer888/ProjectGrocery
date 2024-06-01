@@ -14,7 +14,9 @@ import java.util.List;
 
 public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
 
+    //context for recyclerview
     Context context;
+    //list of expired items
     List<ExpiredItem> items;
 
     //Constructor

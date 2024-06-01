@@ -15,9 +15,12 @@ import com.example.automaticgrocery.data.Items.FillItem;
 import java.util.List;
 
 public class MyAllAdapter extends RecyclerView.Adapter<MyAllViewHolder> {
-    Context context;
-    List<AllItem> items;
 
+    //context for recycleView
+    Context context;
+    //list of items
+    List<AllItem> items;
+    //search product TextView (from AllProductsActivity)
     TextView etSearchProduct;
 
     //Constructor

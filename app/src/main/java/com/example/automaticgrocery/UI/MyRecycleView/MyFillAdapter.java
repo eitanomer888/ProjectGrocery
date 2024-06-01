@@ -15,7 +15,10 @@ import java.util.List;
 
 public class MyFillAdapter extends RecyclerView.Adapter<MyFillViewHolder> {
 
+    //context for recycleView
     Context context;
+
+    //list of fill items
     List<FillItem> items;
 
     //Constructor
