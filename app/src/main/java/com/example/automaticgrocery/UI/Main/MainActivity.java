@@ -76,6 +76,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //initialize objects
         mainModel = new MainModel(this);
 
+        if (mainModel.ReadBooleanFromSharedPreferences(String.valueOf(R.string.first_time_key),true))
+        {
+            mainModel.WriteBooleanToSharedPreferences(String.valueOf(R.string.first_time_key),false);
+
+            //adding the products
+            mainModel.DeleteAllProducts();
+
+            mainModel.addProduct("7290000066318","חטיף במבה 80 גרם (אסם)","7290000066318", 77,"08/03/24" ,"08/03/24", "הכל / חטיפים, מתוקים ודגני בוקר / חטיפים מלוחים / חטיפי בוטנים",100,20);
+            mainModel.addProduct("7290006272072","חטיפי פיצה, 650 גרם (מעדנות)", "7290006272072", 39, "08/03/24" ,"08/03/24","הכל / מזון מקורר, קפוא ונקניקים / מוצרי בצק ומאפה קפוא / פיצות ומאפה איטלקי",50,7);
+            mainModel.addProduct("7290004131074", "חלב 3%, 1 ליטר (תנובה)", "72900041310740", 505, "08/03/24" ,"08/03/24", "הכל / מוצרי חלב וביצים / ריק / חלב טרי",550,100);
+            mainModel.addProduct("7290010471669","יוגורט בטעם תות עם קורנפלקס מצופה שוקולד חלב, 175 גרם (דנונה)", "7290010471669", 23,"08/03/24" ,"08/03/24","הכל / מוצרי חלב וביצים / מעדנים וקינוחים / מעדני חלב" ,80,4);
+
+        }
+
         userIcon = findViewById(R.id.userIcon);
         userIcon.setOnClickListener(this);
 
@@ -260,14 +274,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         else if(barcodeIcon == view)
         {
-            //adding the products for now...
-            mainModel.DeleteAllProducts();
-
-            mainModel.addProduct("7290000066318","חטיף במבה 80 גרם (אסם)","7290000066318", 77,"08/03/24" ,"08/03/24", "הכל / חטיפים, מתוקים ודגני בוקר / חטיפים מלוחים / חטיפי בוטנים",100,20);
-            mainModel.addProduct("7290006272072","חטיפי פיצה, 650 גרם (מעדנות)", "7290006272072", 39, "08/03/24" ,"08/03/24","הכל / מזון מקורר, קפוא ונקניקים / מוצרי בצק ומאפה קפוא / פיצות ומאפה איטלקי",50,7);
-            mainModel.addProduct("7290004131074", "חלב 3%, 1 ליטר (תנובה)", "72900041310740", 505, "08/03/24" ,"08/03/24", "הכל / מוצרי חלב וביצים / ריק / חלב טרי",550,100);
-            mainModel.addProduct("7290010471669","יוגורט בטעם תות עם קורנפלקס מצופה שוקולד חלב, 175 גרם (דנונה)", "7290010471669", 23,"08/03/24" ,"08/03/24","הכל / מוצרי חלב וביצים / מעדנים וקינוחים / מעדני חלב" ,80,4);
-
             //communicate with fragments
             if(MainModel.isFill){
                 FillFragment fillFragment = new FillFragment();

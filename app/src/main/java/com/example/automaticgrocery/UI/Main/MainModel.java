@@ -29,6 +29,11 @@ public class MainModel {
         return repository.ReadBooleanFromSharedPreferences(key, defaultValue);
     }
 
+    public void WriteBooleanToSharedPreferences(String key,boolean value)
+    {
+        repository.WriteBooleanToSharedPreferences(key, value);
+    }
+
     //######################//
 
     //add new product

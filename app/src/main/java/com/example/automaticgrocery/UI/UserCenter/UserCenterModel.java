@@ -188,4 +188,13 @@ public class UserCenterModel
         repository.cancelAlarm();
     }
 
+    //remove all products
+    public void DeleteAllProducts(){
+        repository.DeleteAllProducts();
+    }
+
+    //add product
+    public void addProduct(String internal_reference, String name, String barcode, int amount, String fill_date,String last_date, String category,int target_amount,int last_date_amount){
+        repository.addProduct(internal_reference,name,barcode,amount,fill_date,last_date,category,target_amount,last_date_amount);
+    }
 }

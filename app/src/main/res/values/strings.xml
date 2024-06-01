@@ -5,7 +5,8 @@
     <string name="user_password_key">passKey</string>
     <string name="user_fireId_key">fireIdKey</string>
     <string name="user_loggedIn_key">loggedInKey</string>
-    <string name="admin">eitan</string>
+    <string name="first_time_key">FirstTimeKey</string>
+    <string name="admin">admin</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="fillSW">הצג פגי תוקף</string>
