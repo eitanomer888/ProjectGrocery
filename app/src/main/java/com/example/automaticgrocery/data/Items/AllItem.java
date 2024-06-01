@@ -2,6 +2,7 @@ package com.example.automaticgrocery.data.Items;
 
 public class AllItem {
 
+    //variables
     private String internal_reference,name,barcode;
     private int amount;
     private String fill_date,last_date,category;

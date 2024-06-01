@@ -21,9 +21,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class FireBaseHelper {
+
+    //Firebase instance
     FirebaseFirestore db;
+
+    //context for functions
     private Context context;
 
+    //Constructor
     public FireBaseHelper(Context context) {
         db = FirebaseFirestore.getInstance();
         this.context = context;

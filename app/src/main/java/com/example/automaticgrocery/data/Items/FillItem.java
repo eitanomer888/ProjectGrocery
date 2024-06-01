@@ -1,10 +1,11 @@
 package com.example.automaticgrocery.data.Items;
 
 public class FillItem {
+
+    //variables
     private String name;
     private String internal_reference;
     private int amount;
-
     private int targetAmount;
 
     //constructor

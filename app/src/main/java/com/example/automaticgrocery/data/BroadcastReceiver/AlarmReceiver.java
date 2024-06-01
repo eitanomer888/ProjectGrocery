@@ -27,8 +27,13 @@ import java.util.Date;
 
 public class AlarmReceiver extends BroadcastReceiver {
 
+    //var for channel id
     private static final String CHANNEL_ID = "CHANNEL_ID";
+
+    //calendar for alarm
     private Calendar calendar;
+
+    //repository for communication
     private Repository repository;
 
     @SuppressLint("ScheduleExactAlarm")

@@ -16,12 +16,19 @@ import com.example.automaticgrocery.data.DB.MyDatabaseHelper;
 
 public class Repository {
 
+    //SQLite myDatabaseHelper instance for easy access to the database
     private MyDatabaseHelper myDatabaseHelper;
+
+    //Shared preferences
     private SharedPreferences sharedPreferences;
+
+    //Firebase myFirebaseHelper instance for easy access to the database
     private FireBaseHelper myFirebaseHelper;
 
+    //category variable
     private static String current_category;
 
+    //Context for functions
     private Context context;
 
     //Constructor

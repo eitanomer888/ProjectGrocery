@@ -3,6 +3,8 @@ package com.example.automaticgrocery.data.Items;
 import java.util.Date;
 
 public class ExpiredItem {
+
+    //variables
     private String name;
     private String last_date;
     private int amount;

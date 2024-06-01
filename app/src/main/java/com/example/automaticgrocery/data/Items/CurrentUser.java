@@ -1,6 +1,8 @@
 package com.example.automaticgrocery.data.Items;
 
 public class CurrentUser {
+
+    //variables
     static String username;
     static  String password;
 
