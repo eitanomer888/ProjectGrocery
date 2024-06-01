@@ -1,0 +1,469 @@
+@startuml
+class com.example.automaticgrocery.UI.FillFragment.FillModel {
+- Repository repository
++ Cursor getProductsByCategory()
++ String getCurrent_category()
++ boolean isFillNeeded(int,int)
+}
+
+
+class com.example.automaticgrocery.UI.Login.LoginModel {
+~ Repository repository
+~ Context context
++ boolean loginValidation(String,String)
++ void LoginConfirm(String,String,FireBaseHelper.SearchComplete)
++ void WriteStringToSharedPreferences(String,String)
++ String ReadStringFromSharedPreferences(String,String)
++ void WriteBooleanToSharedPreferences(String,boolean)
++ boolean ReadBooleanFromSharedPreferences(String,boolean)
+}
+
+
+class com.example.automaticgrocery.data.Items.CurrentUser {
+~ {static} String username
+~ {static} String password
+~ {static} String fireId
++ {static} void InitializeUser(String,String,String)
++ {static} void ClearUser()
++ {static} String getUsername()
++ {static} void setUsername(String)
++ {static} String getPassword()
++ {static} void setPassword(String)
++ {static} String getFireId()
++ {static} void setFireId(String)
+}
+
+
+class com.example.automaticgrocery.UI.UserCenter.UserCenter {
+- UserCenterModel userCenterModel
+- Button btnUpdateUser
+- TextView tvName
+- ImageView backButton
+# void onCreate(Bundle)
++ void onClick(View)
+}
+
+
+class com.example.automaticgrocery.UI.ExpiredFragment.ExpiredModel {
+- Repository repository
+- Calendar calendar
++ Cursor getProductsByCategory()
++ String getCurrent_category()
++ boolean isExpired(String)
+}
+
+
+class com.example.automaticgrocery.data.BroadcastReceiver.BootReceiver {
++ void onReceive(Context,Intent)
+}
+
+class com.example.automaticgrocery.UI.UserCenter.UserCenterModel {
+- Repository repository
+- Context context
++ void DataConfirm(String,String,FireBaseHelper.ScanComplete)
++ void DeleteUser(FireBaseHelper.DeleteComplete)
++ void UpdateUser(String,String,String,FireBaseHelper.UpdateComplete)
++ void WriteStringToSharedPreferences(String,String)
++ String ReadStringFromSharedPreferences(String,String)
++ void WriteBooleanToSharedPreferences(String,boolean)
++ void clear_sharedPreference()
++ Context getContext()
++ void setContext(Context)
++ void showUpdateDialog(TextView)
++ boolean updateValidation(String,String)
++ void cancelAlarm()
+}
+
+
+class com.example.automaticgrocery.data.Items.FillItem {
+- String name
+- String internal_reference
+- int amount
+- int targetAmount
++ String getName()
++ void setName(String)
++ String getInternal_reference()
++ void setInternal_reference(String)
++ int getAmount()
++ void setAmount(int)
++ int getTargetAmount()
++ void setTargetAmount(int)
+}
+
+
+class com.example.automaticgrocery.UI.MyRecycleView.MyAllAdapter {
+~ Context context
+~ List<AllItem> items
+~ TextView etSearchProduct
++ MyAllViewHolder onCreateViewHolder(ViewGroup,int)
++ void onBindViewHolder(MyAllViewHolder,int)
++ int getItemCount()
+}
+
+
+class com.example.automaticgrocery.UI.Login.LoginPage {
+- Button btnLogin
+- TextView signUp
+- EditText userPass
+- LoginModel loginModel
+# void onCreate(Bundle)
++ void onClick(View)
+}
+
+
+class com.example.automaticgrocery.UI.Main.MainModel {
+- Repository repository
++ {static} boolean isFill
++ boolean ReadBooleanFromSharedPreferences(String,boolean)
++ void addProduct(String,String,String,int,String,String,String,int,int)
++ void DeleteAllProducts()
++ void setCurrent_category(String)
++ void scheduleAlarm()
+}
+
+
+class com.example.automaticgrocery.UI.MyRecycleView.MyAdapter {
+~ Context context
+~ List<ExpiredItem> items
++ MyViewHolder onCreateViewHolder(ViewGroup,int)
++ void onBindViewHolder(MyViewHolder,int)
++ int getItemCount()
+}
+
+
+class com.example.automaticgrocery.UI.SignUp.SignUpModel {
+- Repository repository
+- Context context
++ boolean sighUpValidation(String,String)
++ void SignUpConfirm(String,String,FireBaseHelper.ScanComplete)
++ void AddUser(String,String,FireBaseHelper.AddComplete)
++ Context getContext()
++ void setContext(Context)
++ void WriteStringToSharedPreferences(String,String)
++ void WriteBooleanToSharedPreferences(String,boolean)
+}
+
+
+class com.example.automaticgrocery.UI.MyRecycleView.MyFillAdapter {
+~ Context context
+~ List<FillItem> items
++ MyFillViewHolder onCreateViewHolder(ViewGroup,int)
++ void onBindViewHolder(MyFillViewHolder,int)
++ int getItemCount()
+}
+
+
+class com.example.automaticgrocery.data.Repository.Repository {
+- MyDatabaseHelper myDatabaseHelper
+- SharedPreferences sharedPreferences
+- FireBaseHelper myFirebaseHelper
+- {static} String current_category
+- Context context
++ Context getContext()
++ String getCurrent_category()
++ void setCurrent_category(String)
++ void LoginConfirm(String,String,FireBaseHelper.SearchComplete)
++ void DataConfirm(String,String,FireBaseHelper.ScanComplete)
++ void AddUser(String,String,FireBaseHelper.AddComplete)
++ void DeleteUser(FireBaseHelper.DeleteComplete)
++ void UpdateUser(String,String,String,FireBaseHelper.UpdateComplete)
++ void WriteStringToSharedPreferences(String,String)
++ String ReadStringFromSharedPreferences(String,String)
++ void WriteBooleanToSharedPreferences(String,boolean)
++ boolean ReadBooleanFromSharedPreferences(String,boolean)
++ void addProduct(String,String,String,int,String,String,String,int,int)
++ void DeleteAllProducts()
++ Cursor getAllProducts()
++ Cursor getProductsByCategory(String)
++ Cursor getProductsByCategoryAndString(String,String)
++ void updateProductExpPart1(String,int)
++ void updateProductExpPart1_0(String,int,String)
++ void updateProductExpPart2(String,int,String,int,int)
++ void updateProductFill(String,int,String,String,int)
++ void updateProductAll(String,int,String,String,int)
++ void scheduleAlarm()
++ void cancelAlarm()
+}
+
+
+class com.example.automaticgrocery.data.Items.ExpiredItem {
+- String name
+- String last_date
+- int amount
+- String internal_reference
+- int last_date_amount
++ String getName()
++ void setName(String)
++ String getLast_date()
++ void setLast_date(String)
++ int getAmount()
++ void setAmount(int)
++ String getInternal_reference()
++ void setInternal_reference(String)
++ int getLast_date_amount()
++ void setLast_date_amount(int)
+}
+
+
+class com.example.automaticgrocery.UI.AllProducts.AllProducts {
+- AllProductsModel allProductsModel
+- ImageView btnReturn
+- Spinner spiAllProducts
+- EditText etSearchProduct
+- RecyclerView recycleViewAll
+- String category
+# void onCreate(Bundle)
++ void onClick(View)
+}
+
+
+class com.example.automaticgrocery.data.DB.FireBaseHelper {
+~ FirebaseFirestore db
+- Context context
++ void ReadUsers(UsersRetrievedListener)
++ void LoginConfirm(String,String,SearchComplete)
++ void ScanUsers(DocsRetrievedListener)
++ void DataConfirm(String,String,ScanComplete)
++ void AddUser(String,String,AddComplete)
++ void DeleteUser(DeleteComplete)
++ void UpdateUser(String,String,String,UpdateComplete)
+}
+
+
+interface com.example.automaticgrocery.data.DB.FireBaseHelper$UsersRetrievedListener {
+~ void onUsersRetrieved(Task<QuerySnapshot>,boolean,String)
+}
+
+interface com.example.automaticgrocery.data.DB.FireBaseHelper$SearchComplete {
+~ void onSearchComplete(Boolean,String)
+}
+
+interface com.example.automaticgrocery.data.DB.FireBaseHelper$DocsRetrievedListener {
+~ void onDocsRetrieved(Task<QuerySnapshot>,boolean)
+}
+
+interface com.example.automaticgrocery.data.DB.FireBaseHelper$ScanComplete {
+~ void onScanComplete(boolean)
+}
+
+interface com.example.automaticgrocery.data.DB.FireBaseHelper$AddComplete {
+~ void onAddComplete(boolean,String)
+}
+
+interface com.example.automaticgrocery.data.DB.FireBaseHelper$DeleteComplete {
+~ void onDeleteComplete(boolean)
+}
+
+interface com.example.automaticgrocery.data.DB.FireBaseHelper$UpdateComplete {
+~ void onUpdateComplete(boolean)
+}
+
+class com.example.automaticgrocery.data.BroadcastReceiver.AlarmReceiver {
+- {static} String CHANNEL_ID
+- Calendar calendar
+- Repository repository
++ void onReceive(Context,Intent)
+- void createNotificationChannel(Context)
++ boolean isExpired(String)
++ boolean isFillNeeded(int,int)
+}
+
+
+class com.example.automaticgrocery.data.DB.MyDatabaseHelper {
+- Context context
+- {static} String DATABASE_NAME
+- {static} int DATABASE_VERSION
+- {static} String TABLE_NAME2
+- {static} String COLUMN_INTERNAL_REFERENCE
+- {static} String COLUMN_PRODUCT_NAME
+- {static} String COLUMN_BARCODE
+- {static} String COLUMN_AMOUNT
+- {static} String COLUMN_FILL_DATE
+- {static} String COLUMN_LAST_DATE
+- {static} String COLUMN_CATEGORY
+- {static} String COLUMN_TARGET_AMOUNT
+- {static} String COLUMN_LAST_DATE_AMOUNT
++ void onCreate(SQLiteDatabase)
++ void onUpgrade(SQLiteDatabase,int,int)
++ void addProduct(String,String,String,int,String,String,String,int,int)
++ void updateProductFullData(String,String,String,int,String,String,String,int,int)
++ void deleteOneProduct(String)
++ void deleteAllProducts()
++ Cursor getAllProducts()
++ Cursor getProductsByCategory(String)
++ Cursor getProductsByCategoryAndString(String,String)
++ void updateProductExpPart1(String,int)
++ void updateProductExpPart1_0(String,int,String)
++ void updateProductExpPart2(String,int,String,int,int)
++ void updateProductFill(String,int,String,String,int)
++ void updateProductAll(String,int,String,String,int)
+}
+
+
+class com.example.automaticgrocery.UI.MyRecycleView.MyFillViewHolder {
+- Repository repository
+- Calendar calendar1
+- int y1
+- Dialog dialog1
+~ TextView tvFillName
+~ ImageView ivFillWarn
++ int targetAmount
+~ String internal_reference
++ void openDialog()
++ void openFinalDialog(int,String,String)
++ {static} double getDifferenceInDays(String,String)
++ int secretFormula(int,String,String)
+}
+
+
+class com.example.automaticgrocery.UI.Main.MainActivity {
+- {static} String PERMISSION_NOTIFICATIONS
+- {static} int NOTIFICATIONS_REQ_CODE
+- MainModel mainModel
+- FragmentManager fm
+- ImageView userIcon
+- Spinner spI
+- Button btnSw
+- TextView tvSelectedClass
+# void onCreate(Bundle)
++ void requestRuntimePermission()
++ void onRequestPermissionsResult(int,String[],int[])
+# void onRestart()
+# void onResume()
++ void onClick(View)
+}
+
+
+class com.example.automaticgrocery.UI.ExpiredFragment.ExpiredFragment {
+- {static} String ARG_PARAM1
+- {static} String ARG_PARAM2
+- String mParam1
+- String mParam2
+- RecyclerView recyclerView
+- View view
+- ExpiredModel expiredModel
++ {static} ExpiredFragment newInstance(String,String)
++ void onCreate(Bundle)
++ View onCreateView(LayoutInflater,ViewGroup,Bundle)
+}
+
+
+class com.example.automaticgrocery.data.Items.AllItem {
+- String internal_reference
+- int amount
+- String fill_date
+- int target_amount
++ String getInternal_reference()
++ void setInternal_reference(String)
++ String getName()
++ void setName(String)
++ String getBarcode()
++ void setBarcode(String)
++ int getAmount()
++ void setAmount(int)
++ String getFill_date()
++ void setFill_date(String)
++ String getLast_date()
++ void setLast_date(String)
++ String getCategory()
++ void setCategory(String)
++ int getTarget_amount()
++ void setTarget_amount(int)
++ int getLast_date_amount()
++ void setLast_date_amount(int)
+}
+
+
+class com.example.automaticgrocery.UI.SignUp.SignUpPage {
+- Button btnSignUp
+- EditText SUuserName
+- SignUpModel signUpModel
+# void onCreate(Bundle)
++ void onClick(View)
+}
+
+
+class com.example.automaticgrocery.UI.MyRecycleView.MyAllViewHolder {
+- Repository repository
+- Calendar calendar1
+- int y1
+- Dialog dialog1
++ String internal_reference
++ int amount
++ String fill_date
++ int target_amount
+~ TextView tvAllName
+~ TextView etSearchProduct
++ void openDialog()
++ {static} double getDifferenceInDays(String,String)
+}
+
+
+class com.example.automaticgrocery.UI.MyRecycleView.MyViewHolder {
+~ TextView tvExpName
++ String internal_reference
++ int amount
+- Repository repository
+- Calendar calendar1
+- int y1
+- Dialog dialog1
++ void openDialog()
++ void openUpDialog()
++ void openConDialog(int,String)
++ void openFinDialog()
++ boolean isBeforeToday(String)
+}
+
+
+class com.example.automaticgrocery.UI.AllProducts.AllProductsModel {
+- Repository repository
++ Cursor getProductsByCategoryAndString(String,String)
++ void InitializeRecycleView(String,String,RecyclerView,TextView)
+}
+
+
+class com.example.automaticgrocery.UI.FillFragment.FillFragment {
+- {static} String ARG_PARAM1
+- {static} String ARG_PARAM2
+- String mParam1
+- String mParam2
+- RecyclerView recycleView2
+- View view
+- FillModel fillModel
++ {static} FillFragment newInstance(String,String)
++ void onCreate(Bundle)
++ View onCreateView(LayoutInflater,ViewGroup,Bundle)
+}
+
+
+
+
+com.example.automaticgrocery.UI.UserCenter.OnClickListener <|.. com.example.automaticgrocery.UI.UserCenter.UserCenter
+androidx.appcompat.app.AppCompatActivity <|-- com.example.automaticgrocery.UI.UserCenter.UserCenter
+android.content.BroadcastReceiver <|-- com.example.automaticgrocery.data.BroadcastReceiver.BootReceiver
+com.example.automaticgrocery.UI.MyRecycleView.Adapter <|-- com.example.automaticgrocery.UI.MyRecycleView.MyAllAdapter
+com.example.automaticgrocery.UI.Login.OnClickListener <|.. com.example.automaticgrocery.UI.Login.LoginPage
+androidx.appcompat.app.AppCompatActivity <|-- com.example.automaticgrocery.UI.Login.LoginPage
+com.example.automaticgrocery.UI.MyRecycleView.Adapter <|-- com.example.automaticgrocery.UI.MyRecycleView.MyAdapter
+com.example.automaticgrocery.UI.MyRecycleView.Adapter <|-- com.example.automaticgrocery.UI.MyRecycleView.MyFillAdapter
+com.example.automaticgrocery.UI.AllProducts.OnClickListener <|.. com.example.automaticgrocery.UI.AllProducts.AllProducts
+androidx.appcompat.app.AppCompatActivity <|-- com.example.automaticgrocery.UI.AllProducts.AllProducts
+com.example.automaticgrocery.data.DB.FireBaseHelper +.. com.example.automaticgrocery.data.DB.FireBaseHelper$UsersRetrievedListener
+com.example.automaticgrocery.data.DB.FireBaseHelper +.. com.example.automaticgrocery.data.DB.FireBaseHelper$SearchComplete
+com.example.automaticgrocery.data.DB.FireBaseHelper +.. com.example.automaticgrocery.data.DB.FireBaseHelper$DocsRetrievedListener
+com.example.automaticgrocery.data.DB.FireBaseHelper +.. com.example.automaticgrocery.data.DB.FireBaseHelper$ScanComplete
+com.example.automaticgrocery.data.DB.FireBaseHelper +.. com.example.automaticgrocery.data.DB.FireBaseHelper$AddComplete
+com.example.automaticgrocery.data.DB.FireBaseHelper +.. com.example.automaticgrocery.data.DB.FireBaseHelper$DeleteComplete
+com.example.automaticgrocery.data.DB.FireBaseHelper +.. com.example.automaticgrocery.data.DB.FireBaseHelper$UpdateComplete
+android.content.BroadcastReceiver <|-- com.example.automaticgrocery.data.BroadcastReceiver.AlarmReceiver
+android.database.sqlite.SQLiteOpenHelper <|-- com.example.automaticgrocery.data.DB.MyDatabaseHelper
+com.example.automaticgrocery.UI.MyRecycleView.ViewHolder <|-- com.example.automaticgrocery.UI.MyRecycleView.MyFillViewHolder
+com.example.automaticgrocery.UI.Main.OnClickListener <|.. com.example.automaticgrocery.UI.Main.MainActivity
+androidx.appcompat.app.AppCompatActivity <|-- com.example.automaticgrocery.UI.Main.MainActivity
+androidx.fragment.app.Fragment <|-- com.example.automaticgrocery.UI.ExpiredFragment.ExpiredFragment
+com.example.automaticgrocery.UI.SignUp.OnClickListener <|.. com.example.automaticgrocery.UI.SignUp.SignUpPage
+androidx.appcompat.app.AppCompatActivity <|-- com.example.automaticgrocery.UI.SignUp.SignUpPage
+com.example.automaticgrocery.UI.MyRecycleView.ViewHolder <|-- com.example.automaticgrocery.UI.MyRecycleView.MyAllViewHolder
+com.example.automaticgrocery.UI.MyRecycleView.ViewHolder <|-- com.example.automaticgrocery.UI.MyRecycleView.MyViewHolder
+androidx.fragment.app.Fragment <|-- com.example.automaticgrocery.UI.FillFragment.FillFragment
+@enduml

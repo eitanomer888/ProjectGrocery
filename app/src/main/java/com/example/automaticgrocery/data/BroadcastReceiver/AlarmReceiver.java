@@ -74,7 +74,7 @@ public class AlarmReceiver extends BroadcastReceiver {
 
         // Create the notification
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, CHANNEL_ID)
-                .setSmallIcon(R.drawable.ic_launcher_foreground)
+                .setSmallIcon(R.drawable.app_icon)
                 .setContentTitle("Product Alert!!!")
                 .setContentText(x + " products are expired and  + " + y + " products are need a refill.")
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
