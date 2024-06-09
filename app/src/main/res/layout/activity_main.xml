@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".UI.Main.MainActivity"
     android:orientation="vertical"
-    android:background="@drawable/app_background_3">
+    android:background="#8A56C55B">
 
     <include
         android:id="@+id/taskbar"

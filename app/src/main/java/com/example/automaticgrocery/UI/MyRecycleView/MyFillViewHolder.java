@@ -172,15 +172,15 @@ public class MyFillViewHolder extends RecyclerView.ViewHolder {
             public void onClick(View v) {
 
                 if(etD_ProductAmount.getText().toString().equals("")){
-                    Toast.makeText(repository.getContext(), "type current amount", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(repository.getContext(), "הכנס כמות נוכחית", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 if(etD_ProductLastDate.getText().toString().equals("אנא סרוק תאריך")){
-                    Toast.makeText(repository.getContext(), "scan last date", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(repository.getContext(), "סרוק תוקף אחרון", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 if(etD_ProductFirstDate.getText().toString().equals("אנא סרוק תאריך")){
-                    Toast.makeText(repository.getContext(), "scan new date", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(repository.getContext(), "סרוק תוקף למילוי", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
@@ -195,12 +195,12 @@ public class MyFillViewHolder extends RecyclerView.ViewHolder {
                 String lastDate = etD_ProductLastDate.getText().toString().trim();
                 String firstDate = etD_ProductFirstDate.getText().toString().trim();
 
-                if(currentAmount <= 0){
-                    Toast.makeText(repository.getContext(), "current amount must be higher than 0", Toast.LENGTH_SHORT).show();
+                if(currentAmount < 0){
+                    Toast.makeText(repository.getContext(), "כמות נוכחית חייב להיות גדולה או שווה לאפס", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 if(currentAmount > targetAmount){
-                    Toast.makeText(repository.getContext(), "כמות גדולה מידי", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(repository.getContext(), "כמות גדולה מידי (חורג מן הכמות הרצויה)", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
@@ -223,7 +223,9 @@ public class MyFillViewHolder extends RecyclerView.ViewHolder {
         EditText etD_ProductAmountToFill = dialog.findViewById(R.id.etD_ProductAmountToFill);
 
         etD_ProductAmountToFill.setText(secretFormula(currentAmount,last_date,fill_date) + "");
-
+        if (currentAmount == 0){
+            etD_ProductAmountToFill.setText(targetAmount + "");
+        }
 
 
         Button btnFillBack =dialog.findViewById(R.id.btnFillBack);
@@ -255,7 +257,7 @@ public class MyFillViewHolder extends RecyclerView.ViewHolder {
                 if (amount_toFill <= 0)
                     return;
                 if(amount_toFill > targetAmount - currentAmount){
-                    Toast.makeText(repository.getContext(), "too much products", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(repository.getContext(), "יותר מידי מוצרים, פנה לאחראי", Toast.LENGTH_SHORT).show();
                     return;
                 }
 

@@ -127,7 +127,11 @@ public class MyViewHolder extends RecyclerView.ViewHolder {
                         openConDialog(amountD,date);
                     }
                     else{
-                        Toast.makeText(repository.getContext(), "כמות צריכה להיות גדולה מ-0", Toast.LENGTH_SHORT).show();
+                       if (amountD == 0){
+                           openFinDialog();
+                       }
+                       else
+                        Toast.makeText(repository.getContext(), "כמות צריכה להיות גדולה או שווה ל-0", Toast.LENGTH_SHORT).show();
                     }
                 }
 

@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -43,6 +44,8 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
         userName = findViewById(R.id.userName);
 
         signUp = findViewById(R.id.signUp);
+        //add underline to text
+        signUp.setPaintFlags(signUp.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
         signUp.setOnClickListener(this);
 
         //check if user already logged in

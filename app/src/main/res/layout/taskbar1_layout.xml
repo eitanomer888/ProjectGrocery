@@ -53,7 +53,8 @@
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
             android:gravity="right"
-            android:textDirection="rtl" />
+            android:textDirection="rtl"
+            android:popupBackground="@color/white"/>
 
         <!-- Button -->
         <Button

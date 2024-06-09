@@ -8,7 +8,7 @@
     tools:context=".UI.AllProducts.AllProducts"
     android:orientation="vertical"
     android:layoutDirection="rtl"
-    android:background="@drawable/app_background_3"
+    android:background="#8A56C55B"
     >
 
     <LinearLayout
