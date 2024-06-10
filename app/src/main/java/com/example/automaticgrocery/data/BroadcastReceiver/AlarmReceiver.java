@@ -76,7 +76,7 @@ public class AlarmReceiver extends BroadcastReceiver {
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, CHANNEL_ID)
                 .setSmallIcon(R.drawable.app_icon)
                 .setContentTitle("Product Alert!!!")
-                .setContentText(x + " products are expired and  + " + y + " products are need a refill.")
+                .setContentText(x + " products are expired and " + y + " products are need a refill.")
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setContentIntent(pendingIntent)
                 .setAutoCancel(true); // Automatically removes the notification when clicked
