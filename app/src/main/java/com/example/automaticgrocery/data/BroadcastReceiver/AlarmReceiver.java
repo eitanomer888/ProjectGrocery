@@ -47,7 +47,7 @@ public class AlarmReceiver extends BroadcastReceiver {
         // Create or get the notification channel
         createNotificationChannel(context);
 
-        // Create an explicit intent for an Activity in your app
+        // Create an explicit intent for an Activity
         Intent notificationIntent = new Intent(context, MainActivity.class);
         notificationIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 
