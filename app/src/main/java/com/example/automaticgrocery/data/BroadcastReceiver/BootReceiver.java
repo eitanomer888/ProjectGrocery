@@ -19,7 +19,7 @@ public class BootReceiver extends BroadcastReceiver {
             Intent alarmIntent = new Intent(context, AlarmReceiver.class);
             PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, alarmIntent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
 
-            long intervalMillis = 60 * 60 * 1000; // 1 hour in milliseconds
+            long intervalMillis = 5000; // 5 seconds in milliseconds
             long triggerTime = System.currentTimeMillis() + intervalMillis;
 
             if (alarmManager != null) {
