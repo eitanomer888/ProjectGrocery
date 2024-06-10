@@ -146,9 +146,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //permission actions
         requestRuntimePermission();
 
-        //notification+alarm action + check if alarm is already scheduled
-        if (PendingIntent.getBroadcast(this, 0, new Intent(this, AlarmReceiver.class), PendingIntent.FLAG_NO_CREATE | PendingIntent.FLAG_IMMUTABLE) == null)
-            mainModel.scheduleAlarm();
+        //notification+alarm action
+        mainModel.scheduleAlarm();
     }
 
 
