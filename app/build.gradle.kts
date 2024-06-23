@@ -5,7 +5,7 @@ plugins {
 
 android {
     namespace = "com.example.automaticgrocery"
-    compileSdk = 34
+    compileSdkVersion(rootProject.extra["compileSdkVersion"] as Int)
 
     defaultConfig {
         applicationId = "com.example.automaticgrocery"
@@ -30,6 +30,7 @@ android {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
+    buildToolsVersion = "34.0.0"
 }
 
 dependencies {

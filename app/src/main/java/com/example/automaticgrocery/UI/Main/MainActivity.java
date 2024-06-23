@@ -20,6 +20,7 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -147,7 +148,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         requestRuntimePermission();
 
         //notification+alarm action
-        mainModel.scheduleAlarm();
+        try {
+            mainModel.scheduleAlarm();
+        }
+        catch (Exception e){
+            Log.e("MainActivity", e + "");
+        }
+
     }
 
 
