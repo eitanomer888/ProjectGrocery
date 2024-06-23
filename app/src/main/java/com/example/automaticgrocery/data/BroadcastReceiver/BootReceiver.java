@@ -6,6 +6,7 @@ import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 
 public class BootReceiver extends BroadcastReceiver {
     @SuppressLint("ScheduleExactAlarm")
@@ -23,7 +24,12 @@ public class BootReceiver extends BroadcastReceiver {
             long triggerTime = System.currentTimeMillis() + intervalMillis;
 
             if (alarmManager != null) {
-                alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, triggerTime, pendingIntent);
+                try {
+                    alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, triggerTime, pendingIntent);
+                }
+                catch (Exception e){
+                    Log.e("Boot",e + "");
+                }
             }
         }
     }
